@@ -7,8 +7,16 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.6",
+    "axios": "^1.2.1",
+    "bootstrap": "^5.2.3",
+    "bootstrap-vue": "^2.23.1",
     "core-js": "^3.8.3",
-    "vue": "^3.2.13"
+    "font-awesome": "^4.7.0",
+    "vue": "^3.2.45",
+    "vue-gravatar": "^1.4.1",
+    "vue-router": "^4.1.6",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",
