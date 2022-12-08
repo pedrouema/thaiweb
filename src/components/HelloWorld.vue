@@ -1,5 +1,5 @@
 <template>
-  <h1>Hello Word</h1>
+  <h1>Hello Word voce gatao</h1>
 </template>
 
 <script>
