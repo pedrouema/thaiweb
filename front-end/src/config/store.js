@@ -17,5 +17,6 @@ export default createStore({
                 state.isMenuVisible = isVisible
             }
         },
+       
     }
 })
