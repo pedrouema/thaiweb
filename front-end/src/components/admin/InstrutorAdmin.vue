@@ -1,5 +1,6 @@
 <template>
     <div class="instrutor-admin">
+        <h3>Gerênciamento de Instrutor</h3>
         <form class="row g-3">
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Nome</label>
