@@ -1,14 +1,14 @@
 <template>
     <div class="aluno-admin">
-        <h3>Gerênciamento de Aluno</h3>
+        <h3>Gerênciamento de Alunos</h3>
         <form class="row g-3">
             <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Nome</label>
+                <label for="inputEmail4" class="form-label">Nome do Aluno</label>
                 <input type="text" class="form-control" placeholder="Nome do Aluno">
             </div>
             <div class="col-md-2">
-                <label for="inputZip" class="form-label">CPF</label>
-                <input type="text" class="form-control" id="inputZip">
+                <label for="inputZip" class="form-label">CPF do Aluno</label>
+                <input type="text" class="form-control" id="inputZip" placeholder="123.456.789-10">
             </div>
             <div class="col-md-2">
                 <label for="inputZip" class="form-label">Data de Nascimento</label>

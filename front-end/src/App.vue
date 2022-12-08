@@ -1,6 +1,6 @@
 <template>
   <div id="app" :class="{'hide-menu': !isMenuVisible}">
-		<Header title="Gerenciamento RT-Muay Thai" 
+		<Header title="Gerênciamento RT-Muay Thai" 
 			:hideToggle="false"
 			:hideUserDropdown="false" />
 		<Menu />

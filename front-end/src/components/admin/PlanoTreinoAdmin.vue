@@ -3,7 +3,7 @@
         <h3>Gerênciamento de Planos</h3>
         <form class="row g-3">
             <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Nome</label>
+                <label for="inputEmail4" class="form-label">Nome do Plano</label>
                 <input type="text" class="form-control" placeholder="Nome do Plano">
             </div>
             <div class="col-md-2">
