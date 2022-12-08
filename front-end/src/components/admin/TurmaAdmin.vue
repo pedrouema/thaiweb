@@ -17,11 +17,16 @@
             </div>
         </form>
     </div>
+    <hr/>
+    <TurmaTable />
 </template>
 
 <script>
+import TurmaTable from './TurmaTable.vue';
+
 export default {
     name: 'TurmaAdmin',
+    components: { TurmaTable }
 }
 </script>
 

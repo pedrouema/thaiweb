@@ -15,11 +15,16 @@
             </div>
         </form>
     </div>
+    <hr/>
+    <PlanoTreinoTable />
 </template>
 
 <script>
+import PlanoTreinoTable from './PlanoTreinoTable.vue';
+
 export default {
     name: 'PlanoTreinoAdmin',
+    components: { PlanoTreinoTable }
 }
 </script>
 

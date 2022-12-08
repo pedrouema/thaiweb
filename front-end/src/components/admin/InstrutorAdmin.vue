@@ -15,11 +15,16 @@
             </div>
         </form>
     </div>
+    <hr/>
+    <InstrutoresTable />
 </template>
 
 <script>
+import InstrutoresTable from './InstrutoresTable.vue';
+
 export default {
     name: 'InstrutoresAdmin',
+    components: { InstrutoresTable }
 }
 </script>
 

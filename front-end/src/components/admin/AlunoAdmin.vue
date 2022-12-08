@@ -39,12 +39,16 @@
             </div>
         </form>
     </div>
+    <hr/>
+    <AlunosTable />
 </template>
 
 <script>
+import AlunosTable from './AlunosTable.vue';
 
 export default {
     name: 'AlunoAdmin',
+    components: { AlunosTable }
 }
 </script>
 
