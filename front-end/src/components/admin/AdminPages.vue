@@ -36,7 +36,7 @@
                     <PlanoTreinoAdmin />
                 </div>
                 <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
-                    <Turma />
+                    <TurmaAdmin />
                 </div>
             </div>
             <!-- Tabs content -->
