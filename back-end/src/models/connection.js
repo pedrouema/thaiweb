@@ -1,18 +1,22 @@
 const Client = require('pg').Client
-const client = new Client({
-    user: "postgres",
-    password: "postgres123",
-    host: "localhost",
+require('dotenv').config();
+
+const connection = new Client({
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    host: process.env.HOST,
     port: 5432,
-    database: "thaiweb"
+    database: process.env.DATABASE
 })
 
+module.exports = connection;
 
-client.connect();
-client.query("SELECT * FROM thaiweb")
-.then(results => {
-    const resultado = results.rows
-    console.log(resultado)
-})
-.finally(() => client.end());
+// EXEMPLO SIMPLES
+// client.connect();
+// client.query("SELECT * FROM thaiweb")
+// .then(results => {
+//     const resultado = results.rows
+//     console.log(resultado)
+// })
+// .finally(() => client.end());
 
