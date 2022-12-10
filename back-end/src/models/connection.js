@@ -9,6 +9,7 @@ const connection = new Client({
     database: process.env.DATABASE
 })
 
+
 module.exports = connection;
 
 // EXEMPLO SIMPLES
