@@ -12,7 +12,7 @@
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2" role="tab"
-                        aria-controls="ex1-tabs-2" aria-selected="true" v-on:click="clickInstrutor()">Instruto</a>
+                        aria-controls="ex1-tabs-2" aria-selected="true" v-on:click="clickInstrutor()">Instrutor</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab"
@@ -27,7 +27,7 @@
             <!-- Tabs content -->
             <div class="tab-content" id="ex1-content">
                 <div class="tab-pane fade" v-bind:class="classShowActiveAluno" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-                    <AlunoAdmin />
+                        <AlunoAdmin />
                 </div>
                 <div class="tab-pane fade" v-bind:class="classShowActiveInstrutor" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
                     <InstrutorAdmin />
@@ -57,14 +57,16 @@ export default {
     name: 'AdminPages',
     components: { PageTitle, AlunoAdmin, InstrutorAdmin, PlanoTreinoAdmin, TurmaAdmin},
     data(){
-            return{
-            classShowActiveAluno: ' show active',
-            classShowActiveInstrutor: '',
-            classShowActivePlano: '',
-            classShowActiveTurma: '',
+        return{
+        classShowActiveAluno: ' show active',
+        classShowActiveInstrutor: '',
+        classShowActivePlano: '',
+        classShowActiveTurma: '',
+
         }
     },
     methods:{
+        
         clickAluno(){
             this.classShowActiveAluno = ' show active'
             this.classShowActiveInstrutor = ''
@@ -90,6 +92,7 @@ export default {
             this.classShowActiveTurma = ' show active'
         }
     },
+    
 }
 </script>
 

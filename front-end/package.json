@@ -11,6 +11,7 @@
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
     "bootstrap-vue": "^2.23.1",
+    "console-browserify": "^1.2.0",
     "core-js": "^3.8.3",
     "font-awesome": "^4.7.0",
     "vue": "^3.2.45",

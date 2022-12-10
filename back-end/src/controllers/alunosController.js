@@ -17,8 +17,16 @@ const deleteAluno = async (req, res) => {
     return res.status(204).json();
 };
 
+const updateAluno = async (req, res) => {
+    const { id } = req.params;
+
+    await alunosModel.updateAluno(id, req.body);
+    return res.status(204).json();
+};
+
 module.exports = {
     getAll,
     addAluno,
     deleteAluno,
+    updateAluno,
 };

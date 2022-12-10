@@ -10,7 +10,21 @@ const addTurma = async (req, res) => {
     return res.status(201).json(createTurma);
 };
 
+const deleteTurma = async (req, res) => {
+    const { id } = req.params;
+    await turmasModel.deleteTurma(id);
+    return res.status(204).json();
+};
+
+const updateTurma = async (req, res) => {
+    const { id } = req.params;
+    await turmasModel.updateTurma(id, req.body);
+    return res.status(204).json();
+};
+
 module.exports = {
     getAll,
     addTurma,
+    deleteTurma,
+    updateTurma,
 };

@@ -40,15 +40,44 @@
         </form>
     </div>
     <hr/>
-    <AlunosTable />
+    <div v-for="aluno in alunos" :key="aluno.id_aluno">
+        <AlunosTable :id_aluno="aluno.id_aluno" :nome_aluno="aluno.nome_aluno" :cpf_aluno="aluno.cpf_aluno"
+                     :dataNasc_aluno="aluno.dataNasc_aluno" :plano_aluno="'Individual 2x'" 
+                     :turma_aluno="'Terça e Quinta 18:00'" :diaPag_aluno="12"/> 
+    </div>
 </template>
 
 <script>
 import AlunosTable from './AlunosTable.vue';
+//import {  baseApiUrl } from '@/global'
+import axios from 'axios'
+import { response } from 'express';
+
 
 export default {
     name: 'AlunoAdmin',
-    components: { AlunosTable }
+    components: { AlunosTable },
+    data(){
+        return {
+            alunos: [],
+
+        }
+    },
+    methods: {
+        getAllAlunos() {
+            const url = 'http://localhost:4000/alunos'
+            axios.get(url).then(response => {
+                this.aluno = response.data
+                console.log(this.alunos);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        },
+    },
+    mounted() {
+        this.getAllAlunos();
+    }
 }
 </script>
 

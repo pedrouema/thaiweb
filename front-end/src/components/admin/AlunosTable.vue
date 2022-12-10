@@ -15,13 +15,13 @@
             </thead>
             <tbody class="table-group-divider">
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Pedro A. Uema</td>
-                    <td>123.456.789-10</td>
-                    <td>04/04/1900</td>
-                    <td>Individual</td>
-                    <td>18:00</td>
-                    <td>15</td>
+                    <th scope="row">{{ id_aluno }}</th>
+                    <td>{{ nome_aluno }}</td>
+                    <td>{{ cpf_aluno }}</td>
+                    <td>{{ dataNasc_aluno }}</td>
+                    <td>{{ plano_aluno }}</td>
+                    <td>{{ turma_aluno }}</td>
+                    <td>{{ diaPag_aluno }}</td>
                     <td>
                         <button type="button" class="btn btn-success">
                             <i class="fa fa-pencil"> </i>
@@ -40,7 +40,16 @@
 
 <script>
 export default {
-    name: 'AlunosTable'
+    name: 'AlunosTable',
+    props: {
+        id_aluno: String,
+        nome_aluno: String,
+        cpf_aluno : String,
+        dataNasc_aluno : String,
+        plano_aluno : String,
+        turma_aluno : String,
+        diaPag_aluno : String,
+    }
 }
 </script>
 

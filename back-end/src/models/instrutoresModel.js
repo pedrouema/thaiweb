@@ -37,8 +37,24 @@ const deleteInstrutor = async (id) => {
     }
 };
 
+const updateInstrutor = async (id, instrutor) => {
+    const { nome_instrutor, cpf_instrutor } = instrutor;
+    let sql = 'UPDATE instrutores SET nome_instrutor='+"'"+nome_instrutor+"',"+
+    ' cpf_instrutor='+"'"+cpf_instrutor+"'"+
+    ' WHERE id_instrutor = '+id;
+    let updateInstrutor;
+    try{ 
+        connection.connect();
+        updateInstrutor = await connection.query(sql)
+        return updateInstrutor;
+    }finally{
+        connection.end();
+    }
+};
+
 module.exports = {
     getAll,
     addInstrutor,
     deleteInstrutor,
+    updateInstrutor,
 };

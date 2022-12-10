@@ -16,8 +16,16 @@ const deleteInstrutor = async (req, res) => {
     return res.status(204).json();
 };
 
+const updateInstrutor = async (req, res) => {
+    const { id } = req.params;
+
+    await instrutoresModel.updateInstrutor(id, req.body);
+    return res.status(204).json();
+};
+
 module.exports = {
     getAll,
     addInstrutor,
     deleteInstrutor,
+    updateInstrutor,
 };
