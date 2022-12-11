@@ -16,15 +16,67 @@
         </form>
     </div>
     <hr/>
-    <PlanoTreinoTable />
+    <div class="plano-treino-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome do Plano</th>
+                    <th scope="col">Valor Mensalidade</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr v-for="plano in planos" :key="plano.id_plano">
+                    <th scope="row">{{ plano.id_plano }}</th>
+                    <td>{{ plano.nome_plano }}</td>
+                    <td>R$ {{ plano.valor_plano }}</td>
+                    <td>
+                        <button type="button" class="btn btn-success">
+                            <i class="fa fa-pencil"> </i>
+                             Editar
+                        </button>
+                        <button type="button" class="btn btn-danger" @click="deletePlano(plano.id_plano)">
+                            <i class="fa fa-trash"> </i>
+                             Excluir
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <script>
-import PlanoTreinoTable from './PlanoTreinoTable.vue';
+import axios from 'axios';
 
 export default {
     name: 'PlanoTreinoAdmin',
-    components: { PlanoTreinoTable }
+    data() {
+        return{
+            planos: [],
+            URL: "http://localhost:4000/planos"
+        }
+    },
+    methods: {
+        getAllPlanos() {
+            axios.get(`${this.URL}`).then(response => {
+                this.planos = response.data
+                console.log(this.planos);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        },
+        deletePlano(id) {
+            axios.delete(this.URL+"/delete/"+id).then(()=>{
+                this.getAllPlanos()
+            })
+        },
+    },
+    mounted() {
+        this.getAllPlanos();
+    }
 }
 </script>
 

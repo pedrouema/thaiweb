@@ -6,8 +6,8 @@ const getAll = async () => {
     try{
         const planos = await connection.query('SELECT * FROM planos');
         return planos.rows;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 
@@ -20,8 +20,8 @@ const addPlano = async (newPlano) => {
         connection.connect();
         createPlano = await connection.query(sql)
         return createPlano;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 
@@ -32,8 +32,8 @@ const deletePlano = async (id) => {
         connection.connect();
         removePlano = await connection.query(sql)
         return removePlano.rowCount;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 
@@ -48,8 +48,8 @@ const updatePlano = async (id, plano) => {
         connection.connect();
         updatePlano = await connection.query(sql)
         return updatePlano;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 

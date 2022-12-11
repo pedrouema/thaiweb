@@ -1,6 +1,6 @@
 const alunosModel = require('../models/alunosModel');
 
-const getAll = async (_req, res) => {
+const getAll = async (req, res) => {
     const alunos = await alunosModel.getAll();
     return res.status(200).json(alunos);
 };

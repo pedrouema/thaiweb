@@ -6,8 +6,8 @@ const getAll = async () => {
     try{
         const turmas = await connection.query('SELECT * FROM turmas');
         return turmas.rows;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 
@@ -20,8 +20,8 @@ const addTurma = async (newTurma) => {
         connection.connect();
         createTurma = await connection.query(sql)
         return createTurma;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 
@@ -32,8 +32,8 @@ const deleteTurma = async (id) => {
         connection.connect();
         removeTurma = await connection.query(sql)
         return removeTurma.rowCount;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 
@@ -47,8 +47,8 @@ const updateTurma = async (id, turma) => {
         connection.connect();
         updateTurma = await connection.query(sql)
         return updateTurma;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 

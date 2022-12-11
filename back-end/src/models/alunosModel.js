@@ -3,11 +3,12 @@ const connection = require ('./connection')
 
 const getAll = async () => {  
     try{
-        connection.connect();
-        const alunos = await connection.query('SELECT * FROM alunos');
+        await connection.connect();
+        const alunos = await connection.query('SELECT * FROM alunos');  
         return alunos.rows;
-    }finally{
-        connection.end();
+        
+    }catch(err){
+        console.log(err);
     }
 };
 
@@ -20,8 +21,8 @@ const addAluno = async (newAluno) => {
         connection.connect();
         createAluno = await connection.query(sql)
         return createAluno;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
     
 };
@@ -33,8 +34,8 @@ const deleteAluno = async (id) => {
         connection.connect();
         removeAluno = await connection.query(sql)
         return removeAluno.rowCount;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 
@@ -51,8 +52,8 @@ const updateAluno = async (id, aluno) => {
         connection.connect();
         updateAluno = await connection.query(sql)
         return updateAluno;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 

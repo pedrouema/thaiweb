@@ -40,38 +40,70 @@
         </form>
     </div>
     <hr/>
-    <div v-for="aluno in alunos" :key="aluno.id_aluno">
-        <AlunosTable :id_aluno="aluno.id_aluno" :nome_aluno="aluno.nome_aluno" :cpf_aluno="aluno.cpf_aluno"
-                     :dataNasc_aluno="aluno.dataNasc_aluno" :plano_aluno="'Individual 2x'" 
-                     :turma_aluno="'Terça e Quinta 18:00'" :diaPag_aluno="12"/> 
+    <div class="alunos-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Data Nascimento</th>
+                    <th scope="col">Plano</th>
+                    <th scope="col">Turma</th>
+                    <th scope="col">Dia Pagamento</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr v-for="aluno in alunos" :key="aluno.id_aluno">
+                    <th scope="row">{{ aluno.id_aluno }}</th>
+                    <td>{{ aluno.nome_aluno }}</td>
+                    <td>{{ aluno.cpf_aluno }}</td>
+                    <td>{{ aluno.dataNasc_aluno }}</td>
+                    <td>{{ "'Individual 2x'" }}</td>
+                    <td>{{ "'Terça e Quinta 18:00'" }}</td>
+                    <td>{{ aluno.diaPag_aluno }}</td>
+                    <td>
+                        <button type="button" class="btn btn-success">
+                            <i class="fa fa-pencil"> </i>
+                             Editar
+                        </button>
+                        <button type="button" class="btn btn-danger" @click="deleteAluno(aluno.id_aluno)">
+                            <i class="fa fa-trash"> </i>
+                             Excluir
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 
 <script>
-import AlunosTable from './AlunosTable.vue';
-//import {  baseApiUrl } from '@/global'
 import axios from 'axios'
-import { response } from 'express';
 
 
 export default {
     name: 'AlunoAdmin',
-    components: { AlunosTable },
     data(){
         return {
             alunos: [],
-
+            URL: "http://localhost:4000/alunos"
         }
     },
     methods: {
         getAllAlunos() {
-            const url = 'http://localhost:4000/alunos'
-            axios.get(url).then(response => {
-                this.aluno = response.data
+            axios.get(`${this.URL}`).then(response => {
+                this.alunos = response.data
                 console.log(this.alunos);
             })
             .catch(error => {
                 console.log(error);
+            })
+        },
+        deleteAluno(id) {
+            axios.delete(this.URL+"/delete/"+id).then(()=>{
+                this.getAllAlunos()
             })
         },
     },

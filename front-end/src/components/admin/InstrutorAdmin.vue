@@ -16,15 +16,68 @@
         </form>
     </div>
     <hr/>
-    <InstrutoresTable />
+    <div class="administradores-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr v-for="instrutor in instrutores" :key="instrutor.id_instrutor">
+                    <th scope="row">{{ instrutor.id_instrutor }}</th>
+                    <td>{{ instrutor.nome_instrutor }}</td>
+                    <td>{{ instrutor.cpf_instrutor }}</td>
+                    <td>
+                        <button type="button" class="btn btn-success">
+                            <i class="fa fa-pencil"> </i>
+                             Editar
+                        </button>
+                        <button type="button" class="btn btn-danger" @click="deleteInstrutor(instrutor.id_instrutor)">
+                            <i class="fa fa-trash"> </i>
+                             Excluir
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <script>
-import InstrutoresTable from './InstrutoresTable.vue';
+import axios from 'axios';
+
 
 export default {
     name: 'InstrutoresAdmin',
-    components: { InstrutoresTable }
+    data() {
+        return{
+            instrutores: [],
+            URL: "http://localhost:4000/instrutores"
+        }
+    },
+    methods: {
+        getAllInstrutores() {
+            axios.get(`${this.URL}`).then(response => {
+                this.instrutores = response.data
+                console.log(this.instrutores);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        },
+        deleteInstrutor(id) {
+            axios.delete(this.URL+"/delete/"+id).then(()=>{
+                this.getAllInstrutores()
+            })
+        },
+    },
+    mounted() {
+        this.getAllInstrutores();
+    }
 }
 </script>
 

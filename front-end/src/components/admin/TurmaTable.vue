@@ -11,9 +11,9 @@
             </thead>
             <tbody class="table-group-divider">
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Turma 10:00</td>
-                    <td>Rafael Teixeira</td>
+                    <th scope="row">{{ id_turma }}</th>
+                    <td>{{ nome_turma }}</td>
+                    <td>{{ instrutor_turma }}</td>
                     <td>
                         <button type="button" class="btn btn-success">
                             <i class="fa fa-pencil"> </i>
@@ -33,7 +33,12 @@
 
 <script>
 export default {
-    name: 'TurmaTable'
+    name: 'TurmaTable',
+    props: {
+        id_turma: String,
+        nome_turma: String,
+        instrutor_turma: String,
+    }
 }
 </script>
 

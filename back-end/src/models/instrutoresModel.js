@@ -6,8 +6,8 @@ const getAll = async () => {
     try{
         const instrutores = await connection.query('SELECT * FROM instrutores');
         return instrutores.rows;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 
@@ -20,8 +20,8 @@ const addInstrutor = async (newInstrutor) => {
         connection.connect();
         createInstrutor = await connection.query(sql)
         return createInstrutor;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 
@@ -32,8 +32,8 @@ const deleteInstrutor = async (id) => {
         connection.connect();
         removeInstrutor = await connection.query(sql)
         return removeInstrutor.rowCount;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 
@@ -47,8 +47,8 @@ const updateInstrutor = async (id, instrutor) => {
         connection.connect();
         updateInstrutor = await connection.query(sql)
         return updateInstrutor;
-    }finally{
-        connection.end();
+    }catch(err){
+        console.log(err);
     }
 };
 

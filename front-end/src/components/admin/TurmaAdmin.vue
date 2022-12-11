@@ -18,15 +18,67 @@
         </form>
     </div>
     <hr/>
-    <TurmaTable />
+    <div class="turma-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome da Turma</th>
+                    <th scope="col">Instrutor</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr v-for="turma in turmas" :key="turma.id_turma">
+                    <th scope="row">{{ turma.id_turma }}</th>
+                    <td>{{ turma.nome_turma }}</td>
+                    <td>{{ "Rafael Teixeira" }}</td>
+                    <td>
+                        <button type="button" class="btn btn-success">
+                            <i class="fa fa-pencil"> </i>
+                             Editar
+                        </button>
+                        <button type="button" class="btn btn-danger" @click="deleteTurma(turma.id_turma)">
+                            <i class="fa fa-trash"> </i>
+                             Excluir
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <script>
-import TurmaTable from './TurmaTable.vue';
+import axios from 'axios'
 
 export default {
     name: 'TurmaAdmin',
-    components: { TurmaTable }
+    data(){
+        return {
+            turmas: [],
+            URL: "http://localhost:4000/turmas"
+        }
+    },
+    methods: {
+        getAllTurmas() {
+            axios.get(`${this.URL}`).then(response => {
+                this.turmas = response.data
+                console.log(this.turmas);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        },
+        deleteTurma(id) {
+        axios.delete(this.URL+"/delete/"+id).then(()=>{
+            this.getAllTurmas()
+        })
+    },
+    },
+    mounted() {
+        this.getAllTurmas();
+    }
 }
 </script>
 
