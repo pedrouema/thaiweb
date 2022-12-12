@@ -4,14 +4,16 @@
         <form class="row g-3">
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Nome do Instrutor</label>
-                <input type="text" class="form-control" placeholder="Nome do Instrutor">
+                <input type="text" class="form-control" placeholder="Nome do Instrutor" v-model="nome">
             </div>
             <div class="col-md-2">
                 <label for="inputZip" class="form-label">CPF do Instrutor</label>
-                <input type="text" class="form-control" id="inputZip" placeholder="123.456.789-10">
+                <input type="text" class="form-control" id="inputZip" placeholder="123.456.789-10" v-model="cpf" v-mask="'###.###.###-##'">
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary">+ Cadastrar</button>
+                <button type="button" class="btn btn-primary" @click="createInstrutor()" v-show="!editar">+ SALVAR</button>
+                <button type="button" class="btn btn-primary" @click="salvarDados()" v-show="editar">+ EDITAR</button>
+                <button  type="button" class="btn btn-danger" @click="limpaDadosFormulario()" >CANCELAR</button>
             </div>
         </form>
     </div>
@@ -32,7 +34,7 @@
                     <td>{{ instrutor.nome_instrutor }}</td>
                     <td>{{ instrutor.cpf_instrutor }}</td>
                     <td>
-                        <button type="button" class="btn btn-success">
+                        <button type="button" class="btn btn-success" @click="carregarDadosInstrutor(instrutor.id_instrutor)">
                             <i class="fa fa-pencil"> </i>
                              Editar
                         </button>
@@ -55,13 +57,17 @@ export default {
     name: 'InstrutoresAdmin',
     data() {
         return{
+            URL: "http://localhost:4000",
             instrutores: [],
-            URL: "http://localhost:4000/instrutores"
+            instrutorId: 0,
+            nome: '',
+            cpf: '',
+            editar: false,
         }
     },
     methods: {
         getAllInstrutores() {
-            axios.get(`${this.URL}`).then(response => {
+            axios.get(`${this.URL}/instrutores`).then(response => {
                 this.instrutores = response.data
                 console.log(this.instrutores);
             })
@@ -69,10 +75,51 @@ export default {
                 console.log(error);
             })
         },
+        createInstrutor(){
+            const instrutor = {
+                nome_instrutor: this.nome,
+                cpf_instrutor: this.cpf,
+                
+            }
+            console.log(instrutor);
+            axios.post(`${this.URL}/instrutores`, instrutor).then(response => {
+                console.log(response);
+                this.getAllInstrutores();
+            })
+            this.limpaDadosFormulario()
+        },
+        carregarDadosInstrutor(id){
+            this.editar = true;
+            axios.get(`${this.URL}/instrutores/getone/`+id).then(response => {
+                const instrutor = response.data[0]
+                this.instrutorId = instrutor.id_instrutor
+                this.nome = instrutor.nome_instrutor
+                this.cpf = instrutor.cpf_instrutor
+                console.log(response.data[0]);
+            })
+        },
+        salvarDados(){
+            const instrutor = {
+                nome_instrutor: this.nome,
+                cpf_instrutor: this.cpf,
+            }
+            console.log(instrutor);
+            axios.put(`${this.URL}/instrutores/${this.instrutorId}`, instrutor).then(response => {
+                console.log(response);
+                this.getAllInstrutores();
+            });
+            this.limpaDadosFormulario();
+        },
         deleteInstrutor(id) {
-            axios.delete(this.URL+"/delete/"+id).then(()=>{
+            axios.delete(this.URL+"/instrutores/delete/"+id).then(()=>{
                 this.getAllInstrutores()
             })
+        },
+        limpaDadosFormulario(){
+            this.instrutorId = 0;
+            this.nome = '';
+            this.cpf = '';
+            this.editar = false;
         },
     },
     mounted() {

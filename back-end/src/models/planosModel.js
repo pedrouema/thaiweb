@@ -1,11 +1,27 @@
 const connection = require ('./connection')
-
+const db = require("./database");
 
 const getAll = async () => {  
-    connection.connect();
     try{
-        const planos = await connection.query('SELECT * FROM planos');
+        const planos = await db.query('SELECT * FROM planos ORDER BY id_plano DESC');
         return planos.rows;
+    }catch(err){
+        console.log(err);
+    }
+};
+
+const getOne = async (id_plano) => {  
+    try{
+        const { rows } = await db.query(`
+            SELECT 
+            id_plano, 
+            nome_plano, 
+            valor_plano 
+            FROM PLANOS 
+            WHERE id_plano = ${id_plano}
+        `);  
+        console.log(rows);
+        return rows;
     }catch(err){
         console.log(err);
     }
@@ -13,12 +29,11 @@ const getAll = async () => {
 
 const addPlano = async (newPlano) => {
     const {  nome_plano, valor_plano } = newPlano;
-    let sql = 'INSERT INTO Planos ("nome_plano", "valor_plano") VALUES('
-    sql+="'"+newPlano.nome_plano+"'"+','+"'"+newPlano.valor_plano+"')"
+    let sql = 'INSERT INTO planos ("nome_plano", "valor_plano") VALUES('
+    sql+="'"+nome_plano+"'"+','+"'"+valor_plano+"')"
     let createPlano;
     try{
-        connection.connect();
-        createPlano = await connection.query(sql)
+        createPlano = await db.query(sql)
         return createPlano;
     }catch(err){
         console.log(err);
@@ -29,8 +44,7 @@ const deletePlano = async (id) => {
     let sql = 'DELETE FROM planos WHERE id_plano = '+id;
     let removePlano;
     try{
-        connection.connect();
-        removePlano = await connection.query(sql)
+        removePlano = await db.query(sql)
         return removePlano.rowCount;
     }catch(err){
         console.log(err);
@@ -42,12 +56,19 @@ const updatePlano = async (id, plano) => {
     let sql = 'UPDATE planos SET nome_plano='+"'"+nome_plano+"',"+
     ' valor_plano='+"'"+valor_plano+"'"+
     ' WHERE id_plano = '+id;
-    console.log(sql);
     let updatePlano;
     try{ 
-        connection.connect();
-        updatePlano = await connection.query(sql)
+        updatePlano = await db.query(sql)
         return updatePlano;
+    }catch(err){
+        console.log(err);
+    }
+};
+
+const getAllOption = async () => {  
+    try{
+        const planos = await db.query('SELECT * FROM planos');
+        return planos.rows;
     }catch(err){
         console.log(err);
     }
@@ -55,7 +76,9 @@ const updatePlano = async (id, plano) => {
 
 module.exports = {
     getAll,
+    getOne,
     addPlano,
     deletePlano,
     updatePlano,
+    getAllOption,
 };

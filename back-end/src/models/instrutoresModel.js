@@ -1,11 +1,28 @@
 const connection = require ('./connection')
+const db = require("./database");
 
 
 const getAll = async () => {  
-    connection.connect();
     try{
-        const instrutores = await connection.query('SELECT * FROM instrutores');
+        const instrutores = await db.query('SELECT * FROM instrutores ORDER BY id_instrutor DESC');
         return instrutores.rows;
+    }catch(err){
+        console.log(err);
+    }
+};
+
+const getOne = async (id_instrutor) => {  
+    try{
+        const { rows } = await db.query(`
+            SELECT 
+            id_instrutor, 
+            nome_instrutor, 
+            cpf_instrutor 
+            FROM INSTRUTORES 
+            WHERE id_instrutor = ${id_instrutor}
+        `);  
+        console.log(rows);
+        return rows;
     }catch(err){
         console.log(err);
     }
@@ -14,11 +31,10 @@ const getAll = async () => {
 const addInstrutor = async (newInstrutor) => {
     const {  nome_instrutor, cpf_instrutor } = newInstrutor;
     let sql = 'INSERT INTO instrutores ("nome_instrutor", "cpf_instrutor") VALUES('
-    sql+="'"+newInstrutor.nome_instrutor+"'"+','+"'"+newInstrutor.cpf_instrutor+"')"
+    sql+="'"+nome_instrutor+"'"+','+"'"+cpf_instrutor+"')"
     let createInstrutor;
     try{
-        connection.connect();
-        createInstrutor = await connection.query(sql)
+        createInstrutor = await db.query(sql)
         return createInstrutor;
     }catch(err){
         console.log(err);
@@ -29,8 +45,7 @@ const deleteInstrutor = async (id) => {
     let sql = 'DELETE FROM instrutores WHERE id_instrutor = '+id;
     let removeInstrutor;
     try{
-        connection.connect();
-        removeInstrutor = await connection.query(sql)
+        removeInstrutor = await db.query(sql)
         return removeInstrutor.rowCount;
     }catch(err){
         console.log(err);
@@ -44,9 +59,17 @@ const updateInstrutor = async (id, instrutor) => {
     ' WHERE id_instrutor = '+id;
     let updateInstrutor;
     try{ 
-        connection.connect();
-        updateInstrutor = await connection.query(sql)
+        updateInstrutor = await db.query(sql)
         return updateInstrutor;
+    }catch(err){
+        console.log(err);
+    }
+};
+
+const getAllOptions = async () => {  
+    try{
+        const instrutor = await db.query('SELECT * FROM instrutores');
+        return instrutor.rows;
     }catch(err){
         console.log(err);
     }
@@ -54,7 +77,9 @@ const updateInstrutor = async (id, instrutor) => {
 
 module.exports = {
     getAll,
+    getOne,
     addInstrutor,
     deleteInstrutor,
     updateInstrutor,
+    getAllOptions,
 };

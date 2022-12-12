@@ -1,7 +1,7 @@
 const pg = require('pg')
 require('dotenv').config();
 
-const connection = new pg.Pool({
+const connection = new pg.Client({
     user: process.env.USER,
     password: process.env.PASSWORD,
     host: process.env.HOST,
@@ -11,12 +11,4 @@ const connection = new pg.Pool({
 
 module.exports = connection;
 
-// EXEMPLO SIMPLES
-// client.connect();
-// client.query("SELECT * FROM thaiweb")
-// .then(results => {
-//     const resultado = results.rows
-//     console.log(resultado)
-// })
-// .finally(() => client.end());
 

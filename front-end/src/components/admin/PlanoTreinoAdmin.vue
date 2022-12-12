@@ -4,14 +4,16 @@
         <form class="row g-3">
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Nome do Plano</label>
-                <input type="text" class="form-control" placeholder="Nome do Plano">
+                <input type="text" class="form-control" placeholder="Nome do Plano" v-model="nome">
             </div>
             <div class="col-md-2">
                 <label for="inputZip" class="form-label">Valor Mensalidade</label>
-                <input type="text" class="form-control" id="inputZip" placeholder="R$ 100,00">
+                <input type="text" class="form-control" id="inputZip" v-model="valor">
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary">+ Cadastrar</button>
+                <button type="button" class="btn btn-primary" @click="createPlano()" v-show="!editar">+ SALVAR</button>
+                <button type="button" class="btn btn-primary" @click="salvarDados()" v-show="editar">+ EDITAR</button>
+                <button  type="button" class="btn btn-danger" @click="limpaDadosFormulario()" >CANCELAR</button>
             </div>
         </form>
     </div>
@@ -30,9 +32,9 @@
                 <tr v-for="plano in planos" :key="plano.id_plano">
                     <th scope="row">{{ plano.id_plano }}</th>
                     <td>{{ plano.nome_plano }}</td>
-                    <td>R$ {{ plano.valor_plano }}</td>
+                    <td>R$ {{ plano.valor_plano.toFixed(2) }}</td>
                     <td>
-                        <button type="button" class="btn btn-success">
+                        <button type="button" class="btn btn-success" @click="carregarDadosPlano(plano.id_plano)">
                             <i class="fa fa-pencil"> </i>
                              Editar
                         </button>
@@ -54,13 +56,17 @@ export default {
     name: 'PlanoTreinoAdmin',
     data() {
         return{
+            URL: "http://localhost:4000",
             planos: [],
-            URL: "http://localhost:4000/planos"
+            planoId: 0,
+            nome: '',
+            valor: 0,
+            editar: false,
         }
     },
     methods: {
         getAllPlanos() {
-            axios.get(`${this.URL}`).then(response => {
+            axios.get(`${this.URL}/planos`).then(response => {
                 this.planos = response.data
                 console.log(this.planos);
             })
@@ -68,10 +74,52 @@ export default {
                 console.log(error);
             })
         },
+        createPlano(){
+            const plano = {
+                nome_plano: this.nome,
+                valor_plano: this.valor,
+                
+            }
+            console.log(plano);
+            axios.post(`${this.URL}/planos`, plano).then(response => {
+                console.log(response);
+                this.getAllPlanos();
+                
+            })
+            this.limpaDadosFormulario()
+        },
+        carregarDadosPlano(id){
+            this.editar = true;
+            axios.get(`${this.URL}/planos/getone/`+id).then(response => {
+                const plano = response.data[0]
+                this.planoId = plano.id_plano
+                this.nome = plano.nome_plano
+                this.valor = plano.valor_plano
+                console.log(response.data[0]);
+            })
+        },
+        salvarDados(){
+            const plano = {
+                nome_plano: this.nome,
+                valor_plano: this.valor,
+            }
+            console.log(plano);
+            axios.put(`${this.URL}/planos/${this.planoId}`, plano).then(response => {
+                console.log(response);
+                this.getAllPlanos();
+            });
+            this.limpaDadosFormulario();
+        },
         deletePlano(id) {
-            axios.delete(this.URL+"/delete/"+id).then(()=>{
+            axios.delete(this.URL+"/planos/delete/"+id).then(()=>{
                 this.getAllPlanos()
             })
+        },
+        limpaDadosFormulario(){
+            this.planoId = 0;
+            this.nome = '';
+            this.valor = 0;
+            this.editar = false;
         },
     },
     mounted() {

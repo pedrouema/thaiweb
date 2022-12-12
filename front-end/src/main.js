@@ -5,10 +5,12 @@ import App from './App.vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 
+import VueTheMask from 'vue-the-mask'
 import store from './config/store'
 import router from './config/router'
 
 const app = createApp(App)
+app.use(VueTheMask)
 app.use(bootstrap)
 app.use(store)
 app.use(router)
