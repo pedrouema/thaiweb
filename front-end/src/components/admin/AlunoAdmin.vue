@@ -1,6 +1,6 @@
 <template>
     <div class="aluno-admin">
-        <h3>Gerênciamento de Alunos</h3>
+        <h3>Gerenciamento de Alunos</h3>
         <form class="row g-3">
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Nome do Aluno</label>

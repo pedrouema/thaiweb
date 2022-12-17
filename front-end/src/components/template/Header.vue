@@ -4,7 +4,7 @@
             <i class="fa fa-lg" :class="icon"></i>
         </a>
         <h1 class="title">
-            <router-link to="/">
+            <router-link to="/home">
                 {{ title }}
             </router-link>
         </h1>

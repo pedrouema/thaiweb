@@ -1,12 +1,13 @@
-<template>
-  <div id="app" :class="{'hide-menu': !isMenuVisible}">
-		<Header title="Gerênciamento RT-Muay Thai" 
+<template >
+  	<div id="app" :class="{'hide-menu': !isMenuVisible} " >
+		<Header title="Gerenciamento RT-Muay Thai" 
 			:hideToggle="false"
 			:hideUserDropdown="false" />
 		<Menu />
 		<Content />
 		<Footer />
 	</div>
+	
 </template>
 
 <script>
@@ -18,8 +19,10 @@ import Footer from "@/components/template/Footer"
 
 export default {
   name: 'App',
-  components: { Header, Menu, Content, Footer },
+  components: { Header, Menu, Content, Footer, },
   computed: mapState(['isMenuVisible']),
+
+  
 }
 </script>
 

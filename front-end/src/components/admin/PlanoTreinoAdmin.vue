@@ -1,6 +1,6 @@
 <template>
     <div class="plano-treino-admin">
-        <h3>Gerênciamento de Planos</h3>
+        <h3>Gerenciamento de Planos</h3>
         <form class="row g-3">
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Nome do Plano</label>
@@ -51,9 +51,11 @@
 
 <script>
 import axios from 'axios';
+import AlunoAdmin from './AlunoAdmin.vue'
 
 export default {
     name: 'PlanoTreinoAdmin',
+    components: { AlunoAdmin },
     data() {
         return{
             URL: "http://localhost:4000",
@@ -114,6 +116,7 @@ export default {
             axios.delete(this.URL+"/planos/delete/"+id).then(()=>{
                 this.getAllPlanos()
             })
+            
         },
         limpaDadosFormulario(){
             this.planoId = 0;
