@@ -43,7 +43,7 @@
             </div>
         </form>
     </div>
-    <hr/>
+    <br/>
     <div class="alunos-table">
         <table class="table">
             <thead>

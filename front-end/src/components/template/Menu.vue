@@ -1,11 +1,39 @@
 <template>
     <aside class="menu" v-show="isMenuVisible">
         
+        <ul>
+            <li>
+                <a href="/home">
+                    <span class="icon"><i class="fa fa-home"></i></span>
+                    <span class="item">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin">
+                    <span class="icon"><i class="fa fa-list-alt"></i></span>
+                    <span class="item">Cadastros</span>
+                </a>
+            </li>
+            <li>
+                <a href="/cronograma">
+                    <span class="icon"><i class="fa fa-calendar"></i></span>
+                    <span class="item">Cronograma</span>
+                </a>
+            </li>
+            <li>
+                <a href="/financeiro">
+                    <span class="icon"><i class="fa fa-money"></i></span>
+                    <span class="item">Financeiro</span>
+                </a>
+            </li>
+        </ul>
     </aside>
+    
 </template>
 
 <script>
 import { mapState } from 'vuex'
+
 
 export default {
     name: 'Menu',
@@ -21,50 +49,40 @@ export default {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
+
     }
 
-    .menu a,
-    .menu a:hover {
-        color: #fff;
-        text-decoration: none;
+    ul li a{
+        display: block;
+        padding: 13px 30px;
+        border-bottom: 1px solid #10558d;
+        color: rgb(241, 237, 237);
+        font-size: 20px;
+        position: relative;
     }
 
-    .menu .tree-node.selected > .tree-content,
-    .menu .tree-node .tree-content:hover {
-        background-color: rgba(255, 255, 255, 0.2);
+    ul li a .icon{
+        color: #dee4ec;
+        width: 30px;
+        display: inline-block;
     }
 
-    .tree-arrow.has-child {
-        filter: brightness(2);
+    ul li a:hover,
+
+    ul li a.active{
+        color: #0c7db1;
+
+        background:white;
+        border-right: 2px solid rgb(5, 68, 104);
     }
 
-    .menu .menu-filter {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        margin: 20px;
-        padding-bottom: 8px;
-        border-bottom: 1px solid #AAA;
+    ul li a:hover .icon,
+    ul li a.active .icon{
+        color: #0c7db1;
     }
-
-    .menu .menu-filter i {
-        color: #AAA;
-        margin-right: 10px;
-    }
-
-    .menu input {
-        color: #CCC;
-        font-size: 1.3rem;
-        border: 0;
-        outline: 0;
-        width: 100%;
-        background: transparent;
-    }
-
-    .tree-filter-empty {
-        color: #CCC;
-        font-size: 1.3rem;
-        margin-left: 20px;
+    
+    ul li a:hover:before,
+    ul li a.active:before{
+        display: block;
     }
 </style>

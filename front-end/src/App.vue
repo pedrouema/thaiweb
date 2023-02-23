@@ -16,6 +16,7 @@ import Header from "@/components/template/Header"
 import Menu from "@/components/template/Menu"
 import Content from "@/components/template/Content"
 import Footer from "@/components/template/Footer"
+import LoginPage from "@/components/login/LoginPage.vue"
 
 export default {
   name: 'App',

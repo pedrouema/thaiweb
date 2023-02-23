@@ -9,7 +9,9 @@ const pool = new Pool({
     database: process.env.DATABASE
 })
 
-pool.on('connect', () => { console.log('Base de Dados conectado com sucesso!'); });
+pool.on('connect', () => { 
+    console.log('Base de Dados conectado com sucesso!') 
+});
 
 module.exports = {
     query: (text, params) => pool.query(text, params),
