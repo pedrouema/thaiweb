@@ -4,6 +4,7 @@ const instrutoresController = require('./controllers/instrutoresController');
 const planosController = require('./controllers/planosController');
 const turmasController = require('./controllers/turmasController');
 const adminsController = require('./controllers/adminsController');
+const despesasController = require('./controllers/despesasController');
 
 const router = express.Router();
 
@@ -43,5 +44,11 @@ router.post('/turmas', turmasController.addTurma)
 router.delete('/turmas/delete/:id', turmasController.deleteTurma)
 router.put('/turmas/:id', turmasController.updateTurma)
 router.get('/turmas/options', turmasController.getAllOptions)
+
+// ROTAS DE FINANCEIRO
+router.get('/despesas', despesasController.getAll)
+router.get('/despesas/getone/:id', despesasController.getOne)
+router.post('/despesas', despesasController.addDespesa)
+router.put('/despesas/:id', despesasController.updateDespesa)
 
 module.exports = router;
