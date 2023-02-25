@@ -9,8 +9,10 @@ const getAll = async () =>{
         d.id_despesa,
         d.nome_despesa,
         d.valor_despesa,
-        to_char(d.vencimento_despesa, 'DD/MM/YYYY') as vencimento_despesa
+        to_char(d.vencimento_despesa, 'DD/MM/YYYY') as vencimento_despesa,
+        d.quitada_despesa
         FROM DESPESAS d
+        WHERE d.quitada_despesa != true
         ORDER BY d.vencimento_despesa
         `);
         return despesas.rows;
@@ -66,9 +68,23 @@ const updateDespesa = async (id, despesa) => {
     }
 };
 
+const quitarDespesa = async (id, despesa) => {
+    const { quitada_despesa } = despesa;
+    let sql = 'UPDATE despesas SET quitada_despesa='+quitada_despesa+
+    ' WHERE id_despesa = '+id;
+    let quitarDespesa;
+    try{ 
+        quitarDespesa = await db.query(sql)
+        return quitarDespesa;
+    }catch(err){
+        console.log(err);
+    }
+};
+
 module.exports = {
     getAll,
     getOne,
     addDespesa,
     updateDespesa,
+    quitarDespesa,
 }

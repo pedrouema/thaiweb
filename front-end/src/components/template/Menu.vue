@@ -55,7 +55,7 @@ export default {
     ul li a{
         display: block;
         padding: 13px 30px;
-        border-bottom: 1px solid #10558d;
+        border-bottom: 1px solid #ffffff;
         color: rgb(241, 237, 237);
         font-size: 20px;
         position: relative;
@@ -70,9 +70,9 @@ export default {
     ul li a:hover,
 
     ul li a.active{
-        color: #0c7db1;
+        color: #000000;
 
-        background:white;
+        background:rgb(255, 255, 255);
         border-right: 2px solid rgb(5, 68, 104);
     }
 

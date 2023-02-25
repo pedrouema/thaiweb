@@ -22,9 +22,16 @@ const updateDespesa = async (req, res) => {
     return res.status(204).json();
 };
 
+const quitarDespesa = async (req, res) => {
+    const { id } = req.params;
+    await despesasModel.quitarDespesa(id, req.body);
+    return res.status(204).json();
+};
+
 module.exports = {
     getAll,
     getOne,
     addDespesa,
     updateDespesa,
+    quitarDespesa,
 }

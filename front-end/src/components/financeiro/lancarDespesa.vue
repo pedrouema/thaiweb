@@ -9,11 +9,11 @@
             </div>
             <div class="col-md-2">
                 <label for="inputZip" class="form-label">Valor da Despesa</label>
-                <input type="text" class="form-control" id="inputZip" placeholder="ex: 185.50" v-model="valor">
+                <input type="text" class="form-control" placeholder="ex: 185.50" v-model="valor">
             </div>
             <div class="col-md-2">
                 <label for="inputZip" class="form-label">Data de Vencimento</label >
-                <input type="date" class="form-control" id="inputZip" v-model="dataVenc">
+                <input type="date" class="form-control" v-model="dataVenc">
             </div>
             <div class="col-12">
                 <button type="button" class="btn btn-primary" @click="createDespesa()" v-show="!editar">+ SALVAR</button>
@@ -43,7 +43,7 @@
                             <i class="fa fa-pencil"> </i>
                              Editar
                         </button>
-                        <button type="button" class="btn btn-danger" @click="deletePlano(plano.id_plano)">
+                        <button type="button" class="btn btn-danger" @click="quitarDespesa(despesa.id_despesa)">
                             <i class="fa fa-check"> </i>
                              Quitar
                         </button>
@@ -64,7 +64,7 @@ export default {
             URL: "http://localhost:4000",
             despesas: [],
             nome: '',
-            valor: 0,
+            valor: '',
             dataVenc: '',
             despesaId: 0,
             editar: false
@@ -107,6 +107,17 @@ export default {
             });
             this.limpaDadosFormulario();
         },
+        quitarDespesa(id){
+            this.editar = true
+            const despesa = {
+                quitada_despesa: true,
+            }
+            axios.put(`${this.URL}/despesas/quitar/${id}`, despesa).then(response => {
+                console.log(response);
+                this.getAllDespesas();
+            });
+            this.limpaDadosFormulario();
+        },
         carregarDadosDespesa(id){
             this.editar = true;
             axios.get(`${this.URL}/despesas/getone/`+id).then(response => {
@@ -120,7 +131,7 @@ export default {
         },
         limpaDadosFormulario(){
             this.nome = '';
-            this.valor = 0,
+            this.valor = '',
             this.dataVenc = '';
             this.despesaId = 0;
             this.editar = false;

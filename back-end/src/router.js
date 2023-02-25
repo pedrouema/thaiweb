@@ -50,5 +50,6 @@ router.get('/despesas', despesasController.getAll)
 router.get('/despesas/getone/:id', despesasController.getOne)
 router.post('/despesas', despesasController.addDespesa)
 router.put('/despesas/:id', despesasController.updateDespesa)
+router.put('/despesas/quitar/:id', despesasController.quitarDespesa)
 
 module.exports = router;
