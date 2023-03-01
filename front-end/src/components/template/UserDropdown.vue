@@ -7,7 +7,7 @@
             <router-link to="/admin">
                 <li><a class="dropdown-item" href="#"><i class="fa fa-cogs"></i>  Administração</a></li>
             </router-link>
-            <li><a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i>  Sair</a></li>
+            <li><a class="dropdown-item" href="/"><i class="fa fa-sign-out"></i>  Sair</a></li>
         </ul>
     </div>
 </template>
