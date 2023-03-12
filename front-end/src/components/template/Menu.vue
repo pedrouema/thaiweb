@@ -26,6 +26,12 @@
                     <span class="item">Financeiro</span>
                 </a>
             </li>
+            <li>
+                <a href="/Analises">
+                    <span class="icon"><i class="fa fa-bar-chart "></i></span>
+                    <span class="item">Análises</span>
+                </a>
+            </li>
         </ul>
     </aside>
     

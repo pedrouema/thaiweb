@@ -4,11 +4,11 @@
         <form class="row g-3">
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Nome do Plano</label>
-                <input type="text" class="form-control" placeholder="Nome do Plano" v-model="nome">
+                <input type="text" class="form-control" placeholder="ex: Grupo 3x, 18:00" v-model="nome">
             </div>
             <div class="col-md-2">
                 <label for="inputZip" class="form-label">Valor Mensalidade</label>
-                <input type="text" class="form-control" id="inputZip" v-model="valor">
+                <input type="text" class="form-control" id="inputZip" placeholder="ex: R$99.99" v-model="valor">
             </div>
             <div class="col-12">
                 <button type="button" class="btn btn-primary" @click="createPlano()" v-show="!editar">+ SALVAR</button>
@@ -62,7 +62,7 @@ export default {
             planos: [],
             planoId: 0,
             nome: '',
-            valor: 0,
+            valor: '',
             editar: false,
         }
     },
@@ -121,7 +121,7 @@ export default {
         limpaDadosFormulario(){
             this.planoId = 0;
             this.nome = '';
-            this.valor = 0;
+            this.valor = '';
             this.editar = false;
         },
     },

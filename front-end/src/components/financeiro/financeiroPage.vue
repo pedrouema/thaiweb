@@ -16,7 +16,7 @@
                     aria-controls="ex1-tabs-1"
                     aria-selected="true"
                     v-on:click="clickDespesa()">
-                    <i class="fa fa-dollar"></i> Despesas Lançar & Quitar</a>
+                    <i class="fa fa-plus-square"></i> Lançar Despesas</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a
@@ -26,6 +26,18 @@
                     href="#ex1-tabs-2"
                     role="tab"
                     aria-controls="ex1-tabs-2"
+                    aria-selected="false"
+                    v-on:click="clickGerenciarDespesas()">
+                    <i class="fa fa-calculator"></i> Gerenciamento de Despesas</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a
+                    class="nav-link"
+                    id="ex1-tab-3"
+                    data-mdb-toggle="tab"
+                    href="#ex1-tabs-3"
+                    role="tab"
+                    aria-controls="ex1-tabs-3"
                     aria-selected="false"
                     v-on:click="clickMensalidade()">
                     <i class="fa fa-calendar-o"></i> Gerenciamento de Mensalidades</a>
@@ -42,10 +54,17 @@
                     <LancarDespesa />
                 </div>
                 <div 
-                    class="tab-pane fade" v-bind:class="classShowActiveMensalidade"
+                    class="tab-pane fade" v-bind:class="classShowActiveGerenciarDespesas"
                     id="ex1-tabs-2" 
                     role="tabpanel" 
                     aria-labelledby="ex1-tab-2">
+                    <GerenciarDespesas />
+                </div>
+                <div 
+                    class="tab-pane fade" v-bind:class="classShowActiveMensalidade"
+                    id="ex1-tabs-3" 
+                    role="tabpanel" 
+                    aria-labelledby="ex1-tab-3">
                     <Mensalidade />
                 </div>
             </div>
@@ -57,24 +76,33 @@
     import PageTitle from '../template/PageTitle'
     import LancarDespesa from './lancarDespesa.vue'
     import Mensalidade from './mensalidade.vue'
+    import GerenciarDespesas from './gerenciarDespesas.vue'
 
     export default{
         name: 'FinanceiroPage',
-        components: { PageTitle, LancarDespesa, Mensalidade },
+        components: { PageTitle, LancarDespesa, Mensalidade, GerenciarDespesas },
         data(){
             return{
                 classShowActiveDespesa: ' show active',
                 classShowActiveMensalidade: '',
+                classShowActiveGerenciarDespesas: '',
             }
         },
         methods: {
             clickDespesa(){
                 this.classShowActiveDespesa = ' show active'
                 this.classShowActiveMensalidade = ''
+                this.classShowActiveGerenciarDespesas = ''
             },
             clickMensalidade(){
                 this.classShowActiveDespesa = ''
                 this.classShowActiveMensalidade = ' show active'
+                this.classShowActiveGerenciarDespesas = ''
+            },
+            clickGerenciarDespesas(){
+                this.classShowActiveDespesa = ''
+                this.classShowActiveMensalidade = ''
+                this.classShowActiveGerenciarDespesas = ' show active'
             },
         }
     }

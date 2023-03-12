@@ -5,6 +5,7 @@ import AdminPages from '@/components/admin/AdminPages'
 import LoginPage from '@/components/login/LoginPage'
 import CronogramaPage from '@/components/cronograma/cronogramaPage'
 import FinanceiroPage from '@/components/financeiro/financeiroPage'
+import AnalisesPage from '@/components/analises/analisesPage'
 
 const cors  = require('cors')
 
@@ -35,6 +36,11 @@ const routes = [
         path: '/financeiro',
         component: FinanceiroPage
     },
+    {
+        name: 'analisesPage',
+        path: '/analises',
+        component: AnalisesPage
+    }
 ]
 
 const router = createRouter({

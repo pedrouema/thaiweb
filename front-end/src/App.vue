@@ -18,9 +18,10 @@ import Content from "@/components/template/Content"
 import Footer from "@/components/template/Footer"
 import LoginPage from "@/components/login/LoginPage.vue"
 
+
 export default {
   name: 'App',
-  components: { Header, Menu, Content, Footer, },
+  components: { Header, Menu, Content, Footer },
   computed: mapState(['isMenuVisible']),
 
   

@@ -16,7 +16,7 @@
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab"
-                        aria-controls="ex1-tabs-3" aria-selected="false" v-on:click="clickPlano()">Plano de Treino</a>
+                        aria-controls="ex1-tabs-3" aria-selected="false" v-on:click="clickPlano()">Plano</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="ex1-tab-4" data-mdb-toggle="tab" href="#ex1-tabs-4" role="tab"

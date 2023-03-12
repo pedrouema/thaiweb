@@ -21,6 +21,27 @@ const getAll = async () =>{
     }
 }
 
+const getAllDespesasQuitadas = async () =>{
+    try{
+        const despesas = await db.query(`
+        SELECT
+        d.id_despesa,
+        d.nome_despesa,
+        d.valor_despesa,
+        to_char(d.vencimento_despesa, 'DD/MM/YYYY') as vencimento_despesa,
+        d.quitada_despesa,
+        d.valorpag_despesa,
+        to_char(d.datapag_despesa, 'DD/MM/YYYY') as pagamento_despesa
+        FROM DESPESAS d
+        WHERE d.quitada_despesa != false
+        ORDER BY d.datapag_despesa
+        `);
+        return despesas.rows;
+    }catch(err){
+        console.log(err);
+    }
+}
+
 const getOne = async (id_despesa) => {
     try{
         const { rows } = await db.query(`
@@ -33,8 +54,51 @@ const getOne = async (id_despesa) => {
         FROM DESPESAS d
         WHERE d.id_despesa = ${id_despesa}
         `)
-        console.log(rows);
         return rows;
+    }catch(err){
+        console.log(err);
+    }
+}
+
+const getNaoQuitadaEntreDatas = async (dataIni, dataFim) => {
+    try{
+        const despesas = await db.query(`
+        SELECT 
+        d.id_despesa,
+        d.nome_despesa,
+        d.valor_despesa,
+        to_char(d.vencimento_despesa, 'DD/MM/YYYY') as vencimento_despesa,
+        d.quitada_despesa
+        FROM DESPESAS d
+        WHERE d.quitada_despesa = false
+        and d.vencimento_despesa >= '${dataIni}'
+        and d.vencimento_despesa <= '${dataFim}'
+        ORDER BY d.vencimento_despesa;
+        `)
+        return despesas.rows;
+    }catch(err){
+        console.log(err);
+    }
+}
+
+const getQuitadaEntreDatas = async (dataIni, dataFim) => {
+    try{
+        const despesas = await db.query(`
+        SELECT 
+        d.id_despesa,
+        d.nome_despesa,
+        d.valor_despesa,
+        to_char(d.vencimento_despesa, 'DD/MM/YYYY') as vencimento_despesa,
+        d.quitada_despesa,
+        d.valorpag_despesa,
+        to_char(d.datapag_despesa, 'DD/MM/YYYY') as pagamento_despesa
+        FROM DESPESAS d
+        WHERE d.quitada_despesa = true
+        and d.datapag_despesa >= '${dataIni}'
+        and d.datapag_despesa <= '${dataFim}'
+        ORDER BY d.datapag_despesa;
+        `)
+        return despesas.rows;
     }catch(err){
         console.log(err);
     }
@@ -69,8 +133,10 @@ const updateDespesa = async (id, despesa) => {
 };
 
 const quitarDespesa = async (id, despesa) => {
-    const { quitada_despesa } = despesa;
-    let sql = 'UPDATE despesas SET quitada_despesa='+quitada_despesa+
+    const { quitada_despesa, valorpag_despesa, datapag_despesa } = despesa;
+    let sql = 'UPDATE despesas SET quitada_despesa='+"'"+quitada_despesa+"',"+
+    ' valorpag_despesa='+"'"+valorpag_despesa+"',"+
+    ' datapag_despesa='+"'"+datapag_despesa+"'"+
     ' WHERE id_despesa = '+id;
     let quitarDespesa;
     try{ 
@@ -81,10 +147,29 @@ const quitarDespesa = async (id, despesa) => {
     }
 };
 
+const voltarDespesa = async (id, despesa) => {
+    const { quitada_despesa } = despesa;
+    let sql = 'UPDATE despesas SET quitada_despesa='+"'"+quitada_despesa+"'"+
+    ' WHERE id_despesa = '+id;
+    let quitarDespesa;
+    try{ 
+        quitarDespesa = await db.query(sql)
+        return quitarDespesa;
+    }catch(err){
+        console.log(err);
+    }
+};
+
+
+
 module.exports = {
     getAll,
     getOne,
     addDespesa,
     updateDespesa,
     quitarDespesa,
+    getAllDespesasQuitadas,
+    voltarDespesa,
+    getNaoQuitadaEntreDatas,
+    getQuitadaEntreDatas,
 }

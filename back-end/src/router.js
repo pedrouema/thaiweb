@@ -47,9 +47,13 @@ router.get('/turmas/options', turmasController.getAllOptions)
 
 // ROTAS DE FINANCEIRO
 router.get('/despesas', despesasController.getAll)
+router.get('/despesasquitadas', despesasController.getAllDespesasQuitadas)
+router.get('/despesasquitadasentredatas/:dataIni/:dataFim', despesasController.getQuitadaEntreDatas)
+router.get('/despesasnaoquitadasentredatas/:dataIni/:dataFim', despesasController.getNaoQuitadaEntreDatas)
 router.get('/despesas/getone/:id', despesasController.getOne)
 router.post('/despesas', despesasController.addDespesa)
 router.put('/despesas/:id', despesasController.updateDespesa)
 router.put('/despesas/quitar/:id', despesasController.quitarDespesa)
+router.put('/despesas/voltar/:id', despesasController.voltarDespesa)
 
 module.exports = router;

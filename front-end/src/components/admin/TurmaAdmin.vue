@@ -15,12 +15,80 @@
                     </option>
                 </select>
             </div>
-            <div class="col-12">
-                <button type="button" class="btn btn-primary" @click="createTurma()" v-show="!editar" >+ SALVAR</button>
-                <button type="button" class="btn btn-primary" @click="salvarDados()" v-show="editar">+ EDITAR</button>
-                <button  type="button" class="btn btn-danger" @click="limpaDadosFormulario()" >CANCELAR</button>
+            <div class="col-md-3">
+                <label for="inputZip" class="form-label">Selecione quantas vezes por semana</label>
+                <select class="form-select" v-model="qtdeSemana">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="inputZip" class="form-label">Selecione o horario do inicio do treino</label>
+                <select class="form-select" v-model="hrTreino">
+                    <option value="8:00">8:00</option>
+                    <option value="8:30">8:30</option>
+                    <option value="9:00">9:00</option>
+                    <option value="9:30">9:30</option>
+                    <option value="10:00">10:00</option>
+                    <option value="10:30">10:30</option>
+                    <option value="11:00">11:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="14:30">14:30</option>
+                    <option value="15:00">15:00</option>
+                    <option value="15:30">15:30</option>
+                    <option value="16:00">16:00</option>
+                    <option value="16:30">16:30</option>
+                    <option value="17:00">17:00</option>
+                    <option value="17:30">17:30</option>
+                    <option value="18:00">18:00</option>
+                    <option value="18:30">18:30</option>
+                    <option value="19:00">19:00</option>
+                    <option value="19:30">19:30</option>
+                    <option value="20:00">20:00</option>
+                    <option value="20:30">20:30</option>
+                    <option value="21:00">21:00</option>
+                </select>
             </div>
         </form>
+        <br/>
+        <label for="inputZip" class="form-label">Selecione os dias de treino da turma: </label><br>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
+            <label class="form-check-label" for="inlineCheckbox1">Segunda</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
+            <label class="form-check-label" for="inlineCheckbox2">Terça</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" />
+            <label class="form-check-label" for="inlineCheckbox3">Quarta</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" />
+            <label class="form-check-label" for="inlineCheckbox4">Quinta</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5" />
+            <label class="form-check-label" for="inlineCheckbox5">Sexta</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6" disabled />
+            <label class="form-check-label" for="inlineCheckbox6">Sábado</label>
+        </div>
+        <br/>
+        <br/>
+        
+        <div class="col-12">
+            <button type="button" class="btn btn-primary" @click="createTurma()" v-show="!editar" >+ SALVAR</button>
+            <button type="button" class="btn btn-primary" @click="salvarDados()" v-show="editar">+ EDITAR</button>
+            <button  type="button" class="btn btn-danger" @click="limpaDadosFormulario()" >CANCELAR</button>
+        </div>
     </div>
     <hr/>
     <div class="turma-table">
@@ -56,6 +124,7 @@
 
 <script>
 import axios from 'axios'
+
 
 export default {
     name: 'TurmaAdmin',
@@ -142,5 +211,5 @@ export default {
 </script>
 
 <style>
-
+   
 </style>

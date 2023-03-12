@@ -34,7 +34,11 @@
             </div>
             <div class="col-md-2">
                 <label for="inputZip" class="form-label">Dia Limite de Pagamento</label>
-                <input type="number" class="form-control" id="inputZip" placeholder="15" v-model="diaPag">
+                <select class="form-select" v-model="diaPag">
+                    <option value="5">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
             </div>
             <div class="col-12">
                 <button type="button" class="btn btn-primary" @click="createAluno()" v-show="!editar">+ SALVAR</button>
@@ -183,8 +187,14 @@ export default {
             this.turma = 0;
             this.diaPag = 0;
             this.editar = false;
-        }
-
+        },
+        isCPF(cpf){
+            cpf = cpf.replace(/\.|-/g,"");
+            soma = 0
+            console.log(cpf);
+            return true
+        },
+        
     },
     mounted() {
         this.getAllAlunos();

@@ -5,6 +5,25 @@ const getAll = async (req, res) => {
     return res.status(200).json(despesas);
 };
 
+const getAllDespesasQuitadas = async (req, res) => {
+    const despesas = await despesasModel.getAllDespesasQuitadas();
+    return res.status(200).json(despesas);
+};
+
+const getNaoQuitadaEntreDatas = async (req, res) => {
+    const dataIni = req.params.dataIni
+    const dataFim = req.params.dataFim
+    const despesas = await despesasModel.getNaoQuitadaEntreDatas(dataIni, dataFim);
+    return res.status(200).json(despesas);
+};
+
+const getQuitadaEntreDatas = async (req, res) => {
+    const dataIni = req.params.dataIni
+    const dataFim = req.params.dataFim
+    const despesas = await despesasModel.getQuitadaEntreDatas(dataIni, dataFim);
+    return res.status(200).json(despesas);
+};
+
 const getOne = async (req, res) => {
     const id = req.params.id;
     const despesa = await despesasModel.getOne(id);
@@ -28,10 +47,20 @@ const quitarDespesa = async (req, res) => {
     return res.status(204).json();
 };
 
+const voltarDespesa = async (req, res) => {
+    const { id } = req.params;
+    await despesasModel.voltarDespesa(id, req.body);
+    return res.status(204).json();
+};
+
 module.exports = {
     getAll,
     getOne,
     addDespesa,
     updateDespesa,
     quitarDespesa,
+    getAllDespesasQuitadas,
+    voltarDespesa,
+    getNaoQuitadaEntreDatas,
+    getQuitadaEntreDatas,
 }

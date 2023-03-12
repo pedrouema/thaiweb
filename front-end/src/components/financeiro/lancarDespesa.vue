@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Gerenciamento de Despesas</h3>
+        <h3>Lançamento de Despesas</h3>
         <br/>
         <form class="row g-3">
             <div class="col-md-6">
@@ -24,13 +24,14 @@
     </div>
     <br/>
     <div class="alunos-table">
+        <!-- <b-alert show>Testando Alent do Bootstrap Vue</b-alert> -->
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Despesa</th>
                     <th scope="col">Valor</th>
                     <th scope="col">Data Vencimento</th>
-                    <th scope="col">Ações</th>
+                    <th scope="col">Ação</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -43,10 +44,10 @@
                             <i class="fa fa-pencil"> </i>
                              Editar
                         </button>
-                        <button type="button" class="btn btn-danger" @click="quitarDespesa(despesa.id_despesa)">
+                        <!-- <button type="button" class="btn btn-danger" @click="quitarDespesa(despesa.id_despesa)">
                             <i class="fa fa-check"> </i>
                              Quitar
-                        </button>
+                        </button> -->
                     </td>
                 </tr>
             </tbody>
