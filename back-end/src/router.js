@@ -5,6 +5,7 @@ const planosController = require('./controllers/planosController');
 const turmasController = require('./controllers/turmasController');
 const adminsController = require('./controllers/adminsController');
 const despesasController = require('./controllers/despesasController');
+const cronogramaController = require('./controllers/cronogramaController');
 
 const router = express.Router();
 
@@ -55,5 +56,13 @@ router.post('/despesas', despesasController.addDespesa)
 router.put('/despesas/:id', despesasController.updateDespesa)
 router.put('/despesas/quitar/:id', despesasController.quitarDespesa)
 router.put('/despesas/voltar/:id', despesasController.voltarDespesa)
+
+// ROTAS DE CRONOGRAMA
+router.get('/cronogramasegunda', cronogramaController.getTurmasSegunda)
+router.get('/cronogramaterca', cronogramaController.getTurmasTerca)
+router.get('/cronogramaquarta', cronogramaController.getTurmasQuarta)
+router.get('/cronogramaquinta', cronogramaController.getTurmasQuinta)
+router.get('/cronogramasexta', cronogramaController.getTurmasSexta)
+router.get('/cronogramasabado', cronogramaController.getTurmasSabado)
 
 module.exports = router;

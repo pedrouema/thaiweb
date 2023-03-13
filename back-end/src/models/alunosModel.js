@@ -38,7 +38,7 @@ const getAll = async () => {
             FROM ALUNOS a
             INNER JOIN planos p on p.id_plano = a.id_plano
             INNER JOIN turmas t on t.id_turma = a.id_turma
-            ORDER BY a.id_aluno DESC
+            ORDER BY a.nome_aluno
         `);  
         console.log(rows);
         return rows;

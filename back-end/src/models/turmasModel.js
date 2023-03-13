@@ -8,10 +8,18 @@ const getAll = async () => {
             SELECT 
             t.id_turma, 
             t.nome_turma, 
-            i.nome_instrutor 
+            i.nome_instrutor ,
+            t.qtdesemanal_turma,
+            t.horario_turma,
+            t.segunda,
+            t.terca,
+            t.quarta,
+            t.quinta,
+            t.sexta,
+            t.sabado
             FROM TURMAS t 
             INNER JOIN instrutores i on i.id_instrutor = t.id_instrutor
-            ORDER BY t.id_turma DESC
+            ORDER BY t.nome_turma
         `);  
         console.log(rows);
         return rows;
@@ -39,9 +47,9 @@ const getOne = async (id_turma) => {
 };
 
 const addTurma = async (newTurma) => {
-    const { nome_turma, id_instrutor } = newTurma;
-    let sql = 'INSERT INTO turmas ("nome_turma", "id_instrutor") VALUES('
-    sql+="'"+nome_turma+"'"+','+"'"+id_instrutor+"')"
+    const { nome_turma, id_instrutor, qtdesemanal_turma, horario_turma, segunda, terca, quarta, quinta, sexta, sabado } = newTurma;
+    let sql = 'INSERT INTO turmas ("nome_turma", "id_instrutor", "qtdesemanal_turma", "horario_turma", "segunda", "terca", "quarta", "quinta", "sexta", "sabado") VALUES('
+    sql+="'"+nome_turma+"'"+','+"'"+id_instrutor+"'"+','+"'"+qtdesemanal_turma+"'"+','+"'"+horario_turma+"'"+','+"'"+segunda+"'"+','+"'"+terca+"'"+','+"'"+quarta+"'"+','+"'"+quinta+"'"+','+"'"+sexta+"'"+','+"'"+sabado+"')"
     let createTurma;
     try{
         createTurma = await db.query(sql)

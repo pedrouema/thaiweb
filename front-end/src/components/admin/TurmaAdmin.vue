@@ -27,11 +27,11 @@
             </div>
             <div class="col-md-3">
                 <label for="inputZip" class="form-label">Selecione o horario do inicio do treino</label>
-                <select class="form-select" v-model="hrTreino">
-                    <option value="8:00">8:00</option>
-                    <option value="8:30">8:30</option>
-                    <option value="9:00">9:00</option>
-                    <option value="9:30">9:30</option>
+                <select class="form-select" v-model="hrtreino">
+                    <option value="08:00">08:00</option>
+                    <option value="08:30">08:30</option>
+                    <option value="09:00">09:00</option>
+                    <option value="09:30">09:30</option>
                     <option value="10:00">10:00</option>
                     <option value="10:30">10:30</option>
                     <option value="11:00">11:00</option>
@@ -56,29 +56,28 @@
         <br/>
         <label for="inputZip" class="form-label">Selecione os dias de treino da turma: </label><br>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" v-model="seg"/>
             <label class="form-check-label" for="inlineCheckbox1">Segunda</label>
         </div>
-
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" v-model="ter"/>
             <label class="form-check-label" for="inlineCheckbox2">Terça</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" />
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" v-model="qua"/>
             <label class="form-check-label" for="inlineCheckbox3">Quarta</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" />
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" v-model="qui"/>
             <label class="form-check-label" for="inlineCheckbox4">Quinta</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5" />
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5" v-model="sex"/>
             <label class="form-check-label" for="inlineCheckbox5">Sexta</label>
         </div>
 
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6" disabled />
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6" v-model="sab" />
             <label class="form-check-label" for="inlineCheckbox6">Sábado</label>
         </div>
         <br/>
@@ -97,6 +96,8 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nome da Turma</th>
+                    <th scope="col">Horario</th>
+                    <th scope="col">Dia(s)</th>
                     <th scope="col">Instrutor</th>
                     <th scope="col">Ações</th>
                 </tr>
@@ -104,7 +105,9 @@
             <tbody class="table-group-divider">
                 <tr v-for="turma in turmas" :key="turma.id_turma">
                     <th scope="row">{{ turma.id_turma }}</th>
-                    <td>{{ turma.nome_turma }}</td>
+                    <td>{{ turma.nome_turma+' '+turma.qtdesemanal_turma+'x' }}</td>
+                    <td>{{ turma.horario_turma }}</td>
+                    <td>{{ 'teste' }}</td>
                     <td>{{ turma.nome_instrutor }}</td>
                     <td>
                         <button type="button" class="btn btn-success" @click="carregarDadosTurma(turma.id_turma)">
@@ -137,7 +140,16 @@ export default {
             nome: '',
             instrutorId: 0,
             instrutor: 0,
-            editar: false
+            editar: false,
+
+            hrtreino: '',
+            qtdeSemana: '',
+            seg: false,
+            ter: false,
+            qua: false,
+            qui: false,
+            sex: false,
+            sab: false,
         }
     },
     methods: {
@@ -153,13 +165,27 @@ export default {
         createTurma() {
             const turma = {
                 nome_turma: this.nome,
-                id_instrutor: this.instrutor
+                id_instrutor: this.instrutor,
+                qtdesemanal_turma: this.qtdeSemana,
+                horario_turma: this.hrtreino,
+                segunda: this.seg,
+                terca: this.ter,
+                quarta: this.qua,
+                quinta: this.qui,
+                sexta: this.sex,
+                sabado: this.sab
             }
             console.log(turma);
             axios.post(`${this.URL}/turmas`, turma).then(response => {
                 console.log(response);
                 this.getAllTurmas();
             });
+            console.log('seg:' +this.seg);
+            console.log('ter:' +this.ter);
+            console.log('qua:' +this.qua);
+            console.log('qui:' +this.qui);
+            console.log('sex:' +this.sex);
+            console.log('sab:' +this.sab);
             this.limpaDadosFormulario();
         },
         carregarDadosTurma(id){
@@ -169,6 +195,7 @@ export default {
                 this.turmaId = turma.id_turma
                 this.nome = turma.nome_turma
                 this.instrutor = turma.id_instrutor
+                
                 console.log(response.data[0]);
             })
         },
@@ -201,6 +228,14 @@ export default {
             this.instrutorId = 0;
             this.instrutor = 0;
             this.editar = false;
+            this.hrtreino = '';
+            this.qtdeSemana = '';
+            this.seg = false;
+            this.ter = false;
+            this.qua = false;
+            this.qui = false;
+            this.sex = false;
+            this,sab = false;
         }
     },
     mounted() {
