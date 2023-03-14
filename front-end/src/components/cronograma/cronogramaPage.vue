@@ -232,4 +232,8 @@
     border: 1px solid;
     }
 
+    body {
+		margin:auto;
+	}
+
 </style>
