@@ -97,7 +97,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nome da Turma</th>
                     <th scope="col">Horario</th>
-                    <th scope="col">Dia(s)</th>
+                    <!-- <th scope="col">Dia(s)</th> -->
                     <th scope="col">Instrutor</th>
                     <th scope="col">Ações</th>
                 </tr>
@@ -107,7 +107,7 @@
                     <th scope="row">{{ turma.id_turma }}</th>
                     <td>{{ turma.nome_turma+' '+turma.qtdesemanal_turma+'x' }}</td>
                     <td>{{ turma.horario_turma }}</td>
-                    <td>{{ 'teste' }}</td>
+                    <!-- <td>{{ 'teste' }}</td> -->
                     <td>{{ turma.nome_instrutor }}</td>
                     <td>
                         <button type="button" class="btn btn-success" @click="carregarDadosTurma(turma.id_turma)">
@@ -156,7 +156,6 @@ export default {
         getAllTurmas() {
             axios.get(`${this.URL}/turmas`).then(response => {
                 this.turmas = response.data
-                console.log(this.turmas);
             })
             .catch(error => {
                 console.log(error);
@@ -175,17 +174,9 @@ export default {
                 sexta: this.sex,
                 sabado: this.sab
             }
-            console.log(turma);
             axios.post(`${this.URL}/turmas`, turma).then(response => {
-                console.log(response);
                 this.getAllTurmas();
             });
-            console.log('seg:' +this.seg);
-            console.log('ter:' +this.ter);
-            console.log('qua:' +this.qua);
-            console.log('qui:' +this.qui);
-            console.log('sex:' +this.sex);
-            console.log('sab:' +this.sab);
             this.limpaDadosFormulario();
         },
         carregarDadosTurma(id){
@@ -195,8 +186,14 @@ export default {
                 this.turmaId = turma.id_turma
                 this.nome = turma.nome_turma
                 this.instrutor = turma.id_instrutor
-                
-                console.log(response.data[0]);
+                this.qtdeSemana = turma.qtdesemanal_turma
+                this.hrtreino = turma.horario_turma
+                this.seg = turma.segunda
+                this.ter = turma.terca
+                this.qua = turma.quarta
+                this.qui = turma.quinta
+                this.sex = turma.sexta
+                this.sab = turma.sabado
             })
         },
         salvarDados(){
@@ -206,7 +203,6 @@ export default {
             }
             console.log(turma);
             axios.put(`${this.URL}/turmas/${this.turmaId}`, turma).then(response => {
-                console.log(response);
                 this.getAllTurmas();
             });
             this.limpaDadosFormulario();
@@ -219,7 +215,6 @@ export default {
         getAllInstrutoresOptions() {
             axios.get(`${this.URL}/instrutores/options`).then(response => {
                 this.instrutores = response.data
-                console.log(this.instrutores);
             })
         },
         limpaDadosFormulario(){

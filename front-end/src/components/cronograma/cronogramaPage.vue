@@ -161,10 +161,8 @@
         },
         methods: {
             getTurmasSegunda(){
-                this.seg = true
                 axios.get(`${this.URL}/cronogramasegunda`).then(response => {
                 this.turmasSeg = response.data
-                console.log(this.turmasSeg);
                 })
                 .catch(error => {
                     console.log(error);
@@ -173,7 +171,6 @@
             getTurmasTerca(){
                 axios.get(`${this.URL}/cronogramaterca`).then(response => {
                 this.turmasTer = response.data
-                console.log(this.turmasTer);
                 })
                 .catch(error => {
                     console.log(error);
@@ -182,7 +179,6 @@
             getTurmasQuarta(){
                 axios.get(`${this.URL}/cronogramaquarta`).then(response => {
                 this.turmasQua = response.data
-                console.log(this.turmasQua);
                 })
                 .catch(error => {
                     console.log(error);
@@ -191,7 +187,6 @@
             getTurmasQuinta(){
                 axios.get(`${this.URL}/cronogramaquinta`).then(response => {
                 this.turmasQui = response.data
-                console.log(this.turmasQui);
                 })
                 .catch(error => {
                     console.log(error);
@@ -200,7 +195,6 @@
             getTurmasSexta(){
                 axios.get(`${this.URL}/cronogramasexta`).then(response => {
                 this.turmasSex = response.data
-                console.log(this.turmasSex);
                 })
                 .catch(error => {
                     console.log(error);
@@ -209,7 +203,6 @@
             getTurmasSabado(){
                 axios.get(`${this.URL}/cronogramasabado`).then(response => {
                 this.turmasSab = response.data
-                console.log(this.turmasSab);
                 })
                 .catch(error => {
                     console.log(error);
@@ -225,7 +218,6 @@
             this.getTurmasSabado();
         }
     }
-    //Teste aqui
 </script>
 
 <style>

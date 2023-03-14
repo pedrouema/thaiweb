@@ -34,7 +34,15 @@ const getOne = async (id_turma) => {
             SELECT 
             t.id_turma, 
             t.nome_turma, 
-            i.id_instrutor 
+            i.id_instrutor,
+            t.qtdesemanal_turma,
+            t.horario_turma,
+            t.segunda,
+            t.terca,
+            t.quarta,
+            t.quinta,
+            t.sexta,
+            t.sabado 
             FROM Turmas t
             INNER JOIN instrutores i on i.id_instrutor = t.id_instrutor
             WHERE t.id_turma = ${id_turma}

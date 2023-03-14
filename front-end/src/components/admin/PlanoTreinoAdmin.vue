@@ -70,7 +70,6 @@ export default {
         getAllPlanos() {
             axios.get(`${this.URL}/planos`).then(response => {
                 this.planos = response.data
-                console.log(this.planos);
             })
             .catch(error => {
                 console.log(error);
@@ -82,9 +81,7 @@ export default {
                 valor_plano: this.valor,
                 
             }
-            console.log(plano);
             axios.post(`${this.URL}/planos`, plano).then(response => {
-                console.log(response);
                 this.getAllPlanos();
                 
             })
@@ -97,7 +94,6 @@ export default {
                 this.planoId = plano.id_plano
                 this.nome = plano.nome_plano
                 this.valor = plano.valor_plano
-                console.log(response.data[0]);
             })
         },
         salvarDados(){
@@ -107,7 +103,6 @@ export default {
             }
             console.log(plano);
             axios.put(`${this.URL}/planos/${this.planoId}`, plano).then(response => {
-                console.log(response);
                 this.getAllPlanos();
             });
             this.limpaDadosFormulario();

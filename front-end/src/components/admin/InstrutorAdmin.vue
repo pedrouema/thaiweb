@@ -69,7 +69,6 @@ export default {
         getAllInstrutores() {
             axios.get(`${this.URL}/instrutores`).then(response => {
                 this.instrutores = response.data
-                console.log(this.instrutores);
             })
             .catch(error => {
                 console.log(error);
@@ -81,9 +80,7 @@ export default {
                 cpf_instrutor: this.cpf,
                 
             }
-            console.log(instrutor);
             axios.post(`${this.URL}/instrutores`, instrutor).then(response => {
-                console.log(response);
                 this.getAllInstrutores();
             })
             this.limpaDadosFormulario()
@@ -95,7 +92,6 @@ export default {
                 this.instrutorId = instrutor.id_instrutor
                 this.nome = instrutor.nome_instrutor
                 this.cpf = instrutor.cpf_instrutor
-                console.log(response.data[0]);
             })
         },
         salvarDados(){
@@ -105,7 +101,6 @@ export default {
             }
             console.log(instrutor);
             axios.put(`${this.URL}/instrutores/${this.instrutorId}`, instrutor).then(response => {
-                console.log(response);
                 this.getAllInstrutores();
             });
             this.limpaDadosFormulario();

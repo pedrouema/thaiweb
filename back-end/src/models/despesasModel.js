@@ -34,7 +34,7 @@ const getAllDespesasQuitadas = async () =>{
         to_char(d.datapag_despesa, 'DD/MM/YYYY') as pagamento_despesa
         FROM DESPESAS d
         WHERE d.quitada_despesa != false
-        ORDER BY d.datapag_despesa
+        ORDER BY d.datapag_despesa DESC
         `);
         return despesas.rows;
     }catch(err){

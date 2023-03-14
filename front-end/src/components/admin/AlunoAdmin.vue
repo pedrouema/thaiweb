@@ -112,7 +112,6 @@ export default {
         getAllAlunos() {
             axios.get(`${this.URL}/alunos`).then(response => {
                 this.alunos = response.data
-                console.log(this.alunos);
             })
         },
         createAluno() {
@@ -126,7 +125,6 @@ export default {
             }
             console.log(aluno);
             axios.post(`${this.URL}/alunos`, aluno).then(response => {
-                console.log(response);
                 this.getAllAlunos();
             });
             this.limpaDadosFormulario();
@@ -142,7 +140,6 @@ export default {
                 this.plano = aluno.id_plano
                 this.turma = aluno.id_turma
                 this.diaPag = aluno.diapag_aluno
-                console.log(response.data[0]);
             })
         },
         salvarDados(){
@@ -156,7 +153,6 @@ export default {
             }
             console.log(aluno);
             axios.put(`${this.URL}/alunos/${this.alunoId}`, aluno).then(response => {
-                console.log(response);
                 this.getAllAlunos();
             });
             this.limpaDadosFormulario();
@@ -169,13 +165,11 @@ export default {
         getAllPlanosOptions() {
             axios.get(`${this.URL}/planos/options`).then(response => {
                 this.planos = response.data
-                console.log(this.planos);
             })
         },
         getAllTurmasOptions() {
             axios.get(`${this.URL}/turmas/options`).then(response => {
                 this.turmas = response.data
-                console.log(this.turmas);
             })
         },
         limpaDadosFormulario(){
