@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li>
-                <a href="/Analises">
+                <a href="/analises">
                     <span class="icon"><i class="fa fa-bar-chart "></i></span>
                     <span class="item">Análises</span>
                 </a>
@@ -63,7 +63,7 @@ export default {
         padding: 13px 30px;
         border-bottom: 1px solid #ffffff;
         color: rgb(241, 237, 237);
-        font-size: 18px;
+        font-size: 20px;
         position: relative;
     }
 

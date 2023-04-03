@@ -6,6 +6,7 @@ const turmasController = require('./controllers/turmasController');
 const adminsController = require('./controllers/adminsController');
 const despesasController = require('./controllers/despesasController');
 const cronogramaController = require('./controllers/cronogramaController');
+const recebimentosController = require('./controllers/recebimentosController');
 
 const router = express.Router();
 
@@ -18,6 +19,7 @@ router.post('/admins/valid', adminsController.getValido)
 // ROTAS DE ALUNOS
 router.get('/alunos', alunosController.getAll)
 router.get('/alunos/getone/:id', alunosController.getOne)
+router.get('/alunos/getnome/:nome_aluno', alunosController.getNome)
 router.post('/alunos', alunosController.addAluno)
 router.delete('/alunos/delete/:id', alunosController.deleteAluno)
 router.put('/alunos/:id', alunosController.updateAluno)
@@ -64,5 +66,8 @@ router.get('/cronogramaquarta', cronogramaController.getTurmasQuarta)
 router.get('/cronogramaquinta', cronogramaController.getTurmasQuinta)
 router.get('/cronogramasexta', cronogramaController.getTurmasSexta)
 router.get('/cronogramasabado', cronogramaController.getTurmasSabado)
+
+// ROTAS PAGAMENTO RECEBIDOS (MENSALIDADES)
+router.post('/recebimentos', recebimentosController.createPagamentoRecebido)
 
 module.exports = router;

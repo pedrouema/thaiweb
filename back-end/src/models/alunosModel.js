@@ -2,6 +2,26 @@ const connection = require ('./connection')
 
 const db = require("./database");
 
+const getNome = async (nome_aluno) => {  
+    try{
+        const { rows } = await db.query(`
+            SELECT 
+            a.id_aluno, 
+            a.nome_aluno, 
+            a.cpf_aluno, 
+            a.diapag_aluno,
+            p.nome_plano, p.valor_plano
+            FROM ALUNOS a
+            INNER JOIN planos p on p.id_plano = a.id_plano
+            WHERE UPPER(a.nome_aluno) LIKE UPPER('%${nome_aluno}%')
+        `);  
+        console.log(rows);
+        return rows;
+    }catch(err){
+        console.log(err);
+    }
+};
+
 const getOne = async (id_aluno) => {  
     try{
         const { rows } = await db.query(`
@@ -95,4 +115,5 @@ module.exports = {
     addAluno,
     deleteAluno,
     updateAluno,
+    getNome,
 };

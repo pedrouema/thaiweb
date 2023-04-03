@@ -18,11 +18,12 @@
             <div class="col-md-3">
                 <label for="inputZip" class="form-label">Selecione quantas vezes por semana</label>
                 <select class="form-select" v-model="qtdeSemana">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                    <option value="1">01</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                    <option value="4">04</option>
+                    <option value="5">05</option>
+                    <option value="6">06</option>
                 </select>
             </div>
             <div class="col-md-3">
@@ -97,7 +98,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nome da Turma</th>
                     <th scope="col">Horario</th>
-                    <!-- <th scope="col">Dia(s)</th> -->
+                    <th scope="col">Dia(s)</th>
                     <th scope="col">Instrutor</th>
                     <th scope="col">Ações</th>
                 </tr>
@@ -107,7 +108,7 @@
                     <th scope="row">{{ turma.id_turma }}</th>
                     <td>{{ turma.nome_turma+' '+turma.qtdesemanal_turma+'x' }}</td>
                     <td>{{ turma.horario_turma }}</td>
-                    <!-- <td>{{ 'teste' }}</td> -->
+                    <td>{{ turma.dias_turma }}</td>
                     <td>{{ turma.nome_instrutor }}</td>
                     <td>
                         <button type="button" class="btn btn-success" @click="carregarDadosTurma(turma.id_turma)">
@@ -150,6 +151,7 @@ export default {
             qui: false,
             sex: false,
             sab: false,
+            dias: '',
         }
     },
     methods: {
@@ -162,6 +164,18 @@ export default {
             })
         },
         createTurma() {
+            if(this.seg)
+                    this.dias = ' Segunda'
+            if(this.ter)
+                this.dias = this.dias+ ' Terça'
+            if(this.qua)
+                this.dias = this.dias+ ' Quarta'
+            if(this.qui)
+                this.dias = this.dias+ ' Quinta'
+            if(this.sex)
+                this.dias = this.dias+ ' Sexta'
+            if(this.sab)
+                this.dias = this.dias+ ' Sábado'
             const turma = {
                 nome_turma: this.nome,
                 id_instrutor: this.instrutor,
@@ -172,7 +186,8 @@ export default {
                 quarta: this.qua,
                 quinta: this.qui,
                 sexta: this.sex,
-                sabado: this.sab
+                sabado: this.sab,
+                dias_turma: this.dias
             }
             axios.post(`${this.URL}/turmas`, turma).then(response => {
                 this.getAllTurmas();
@@ -197,9 +212,30 @@ export default {
             })
         },
         salvarDados(){
+            if(this.seg)
+                this.dias = ' Segunda'
+            if(this.ter)
+                this.dias = this.dias+ ' Terça'
+            if(this.qua)
+                this.dias = this.dias+ ' Quarta'
+            if(this.qui)
+                this.dias = this.dias+ ' Quinta'
+            if(this.sex)
+                this.dias = this.dias+ ' Sexta'
+            if(this.sab)
+                this.dias = this.dias+ ' Sábado'
             const turma = {
                 nome_turma: this.nome,
-                id_instrutor: this.instrutor
+                id_instrutor: this.instrutor,
+                qtdesemanal_turma: this.qtdeSemana,
+                horario_turma: this.hrtreino,
+                segunda: this.seg,
+                terca: this.ter,
+                quarta: this.qua,
+                quinta: this.qui,
+                sexta: this.sex,
+                sabado: this.sab,
+                dias_turma: this.dias
             }
             console.log(turma);
             axios.put(`${this.URL}/turmas/${this.turmaId}`, turma).then(response => {
@@ -230,7 +266,8 @@ export default {
             this.qua = false;
             this.qui = false;
             this.sex = false;
-            this,sab = false;
+            this.sab = false;
+            this.dias = '';
         }
     },
     mounted() {

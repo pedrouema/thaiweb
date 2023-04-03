@@ -16,7 +16,8 @@ const getAll = async () => {
             t.quarta,
             t.quinta,
             t.sexta,
-            t.sabado
+            t.sabado,
+            t.dias_turma
             FROM TURMAS t 
             INNER JOIN instrutores i on i.id_instrutor = t.id_instrutor
             ORDER BY t.nome_turma
@@ -42,7 +43,8 @@ const getOne = async (id_turma) => {
             t.quarta,
             t.quinta,
             t.sexta,
-            t.sabado 
+            t.sabado,
+            t.dias_turma 
             FROM Turmas t
             INNER JOIN instrutores i on i.id_instrutor = t.id_instrutor
             WHERE t.id_turma = ${id_turma}
@@ -55,9 +57,9 @@ const getOne = async (id_turma) => {
 };
 
 const addTurma = async (newTurma) => {
-    const { nome_turma, id_instrutor, qtdesemanal_turma, horario_turma, segunda, terca, quarta, quinta, sexta, sabado } = newTurma;
-    let sql = 'INSERT INTO turmas ("nome_turma", "id_instrutor", "qtdesemanal_turma", "horario_turma", "segunda", "terca", "quarta", "quinta", "sexta", "sabado") VALUES('
-    sql+="'"+nome_turma+"'"+','+"'"+id_instrutor+"'"+','+"'"+qtdesemanal_turma+"'"+','+"'"+horario_turma+"'"+','+"'"+segunda+"'"+','+"'"+terca+"'"+','+"'"+quarta+"'"+','+"'"+quinta+"'"+','+"'"+sexta+"'"+','+"'"+sabado+"')"
+    const { nome_turma, id_instrutor, qtdesemanal_turma, horario_turma, segunda, terca, quarta, quinta, sexta, sabado, dias_turma } = newTurma;
+    let sql = 'INSERT INTO turmas ("nome_turma", "id_instrutor", "qtdesemanal_turma", "horario_turma", "segunda", "terca", "quarta", "quinta", "sexta", "sabado", "dias_turma") VALUES('
+    sql+="'"+nome_turma+"'"+','+"'"+id_instrutor+"'"+','+"'"+qtdesemanal_turma+"'"+','+"'"+horario_turma+"'"+','+"'"+segunda+"'"+','+"'"+terca+"'"+','+"'"+quarta+"'"+','+"'"+quinta+"'"+','+"'"+sexta+"'"+','+"'"+sabado+"'"+','+"'"+dias_turma+"')"
     let createTurma;
     try{
         createTurma = await db.query(sql)
@@ -79,9 +81,18 @@ const deleteTurma = async (id) => {
 };
 
 const updateTurma = async (id, turma) => {
-    const { nome_turma, id_instrutor} = turma;
+    const { nome_turma, id_instrutor, qtdesemanal_turma, horario_turma, segunda, terca, quarta, quinta, sexta, sabado, dias_turma } = turma;
     let sql = 'UPDATE turmas SET nome_turma='+"'"+nome_turma+"',"+
-    ' id_instrutor='+"'"+id_instrutor+"'"+
+    ' id_instrutor='+"'"+id_instrutor+"',"+
+    ' qtdesemanal_turma='+"'"+qtdesemanal_turma+"',"+
+    ' horario_turma='+"'"+horario_turma+"',"+
+    ' segunda='+"'"+segunda+"',"+
+    ' terca='+"'"+terca+"',"+
+    ' quarta='+"'"+quarta+"',"+
+    ' quinta='+"'"+quinta+"',"+
+    ' sexta='+"'"+sexta+"',"+
+    ' sabado='+"'"+sabado+"',"+
+    ' dias_turma='+"'"+dias_turma+"'"+
     ' WHERE id_turma = '+id;
     console.log(sql);
     let updateTurma;
@@ -101,6 +112,8 @@ const getAllOptions = async () => {
         console.log(err);
     }
 };
+
+
 
 module.exports = {
     getAll,

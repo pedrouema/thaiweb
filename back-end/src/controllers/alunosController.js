@@ -5,6 +5,12 @@ const getAll = async (req, res) => {
     return res.status(200).json(alunos);
 };
 
+const getNome = async (req, res) => {
+    const nome_aluno = req.params.nome_aluno;
+    const aluno = await alunosModel.getNome(nome_aluno);
+    return res.status(200).json(aluno);
+};
+
 const getOne = async (req, res) => {
     const id = req.params.id;
     const aluno = await alunosModel.getOne(id);
@@ -36,4 +42,5 @@ module.exports = {
     addAluno,
     deleteAluno,
     updateAluno,
+    getNome,
 };
