@@ -69,5 +69,8 @@ router.get('/cronogramasabado', cronogramaController.getTurmasSabado)
 
 // ROTAS PAGAMENTO RECEBIDOS (MENSALIDADES)
 router.post('/recebimentos', recebimentosController.createPagamentoRecebido)
+router.get('/getallrecebidas', recebimentosController.getAllRecebidas)
+router.get('/recebidasentredatas/:dataIni/:dataFim', recebimentosController.getRecebidasEntreDatas)
+router.delete('/recebimento/delete/:id', recebimentosController.deleteRecebimento)
 
 module.exports = router;

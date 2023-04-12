@@ -5,6 +5,27 @@ const createPagamentoRecebido = async (req, res) => {
     return res.status(201).json(createRecebimento);
 };
 
+const getAllRecebidas = async (req, res) => {
+    const recebido = await recebimentosModel.getAllRecebidas();
+    return res.status(200).json(recebido);
+};
+
+const getRecebidasEntreDatas = async (req, res) => {
+    const dataIni = req.params.dataIni
+    const dataFim = req.params.dataFim
+    const recebidas = await recebimentosModel.getRecebidasEntreDatas(dataIni, dataFim);
+    return res.status(200).json(recebidas);
+};
+
+const deleteRecebimento = async (req, res) => {
+    const { id } = req.params;
+    await recebimentosModel.deleteRecebimento(id);
+    return res.status(204).json();
+};
+
 module.exports = {
     createPagamentoRecebido,
+    getAllRecebidas,
+    getRecebidasEntreDatas,
+    deleteRecebimento,
 }
