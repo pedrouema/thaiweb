@@ -36,7 +36,7 @@
                     <td>
                         <button type="button" class="btn btn-danger" @click="showAlertApagar(recebida.id_mensalidade)">
                             <i class="fa fa-trash"> </i>
-                             Apagar (Não Foi Recebido)
+                             Voltar (Não Foi Recebido)
                         </button>
                     </td>
                 </tr>
