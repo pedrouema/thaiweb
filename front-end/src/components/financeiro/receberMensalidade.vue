@@ -69,6 +69,7 @@ export default {
             this.limpaDados()
         },
         async receber(id_aluno) {
+            
             for(let i = 0; i < this.alunos.length; i++)
             {
                 if(this.alunos[i].id_aluno == id_aluno)
@@ -101,6 +102,22 @@ export default {
                 const { value: formValues } = await this.$swal.fire({
                     title: 'Receber Pagamento! ',
                     html:
+                        '<label for="inputState" class="form-label">Selecione o mês à receber:</label>' +
+                        '<select type="number" id="swal-input1" class="swal2-input">' +
+                            '<option value="01">Janeiro</option>' +
+                            '<option value="02">Fevereiro</option>' +
+                            '<option value="03">Março</option>' +
+                            '<option value="04">Abril</option>' +
+                            '<option value="05">Maio</option>' +
+                            '<option value="06">Junho</option>' +
+                            '<option value="07">Julho</option>' +
+                            '<option value="08">Agosto</option>' +
+                            '<option value="09">Setembro</option>' +
+                            '<option value="10">Outubro</option>' +
+                            '<option value="11">Novembro</option>' +
+                            '<option value="12">Dezembro</option>' +
+                        '</select>' +
+                        '________________________________________________________________ </br></br>' +
                         '<label for="inputState" class="form-label">Digite o valor recebido</label>' +
                         '<input type="number" id="swal-input2" class="swal2-input"> </br></br>' +
                         '________________________________________________________________ </br></br>' +
@@ -120,7 +137,6 @@ export default {
                     this.valorRecebimento = formValues[1]
                     this.dataRecebimento = formValues[2]
                     this.showAlertReceber(id_aluno)
-                    console.log("TESTEEEEEEEE"+this.mesRecebimento);
                 }
             }
         },
