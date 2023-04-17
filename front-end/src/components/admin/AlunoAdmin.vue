@@ -80,7 +80,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Nome</th>
                     <th scope="col">CPF</th>
                     <th scope="col">Data Nascimento</th>
@@ -92,8 +91,7 @@
             </thead>
             <tbody class="table-group-divider">
                 <tr v-for="aluno in alunos" :key="aluno.id_aluno">
-                    <th scope="row">{{ aluno.id_aluno }}</th>
-                    <td>{{ aluno.nome_aluno }}</td>
+                    <th scope="row">{{ aluno.nome_aluno }}</th>
                     <td>{{ aluno.cpf_aluno }}</td>
                     <td>{{ aluno.datanasc_aluno }}</td>
                     <td>{{ aluno.nome_plano }}</td>

@@ -8,19 +8,23 @@
             <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab"
-                        aria-controls="ex1-tabs-1" aria-selected="true" v-on:click="clickAluno()">Aluno</a>
+                        aria-controls="ex1-tabs-1" aria-selected="true" v-on:click="clickAluno()">
+                        <i class="fa fa-graduation-cap"></i> Aluno</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2" role="tab"
-                        aria-controls="ex1-tabs-2" aria-selected="true" v-on:click="clickInstrutor()">Instrutor</a>
+                        aria-controls="ex1-tabs-2" aria-selected="true" v-on:click="clickInstrutor()">
+                        <i class="fa fa-university"></i> Instrutor</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab"
-                        aria-controls="ex1-tabs-3" aria-selected="false" v-on:click="clickPlano()">Plano</a>
+                        aria-controls="ex1-tabs-3" aria-selected="false" v-on:click="clickPlano()">
+                        <i class="fa fa-book"></i> Plano</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="ex1-tab-4" data-mdb-toggle="tab" href="#ex1-tabs-4" role="tab"
-                        aria-controls="ex1-tabs-4" aria-selected="false" v-on:click="clickTurma()">Turma</a>
+                        aria-controls="ex1-tabs-4" aria-selected="false" v-on:click="clickTurma()">
+                        <i class="fa fa-users"></i> Turma</a>
                 </li>
             </ul>
             <!-- Tabs navs -->

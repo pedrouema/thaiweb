@@ -7,31 +7,43 @@
                 <input type="text" class="form-control" placeholder="ex: Grupo 3x, 18:00" v-model="nome">
             </div>
             <div class="col-md-2">
-                <label for="inputZip" class="form-label">Valor Mensalidade</label>
+                <label for="inputZip" class="form-label">Valor do Plano</label>
                 <input type="text" class="form-control" id="inputZip" placeholder="ex: R$99.99" v-model="valor">
             </div>
-            <div class="col-12">
-                <button type="button" class="btn btn-primary" @click="createPlano()" v-show="!editar">+ SALVAR</button>
-                <button type="button" class="btn btn-primary" @click="salvarDados()" v-show="editar">+ EDITAR</button>
-                <button  type="button" class="btn btn-danger" @click="limpaDadosFormulario()" >CANCELAR</button>
-            </div>
         </form>
+        <br>
+        <label for="inputZip" class="form-label">Selecione o tipo de plano: </label><br>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" v-model="tipomensal"/>
+            <label class="form-check-label" for="inlineCheckbox1">Mensalidade</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" v-model="tipoavulso"/>
+            <label class="form-check-label" for="inlineCheckbox2">Avulso</label>
+        </div>
+        <br>
+        <br>
+        <div class="col-12">
+            <button type="button" class="btn btn-primary" @click="createPlano()" v-show="!editar">+ SALVAR</button>
+            <button type="button" class="btn btn-primary" @click="salvarDados()" v-show="editar">+ EDITAR</button>
+            <button  type="button" class="btn btn-danger" @click="limpaDadosFormulario()" >CANCELAR</button>
+        </div>
     </div>
     <hr/>
     <div class="plano-treino-table">
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Nome do Plano</th>
-                    <th scope="col">Valor Mensalidade</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Valor do Plano</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
                 <tr v-for="plano in planos" :key="plano.id_plano">
-                    <th scope="row">{{ plano.id_plano }}</th>
-                    <td>{{ plano.nome_plano }}</td>
+                    <th scope="row">{{ plano.nome_plano }}</th>
+                    <td>{{ plano.tipo_plano }}</td>
                     <td>R$ {{ plano.valor_plano.toFixed(2) }}</td>
                     <td>
                         <button type="button" class="btn btn-success" @click="carregarDadosPlano(plano.id_plano)">
@@ -64,6 +76,9 @@ export default {
             nome: '',
             valor: '',
             editar: false,
+            tipomensal: false,
+            tipoavulso: false,
+            tipoplano: ''
         }
     },
     methods: {
@@ -76,14 +91,18 @@ export default {
             })
         },
         createPlano(){
+            if(this.tipomensal)
+                this.tipoplano = "Mensalidade"
+            if(this.tipoavulso)
+                this.tipoplano = "Avulso"
             const plano = {
                 nome_plano: this.nome,
                 valor_plano: this.valor,
-                
+                tipo_mensal: this.tipomensal,
+                tipo_avulso: this.tipoavulso,
             }
             axios.post(`${this.URL}/planos`, plano).then(response => {
                 this.getAllPlanos();
-                
             })
             this.limpaDadosFormulario()
         },
@@ -94,12 +113,21 @@ export default {
                 this.planoId = plano.id_plano
                 this.nome = plano.nome_plano
                 this.valor = plano.valor_plano
+                this.tipomensal = plano.tipo_mensal
+                this.tipoavulso = plano.tipo_avulso
             })
         },
         salvarDados(){
+            if(this.tipomensal)
+                this.tipoplano = "Mensalidade"
+            if(this.tipoavulso)
+                this.tipoplano = "Avulso"
             const plano = {
                 nome_plano: this.nome,
                 valor_plano: this.valor,
+                tipo_mensal: this.tipomensal,
+                tipo_avulso: this.tipoavulso,
+                tipo_plano: this.tipoplano
             }
             console.log(plano);
             axios.put(`${this.URL}/planos/${this.planoId}`, plano).then(response => {
@@ -118,6 +146,8 @@ export default {
             this.nome = '';
             this.valor = '';
             this.editar = false;
+            this.tipomensal = false;
+            this.tipoavulso = false;
         },
     },
     mounted() {

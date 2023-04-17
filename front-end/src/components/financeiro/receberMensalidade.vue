@@ -1,5 +1,5 @@
 <template>
-    <h3>Receber Mensalidade</h3>
+    <h3>Recebimento</h3>
     <form class="form-inline">
         <h5>Busque pelo o nome do aluno que deseja receber!</h5>
         <div class="form-group mb-2">

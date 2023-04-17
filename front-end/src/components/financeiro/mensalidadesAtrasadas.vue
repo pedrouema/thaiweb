@@ -1,5 +1,6 @@
 <template>
-    <h2>Pagina de mensalidades atrasadas</h2>
+    <h2>Mensalidades em Atraso</h2>
+    
 </template>
 
 <script>

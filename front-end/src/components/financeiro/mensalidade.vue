@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Gerenciamento de Mensalidades</h3>
+        <h3>Gerenciamento de Contas à Receber</h3>
         <div class=" cronograma-page-tabs">
             <!-- Tabs navs -->
             <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
@@ -14,7 +14,7 @@
                     aria-controls="ex1-tabs-1"
                     aria-selected="true"
                     v-on:click="clickReceber()">
-                    <i class="fa fa-money"></i> Receber Mensalidade</a>
+                    <i class="fa fa-money"></i> Receber</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a
@@ -26,7 +26,7 @@
                     aria-controls="ex1-tabs-2"
                     aria-selected="true"
                     v-on:click="clickAtrasados()">
-                    <i class="fa fa-warning"></i> Mensalidades atrasadas</a>
+                    <i class="fa fa-warning"></i> Mensalidade(s) Atrasada(s)</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a
@@ -38,7 +38,7 @@
                     aria-controls="ex1-tabs-3"
                     aria-selected="true"
                     v-on:click="clickVerRecebidas()">
-                    <i class="fa fa-eye"></i> Ver Mensalidades Recebidas</a>
+                    <i class="fa fa-eye"></i> Recebimentos Confirmados</a>
                 </li>
             </ul>
             <!-- Tabs navs -->

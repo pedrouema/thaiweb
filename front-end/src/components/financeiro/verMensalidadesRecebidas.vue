@@ -1,7 +1,7 @@
 <template>
-    <h3>Gerenciamento de Recebimentos</h3>
+    <h3>Pagamento Recebidos</h3>
     <form class="row g-3">
-        <h5>Selecione as datas inicio e fim para buscar as mensalidades recebidas.</h5>
+        <h5>Selecione as datas inicio e fim para buscar recebimentos confirmados.</h5>
         <div class="col-md-2">
             <label for="inputZip" class="form-label">Data Inicio</label >
             <input type="date" class="form-control" v-model="dataIni">
@@ -36,7 +36,7 @@
                     <td>
                         <button type="button" class="btn btn-danger" @click="showAlertApagar(recebida.id_mensalidade)">
                             <i class="fa fa-trash"> </i>
-                             Apagar (Não Foi Recebido)
+                             Voltar (Não Foi Recebido)
                         </button>
                     </td>
                 </tr>
@@ -116,8 +116,8 @@ export default {
                 result.dismiss === this.$swal.DismissReason.cancel
             ) {
                 swalWithBootstrapButtons.fire(
-                'Cancelado! ',
-                'fatura recebida não foi apagada! ',
+                'CANCELADO! ',
+                'VALOR RECEBIDO NÃO FOI APAGADO! ',
                 'error'
                 )
             }

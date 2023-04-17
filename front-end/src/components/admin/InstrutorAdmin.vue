@@ -22,7 +22,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Nome</th>
                     <th scope="col">CPF</th>
                     <th scope="col">Ações</th>
@@ -30,8 +29,7 @@
             </thead>
             <tbody class="table-group-divider">
                 <tr v-for="instrutor in instrutores" :key="instrutor.id_instrutor">
-                    <th scope="row">{{ instrutor.id_instrutor }}</th>
-                    <td>{{ instrutor.nome_instrutor }}</td>
+                    <th scope="row">{{ instrutor.nome_instrutor }}</th>
                     <td>{{ instrutor.cpf_instrutor }}</td>
                     <td>
                         <button type="button" class="btn btn-success" @click="carregarDadosInstrutor(instrutor.id_instrutor)">

@@ -16,7 +16,10 @@ const getOne = async (id_plano) => {
             SELECT 
             id_plano, 
             nome_plano, 
-            valor_plano 
+            valor_plano,
+            tipo_mensal,
+            tipo_avulso,
+            tipo_plano 
             FROM PLANOS 
             WHERE id_plano = ${id_plano}
         `);  
@@ -28,9 +31,9 @@ const getOne = async (id_plano) => {
 };
 
 const addPlano = async (newPlano) => {
-    const {  nome_plano, valor_plano } = newPlano;
-    let sql = 'INSERT INTO planos ("nome_plano", "valor_plano") VALUES('
-    sql+="'"+nome_plano+"'"+','+"'"+valor_plano+"')"
+    const {  nome_plano, valor_plano, tipo_mensal, tipo_avulso } = newPlano;
+    let sql = 'INSERT INTO planos ("nome_plano", "valor_plano", "tipo_mensal", "tipo_avulso", "tipo_plano") VALUES('
+    sql+="'"+nome_plano+"'"+','+"'"+valor_plano+"'"+","+"'"+tipo_mensal+"'"+","+"'"+tipo_avulso+"'"+","+"'"+tipo_plano+"')"
     let createPlano;
     try{
         createPlano = await db.query(sql)
@@ -52,9 +55,12 @@ const deletePlano = async (id) => {
 };
 
 const updatePlano = async (id, plano) => {
-    const { nome_plano, valor_plano } = plano;
+    const { nome_plano, valor_plano, tipo_mensal, tipo_avulso, tipo_plano } = plano;
     let sql = 'UPDATE planos SET nome_plano='+"'"+nome_plano+"',"+
-    ' valor_plano='+"'"+valor_plano+"'"+
+    ' valor_plano='+"'"+valor_plano+"',"+
+    ' tipo_mensal='+"'"+tipo_mensal+"',"+
+    ' tipo_avulso='+"'"+tipo_avulso+"',"+
+    ' tipo_plano='+"'"+tipo_plano+"'"+
     ' WHERE id_plano = '+id;
     let updatePlano;
     try{ 

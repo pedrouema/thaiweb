@@ -27,7 +27,7 @@
                 </select>
             </div>
             <div class="col-md-3">
-                <label for="inputZip" class="form-label">Selecione o horario do inicio do treino</label>
+                <label for="inputZip" class="form-label">Selecione o horario de inicio do treino</label>
                 <select class="form-select" v-model="hrtreino">
                     <option value="08:00">08:00</option>
                     <option value="08:30">08:30</option>
@@ -95,7 +95,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Nome da Turma</th>
                     <th scope="col">Horario</th>
                     <th scope="col">Dia(s)</th>
@@ -105,8 +104,7 @@
             </thead>
             <tbody class="table-group-divider">
                 <tr v-for="turma in turmas" :key="turma.id_turma">
-                    <th scope="row">{{ turma.id_turma }}</th>
-                    <td>{{ turma.nome_turma+' '+turma.qtdesemanal_turma+'x' }}</td>
+                    <th scope="row">{{ turma.nome_turma+' '+turma.qtdesemanal_turma+'x' }}</th>
                     <td>{{ turma.horario_turma }}</td>
                     <td>{{ turma.dias_turma }}</td>
                     <td>{{ turma.nome_instrutor }}</td>
