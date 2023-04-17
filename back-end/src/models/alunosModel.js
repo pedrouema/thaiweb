@@ -10,7 +10,9 @@ const getNome = async (nome_aluno) => {
             a.nome_aluno, 
             a.cpf_aluno, 
             a.diapag_aluno,
-            p.nome_plano, p.valor_plano
+            p.nome_plano, 
+            p.valor_plano,
+            p.tipo_mensal
             FROM ALUNOS a
             INNER JOIN planos p on p.id_plano = a.id_plano
             WHERE UPPER(a.nome_aluno) LIKE UPPER('%${nome_aluno}%')

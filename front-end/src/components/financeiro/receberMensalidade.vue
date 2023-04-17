@@ -55,36 +55,73 @@ export default {
             nome: '',
             dataRecebimento: '',
             valorRecebimento: '',
+            mensalidade: false,
+            plano: '',
+            mesRecebimento: '',
         }
     },
     methods: {
         buscar() {
             axios.get(`${this.URL}/alunos/getnome/`+this.nome).then(response => {
                 this.alunos = response.data
+                console.log(this.alunos);
             })
             this.limpaDados()
         },
         async receber(id_aluno) {
-            const { value: formValues } = await this.$swal.fire({
-                title: 'Receber Pagamento! ',
-                html:
-                    '<label for="inputState" class="form-label">Digite o valor recebido</label>' +
-                    '<input type="number" id="swal-input1" class="swal2-input"> </br></br>' +
-                    '________________________________________________________________ </br></br>' +
-                    '<label for="inputState" class="form-label">Selecione a data do pagamento</label>' +
-                    '<input type="date" id="swal-input2" class="swal2-input">',
-                focusConfirm: false,
-                preConfirm: () => {
-                    return [
-                    document.getElementById('swal-input1').value,
-                    document.getElementById('swal-input2').value
-                    ]
+            for(let i = 0; i < this.alunos.length; i++)
+            {
+                if(this.alunos[i].id_aluno == id_aluno)
+                    this.mensalidade = this.alunos[i].tipo_mensal
+            }
+            if(!this.mensalidade){
+                const { value: formValues } = await this.$swal.fire({
+                    title: 'Receber Pagamento! ',
+                    html:
+                        '<label for="inputState" class="form-label">Digite o valor recebido</label>' +
+                        '<input type="number" id="swal-input1" class="swal2-input"> </br></br>' +
+                        '________________________________________________________________ </br></br>' +
+                        '<label for="inputState" class="form-label">Selecione a data do pagamento</label>' +
+                        '<input type="date" id="swal-input2" class="swal2-input">',
+                    focusConfirm: false,
+                    preConfirm: () => {
+                        return [
+                        document.getElementById('swal-input1').value,
+                        document.getElementById('swal-input2').value
+                        ]
+                    }
+                })
+                if (formValues) {
+                    this.valorRecebimento = formValues[0]
+                    this.dataRecebimento = formValues[1]
+                    this.showAlertReceber(id_aluno)
                 }
-            })
-            if (formValues) {
-                this.valorRecebimento = formValues[0]
-                this.dataRecebimento = formValues[1]
-                this.showAlertReceber(id_aluno)
+            }
+            else{
+                const { value: formValues } = await this.$swal.fire({
+                    title: 'Receber Pagamento! ',
+                    html:
+                        '<label for="inputState" class="form-label">Digite o valor recebido</label>' +
+                        '<input type="number" id="swal-input2" class="swal2-input"> </br></br>' +
+                        '________________________________________________________________ </br></br>' +
+                        '<label for="inputState" class="form-label">Selecione a data do pagamento</label>' +
+                        '<input type="date" id="swal-input3" class="swal2-input">',
+                    focusConfirm: false,
+                    preConfirm: () => {
+                        return [
+                        document.getElementById('swal-input1').value,
+                        document.getElementById('swal-input2').value,
+                        document.getElementById('swal-input3').value
+                        ]
+                    }
+                })
+                if (formValues) {
+                    this.mesRecebimento = formValues[0]
+                    this.valorRecebimento = formValues[1]
+                    this.dataRecebimento = formValues[2]
+                    this.showAlertReceber(id_aluno)
+                    console.log("TESTEEEEEEEE"+this.mesRecebimento);
+                }
             }
         },
         showAlertReceber(id_aluno) {
