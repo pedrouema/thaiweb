@@ -40,7 +40,7 @@
                     aria-controls="ex1-tabs-3"
                     aria-selected="false"
                     v-on:click="clickMensalidade()">
-                    <i class="fa fa-calendar-o"></i> Gerenciamento de Mensalidades</a>
+                    <i class="fa fa-calendar-o"></i> Gerenciamento Contas à Receber</a>
                 </li>
             </ul>
             <!-- Tabs navs -->

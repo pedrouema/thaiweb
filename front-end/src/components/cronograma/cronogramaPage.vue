@@ -8,7 +8,7 @@
             <thead>
                 <tr>
                     <th scope="col">
-                        <div class="card" style="background-color:azure;">
+                        <div class="card" style="background-color:orange;">
                             <div class="card-body">
                                 <h4 class="card-title" style="text-align: center; text-;">Segunda-Feira</h4>
                                 <table class="table">
@@ -29,7 +29,7 @@
                         </div>
                     </th>
                     <th scope="col">
-                        <div class="card" style="background-color:aliceblue">
+                        <div class="card" style="background-color:royalblue">
                             <div class="card-body">
                                 <h4 class="card-title" style="text-align: center;">Terça-Feira</h4>
                                 <table class="table">
@@ -50,7 +50,7 @@
                         </div>
                     </th>
                     <th scope="col">
-                        <div class="card" style="background-color:azure;">
+                        <div class="card" style="background-color:orange">
                             <div class="card-body">
                                 <h4 class="card-title" style="text-align: center;">Quarta-Feira</h4>
                                 <table class="table">
@@ -71,7 +71,7 @@
                         </div>
                     </th>
                     <th scope="col">
-                        <div class="card" style="background-color:aliceblue;">
+                        <div class="card" style="background-color:royalblue;">
                             <div class="card-body">
                                 <h4 class="card-title" style="text-align: center;">Quinta-Feira</h4>
                                 <table class="table">
@@ -92,7 +92,7 @@
                         </div>
                     </th>
                     <th scope="col">
-                        <div class="card" style="background-color:azure;">
+                        <div class="card" style="background-color:orange">
                             <div class="card-body">
                                 <h4 class="card-title" style="text-align: center;">Sexta-Feira</h4>
                                 <table class="table">
@@ -113,7 +113,7 @@
                         </div>
                     </th>
                     <th scope="col">
-                        <div class="card" style="background-color:aliceblue;">
+                        <div class="card" style="background-color:royalblue;">
                             <div class="card-body">
                                 <h4 class="card-title" style="text-align: center;">Sábado</h4>
                                 <table class="table">
