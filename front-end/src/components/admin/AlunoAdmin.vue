@@ -76,7 +76,11 @@
         </form>
     </div>
     <br/>
-    <div class="alunos-table">
+    <br>
+        <div class="alunos-table">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-dark" type="button"><i class="fa fa-print"> </i> Imprimir</button>
+            </div>
         <table class="table">
             <thead>
                 <tr>
