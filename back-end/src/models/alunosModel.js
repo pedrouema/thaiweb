@@ -9,7 +9,8 @@ const getNome = async (nome_aluno) => {
             a.id_aluno, 
             a.nome_aluno, 
             a.cpf_aluno, 
-            a.diapag_aluno,
+            to_char(a.diapag_aluno, 'DD/MM/YYYY') as diapag_aluno,
+            EXTRACT (DAY FROM diapag_aluno) as diapag_format,
             p.nome_plano, 
             p.valor_plano,
             p.tipo_mensal
@@ -33,7 +34,8 @@ const getOne = async (id_aluno) => {
             a.cpf_aluno, 
             to_char(a.datanasc_aluno, 'DD/MM/YYYY') as datanasc_aluno, 
             to_char(a.datanasc_aluno, 'yyyy-MM-dd') as datanasc_formatada, 
-            a.diapag_aluno,
+            to_char(a.diapag_aluno, 'DD/MM/YYYY') as diapag_aluno,
+            to_char(a.diapag_aluno, 'yyyy-MM-dd') as diapag_formatada,
             p.id_plano, t.id_turma 
             FROM ALUNOS a
             INNER JOIN planos p on p.id_plano = a.id_plano
@@ -55,8 +57,9 @@ const getAll = async () => {
             a.nome_aluno, 
             a.cpf_aluno, 
             to_char(a.datanasc_aluno, 'DD/MM/YYYY') as datanasc_aluno, 
-            a.diapag_aluno,
-            p.nome_plano, t.nome_turma 
+            p.nome_plano, 
+            t.nome_turma,
+            to_char(a.diapag_aluno, 'DD/MM/YYYY') as diapag_aluno 
             FROM ALUNOS a
             INNER JOIN planos p on p.id_plano = a.id_plano
             INNER JOIN turmas t on t.id_turma = a.id_turma
@@ -69,10 +72,60 @@ const getAll = async () => {
     }
 };
 
+const getAllMensalidade = async () => {  
+    try{
+        const { rows } = await db.query(`
+            SELECT 
+            a.id_aluno, 
+            a.nome_aluno, 
+            a.cpf_aluno, 
+            to_char(a.datanasc_aluno, 'DD/MM/YYYY') as datanasc_aluno, 
+            p.nome_plano, 
+            t.nome_turma,
+            to_char(a.diapag_aluno, 'DD/MM/YYYY') as diapag_aluno, 
+            EXTRACT (DAY FROM diapag_aluno) as diapag_format
+            FROM ALUNOS a
+            INNER JOIN planos p on p.id_plano = a.id_plano
+            INNER JOIN turmas t on t.id_turma = a.id_turma
+            WHERE p.tipo_mensal = true
+            ORDER BY a.nome_aluno
+        `);  
+        console.log(rows);
+        return rows;
+    }catch(err){
+        console.log(err);
+    }
+};
+
+const getAllMensalidadesAtrasadas = async (dataAtual) => {  
+    try{
+        const { rows } = await db.query(`
+            SELECT 
+            a.id_aluno, 
+            a.nome_aluno, 
+            a.cpf_aluno, 
+            to_char(a.datanasc_aluno, 'DD/MM/YYYY') as datanasc_aluno, 
+            p.nome_plano, 
+            t.nome_turma,
+            to_char(a.diapag_aluno, 'DD/MM/YYYY') as diapag_aluno, 
+            EXTRACT (DAY FROM diapag_aluno) as diapag_format
+            FROM ALUNOS a
+            INNER JOIN planos p on p.id_plano = a.id_plano
+            INNER JOIN turmas t on t.id_turma = a.id_turma
+            WHERE p.tipo_mensal = true
+            ORDER BY a.nome_aluno
+        `);  
+        console.log(rows);
+        return rows;
+    }catch(err){
+        console.log(err);
+    }
+};
+
 const addAluno = async (newAluno) => {
-    const { nome_aluno, cpf_aluno, datanasc_aluno, diapag_aluno, id_plano, id_turma } = newAluno;
-    let sql = `INSERT INTO alunos ("nome_aluno", "cpf_aluno", "datanasc_aluno", "diapag_aluno", "id_plano", "id_turma") 
-               VALUES('${nome_aluno}','${cpf_aluno}', '${datanasc_aluno}', ${diapag_aluno}, ${id_plano}, ${id_turma})`;
+    const { nome_aluno, cpf_aluno, datanasc_aluno, id_plano, id_turma, diapag_aluno  } = newAluno;
+    let sql = `INSERT INTO alunos ("nome_aluno", "cpf_aluno", "datanasc_aluno", "id_plano", "id_turma", "diapag_aluno") 
+               VALUES('${nome_aluno}','${cpf_aluno}', '${datanasc_aluno}', ${id_plano}, ${id_turma}, '${diapag_aluno}')`;
     let createAluno;
     try{
         createAluno = await db.query(sql)
@@ -118,4 +171,6 @@ module.exports = {
     deleteAluno,
     updateAluno,
     getNome,
+    getAllMensalidade,
+    getAllMensalidadesAtrasadas,
 };

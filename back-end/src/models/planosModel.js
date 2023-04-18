@@ -31,7 +31,7 @@ const getOne = async (id_plano) => {
 };
 
 const addPlano = async (newPlano) => {
-    const {  nome_plano, valor_plano, tipo_mensal, tipo_avulso } = newPlano;
+    const {  nome_plano, valor_plano, tipo_mensal, tipo_avulso, tipo_plano } = newPlano;
     let sql = 'INSERT INTO planos ("nome_plano", "valor_plano", "tipo_mensal", "tipo_avulso", "tipo_plano") VALUES('
     sql+="'"+nome_plano+"'"+','+"'"+valor_plano+"'"+","+"'"+tipo_mensal+"'"+","+"'"+tipo_avulso+"'"+","+"'"+tipo_plano+"')"
     let createPlano;

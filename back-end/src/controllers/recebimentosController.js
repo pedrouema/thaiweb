@@ -23,9 +23,16 @@ const deleteRecebimento = async (req, res) => {
     return res.status(204).json();
 };
 
+const getAtrasados = async (req, res) => {
+    const mesAtual = req.params.mesAtual
+    const recebidas = await recebimentosModel.getAtrasados(mesAtual);
+    return res.status(200).json(recebidas);
+};
+
 module.exports = {
     createPagamentoRecebido,
     getAllRecebidas,
     getRecebidasEntreDatas,
     deleteRecebimento,
+    getAtrasados,
 }

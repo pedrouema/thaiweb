@@ -29,7 +29,7 @@
                     <td>{{ aluno.cpf_aluno }}</td>
                     <td>{{ aluno.nome_plano }}</td>
                     <td>R${{ aluno.valor_plano.toFixed(2) }}</td>
-                    <td>{{ aluno.diapag_aluno }}</td>
+                    <td>{{ aluno.diapag_format }}</td>
                     <td>R${{ aluno.valor_plano.toFixed(2) }}</td>
                     <td>
                         <button type="button" class="btn btn-success" @click="receber(aluno.id_aluno)">
@@ -180,6 +180,7 @@ export default {
         },
         criaRecebimento(id_aluno) {
             const recebimento = {
+                mes_referente: this.mesRecebimento,
                 valor_recebimento: this.valorRecebimento,
                 data_recebimento: this.dataRecebimento,
                 id_aluno: id_aluno
@@ -193,6 +194,7 @@ export default {
             this.nome = '';
             this.valorRecebimento = '';
             this.dataRecebimento = '';
+            this.mesRecebimento = '';
         },      
     },
     mounted() {

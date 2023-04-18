@@ -5,6 +5,11 @@ const getAll = async (req, res) => {
     return res.status(200).json(alunos);
 };
 
+const getAllMensalidade = async (req, res) => {
+    const alunos = await alunosModel.getAllMensalidade();
+    return res.status(200).json(alunos);
+};
+
 const getNome = async (req, res) => {
     const nome_aluno = req.params.nome_aluno;
     const aluno = await alunosModel.getNome(nome_aluno);
@@ -43,4 +48,5 @@ module.exports = {
     deleteAluno,
     updateAluno,
     getNome,
+    getAllMensalidade,
 };

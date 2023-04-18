@@ -33,40 +33,8 @@
                 </select>
             </div>
             <div class="col-md-2">
-                <label for="inputZip" class="form-label">Dia Limite de Pagamento</label>
-                <select class="form-select" v-model="diaPag">
-                    <option value="1">01</option>
-                    <option value="2">02</option>
-                    <option value="3">03</option>
-                    <option value="4">04</option>
-                    <option value="5">05</option>
-                    <option value="6">06</option>
-                    <option value="7">07</option>
-                    <option value="8">08</option>
-                    <option value="9">09</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-                </select>
+                <label for="inputZip" class="form-label">Data de inicio</label >
+                <input type="date" class="form-control" id="inputZip" v-model="diaPag">
             </div>
             <div class="col-12">
                 <button type="button" class="btn btn-primary" @click="createAluno()" v-show="!editar">+ SALVAR</button>
@@ -89,7 +57,7 @@
                     <th scope="col">Data Nascimento</th>
                     <th scope="col">Plano</th>
                     <th scope="col">Turma</th>
-                    <th scope="col">Dia Pagamento</th>
+                    <th scope="col">Data Inicio</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -134,7 +102,7 @@ export default {
             dataNasc: '',
             plano: 0,
             turma: 0,
-            diaPag: 0,
+            diaPag: '',
             editar: false
         }
     },
@@ -169,7 +137,7 @@ export default {
                 this.dataNasc = aluno.datanasc_formatada
                 this.plano = aluno.id_plano
                 this.turma = aluno.id_turma
-                this.diaPag = aluno.diapag_aluno
+                this.diaPag = aluno.diapag_formatada
             })
         },
         salvarDados(){
@@ -209,7 +177,7 @@ export default {
             this.dataNasc = '';
             this.plano = 0;
             this.turma = 0;
-            this.diaPag = 0;
+            this.diaPag = '';
             this.editar = false;
         },
         isCPF(cpf){

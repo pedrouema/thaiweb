@@ -100,6 +100,7 @@ export default {
                 valor_plano: this.valor,
                 tipo_mensal: this.tipomensal,
                 tipo_avulso: this.tipoavulso,
+                tipo_plano: this.tipoplano
             }
             axios.post(`${this.URL}/planos`, plano).then(response => {
                 this.getAllPlanos();

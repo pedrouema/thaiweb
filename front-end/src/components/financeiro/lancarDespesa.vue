@@ -75,7 +75,6 @@ export default {
         getAllDespesas() {
             axios.get(`${this.URL}/despesas`).then(response => {
                 this.despesas = response.data
-                console.log(this.despesas);
             })
             .catch(error => {
                 console.log(error);
@@ -89,7 +88,6 @@ export default {
             }
             console.log(despesa);
             axios.post(`${this.URL}/despesas`, despesa).then(response => {
-                console.log(response);
                 this.getAllDespesas();
                 
             })

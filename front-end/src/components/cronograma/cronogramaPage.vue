@@ -3,140 +3,140 @@
         <PageTitle icon="fa fa-calendar" main="Cronograma"
             sub="Cronograma Semanal" />
         
-        <div class="alunos-table">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        <div class="card" style="background-color:orange;">
-                            <div class="card-body">
-                                <h4 class="card-title" style="text-align: center; text-;">Segunda-Feira</h4>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Horario</th>
-                                            <th scope="col">Turma</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-group-divider">
-                                        <tr v-for="turma in turmasSeg" :key="turma.id_turma">
-                                            <th scope="row">{{ turma.horario_turma }}</th>
-                                            <td>{{ turma.nome_turma+', '+turma.qtdesemanal_turma+'x'}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+        <div id="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <div class="card" style="background-color:orange;">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="text-align: center; text-;">Segunda-Feira</h4>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Horario</th>
+                                                <th scope="col">Turma</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-group-divider">
+                                            <tr v-for="turma in turmasSeg" :key="turma.id_turma">
+                                                <th scope="row">{{ turma.horario_turma }}</th>
+                                                <td>{{ turma.nome_turma+', '+turma.qtdesemanal_turma+'x'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="card" style="background-color:royalblue">
-                            <div class="card-body">
-                                <h4 class="card-title" style="text-align: center;">Terça-Feira</h4>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Horario</th>
-                                            <th scope="col">Turma</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-group-divider">
-                                        <tr v-for="turma in turmasTer" :key="turma.id_turma">
-                                            <th scope="row">{{ turma.horario_turma }}</th>
-                                            <td>{{ turma.nome_turma+', '+turma.qtdesemanal_turma+'x'}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        </th>
+                        <th scope="col">
+                            <div class="card" style="background-color:royalblue">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="text-align: center;">Terça-Feira</h4>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Horario</th>
+                                                <th scope="col">Turma</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-group-divider">
+                                            <tr v-for="turma in turmasTer" :key="turma.id_turma">
+                                                <th scope="row">{{ turma.horario_turma }}</th>
+                                                <td>{{ turma.nome_turma+', '+turma.qtdesemanal_turma+'x'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="card" style="background-color:orange">
-                            <div class="card-body">
-                                <h4 class="card-title" style="text-align: center;">Quarta-Feira</h4>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Horario</th>
-                                            <th scope="col">Turma</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-group-divider">
-                                        <tr v-for="turma in turmasQua" :key="turma.id_turma">
-                                            <th scope="row">{{ turma.horario_turma }}</th>
-                                            <td>{{ turma.nome_turma+', '+turma.qtdesemanal_turma+'x'}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        </th>
+                        <th scope="col">
+                            <div class="card" style="background-color:orange">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="text-align: center;">Quarta-Feira</h4>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Horario</th>
+                                                <th scope="col">Turma</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-group-divider">
+                                            <tr v-for="turma in turmasQua" :key="turma.id_turma">
+                                                <th scope="row">{{ turma.horario_turma }}</th>
+                                                <td>{{ turma.nome_turma+', '+turma.qtdesemanal_turma+'x'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="card" style="background-color:royalblue;">
-                            <div class="card-body">
-                                <h4 class="card-title" style="text-align: center;">Quinta-Feira</h4>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Horario</th>
-                                            <th scope="col">Turma</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-group-divider">
-                                        <tr v-for="turma in turmasQui" :key="turma.id_turma">
-                                            <th scope="row">{{ turma.horario_turma }}</th>
-                                            <td>{{ turma.nome_turma+', '+turma.qtdesemanal_turma+'x'}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        </th>
+                        <th scope="col">
+                            <div class="card" style="background-color:royalblue;">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="text-align: center;">Quinta-Feira</h4>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Horario</th>
+                                                <th scope="col">Turma</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-group-divider">
+                                            <tr v-for="turma in turmasQui" :key="turma.id_turma">
+                                                <th scope="row">{{ turma.horario_turma }}</th>
+                                                <td>{{ turma.nome_turma+', '+turma.qtdesemanal_turma+'x'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="card" style="background-color:orange">
-                            <div class="card-body">
-                                <h4 class="card-title" style="text-align: center;">Sexta-Feira</h4>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Horario</th>
-                                            <th scope="col">Turma</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-group-divider">
-                                        <tr v-for="turma in turmasSex" :key="turma.id_turma">
-                                            <th scope="row">{{ turma.horario_turma }}</th>
-                                            <td>{{ turma.nome_turma+', '+turma.qtdesemanal_turma+'x'}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        </th>
+                        <th scope="col">
+                            <div class="card" style="background-color:orange">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="text-align: center;">Sexta-Feira</h4>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Horario</th>
+                                                <th scope="col">Turma</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-group-divider">
+                                            <tr v-for="turma in turmasSex" :key="turma.id_turma">
+                                                <th scope="row">{{ turma.horario_turma }}</th>
+                                                <td>{{ turma.nome_turma+', '+turma.qtdesemanal_turma+'x'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="card" style="background-color:royalblue;">
-                            <div class="card-body">
-                                <h4 class="card-title" style="text-align: center;">Sábado</h4>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Horario</th>
-                                            <th scope="col">Turma</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-group-divider">
-                                        <tr v-for="turma in turmasSab" :key="turma.id_turma">
-                                            <th scope="row">{{ turma.horario_turma }}</th>
-                                            <td>{{ turma.nome_turma+', '+turma.qtdesemanal_turma+'x'}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        </th>
+                        <th scope="col">
+                            <div class="card" style="background-color:royalblue;">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="text-align: center;">Sábado</h4>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Horario</th>
+                                                <th scope="col">Turma</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-group-divider">
+                                            <tr v-for="turma in turmasSab" :key="turma.id_turma">
+                                                <th scope="row">{{ turma.horario_turma }}</th>
+                                                <td>{{ turma.nome_turma+', '+turma.qtdesemanal_turma+'x'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    </th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -222,11 +222,13 @@
 
 <style>
     table, th, td {
-    border: 1px solid;
+        border: 1px solid;
     }
 
     body {
 		margin:auto;
-	}
-
+	}   
+    div#container{
+        overflow-x: auto;
+    }
 </style>

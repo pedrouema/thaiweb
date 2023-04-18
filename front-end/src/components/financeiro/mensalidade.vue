@@ -38,7 +38,7 @@
                     aria-controls="ex1-tabs-3"
                     aria-selected="true"
                     v-on:click="clickVerRecebidas()">
-                    <i class="fa fa-eye"></i> Recebimentos Confirmados</a>
+                    <i class="fa fa-eye"></i> Recebimentos Baixados</a>
                 </li>
             </ul>
             <!-- Tabs navs -->

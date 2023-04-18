@@ -1,9 +1,9 @@
 const db = require("./database");
 
 const createPagamentoRecebido = async (newPagamento) => {
-    const { valor_recebimento, data_recebimento, id_aluno } = newPagamento;
-    let sql = `INSERT INTO pagamentos_recebidos ("valor_recebimento", "data_recebimento", "id_aluno") 
-               VALUES('${valor_recebimento}','${data_recebimento}', '${id_aluno}')`;
+    const { mes_referente ,valor_recebimento, data_recebimento, id_aluno } = newPagamento;
+    let sql = `INSERT INTO pagamentos_recebidos ("mes_referente", "valor_recebimento", "data_recebimento", "id_aluno") 
+               VALUES('${mes_referente}','${valor_recebimento}','${data_recebimento}', '${id_aluno}')`;
     let createRecebimento;
     try{
         createRecebimento = await db.query(sql)
@@ -64,9 +64,38 @@ const deleteRecebimento = async (id) => {
     }
 };
 
+const getAtrasados = async (mesAtual) =>{
+    try{
+        const recebido = await db.query(`
+        SELECT
+        r.id_mensalidade,
+        to_char(r.data_recebimento, 'DD/MM/YYYY') as data_recebimento,
+        r.valor_recebimento,
+        r.mes_referente,
+        a.nome_aluno,
+        a.cpf_aluno,
+        p.nome_plano,
+        p.valor_plano,
+        to_char(a.diapag_aluno, 'DD/MM/YYYY') as diapag_aluno,
+        EXTRACT (DAY FROM diapag_aluno) as diapag_format
+        FROM pagamentos_recebidos r
+        INNER JOIN alunos a on a.id_aluno = r.id_aluno
+        INNER JOIN planos p on p.id_plano = a.id_plano
+        WHERE p.tipo_mensal = true
+        and r.mes_referente <> '${mesAtual}'
+        ORDER BY a.nome_aluno
+        `);
+        return recebido.rows;
+    }catch(err){
+        console.log(err);
+    }
+}
+
+
 module.exports = {
     createPagamentoRecebido,
     getAllRecebidas,
     getRecebidasEntreDatas,
     deleteRecebimento,
+    getAtrasados,
 }

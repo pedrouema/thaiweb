@@ -15,7 +15,6 @@
                 <i class="fa fa-search"></i> BUSCAR</button>
         </div>
     </form>
-    <br>
     <div class="recebidas-table">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button class="btn btn-dark" type="button"><i class="fa fa-print"> </i> Imprimir</button>
