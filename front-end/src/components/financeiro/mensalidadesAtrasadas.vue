@@ -38,6 +38,7 @@
 
 <script>
 import axios from 'axios'
+import { FORMERR } from 'dns'
 
 export default {
     name: 'MensalidadesAtrasadas',
@@ -45,16 +46,18 @@ export default {
         return {
             URL: "http://localhost:4000",
             alunos: [],
+            atrasado: [],
             atrasados: [],
             nome: '',
             mesAtual: '',
             diaAtual: '',
             anoAtual: '',
             dataAtual: '',
+            mesAno: '',
         }
     },
     methods: {
-        //BUSCA POR NOME (OBS: TEM QUE VERIFICAR SE É PLANO DE MENSALIDADE)
+        //FUNÇÃO PARA MANDAR TODOS ID ALUNOS PARA VERIFICAR PAGAMENTO NA TABELA RECEBIMENTOS 
         
         //RETORNAR TODOS ALUNOS TIPO PLANO MENSALIDADE
         getAllAlunosMensalidade() {
@@ -70,6 +73,18 @@ export default {
                 console.log(response.data);
             })
         },
+        //FUNÇÃO TESTE
+        teste() {
+            for(let i = 0; i < this.alunos.length; i++){
+                axios.get(`${this.URL}/recebimentoatrasadas/`+this.alunos[i].id_aluno+'/'+this.mesAno).then(response => {
+                this.atrasado = response.data[0]
+                console.log(response.data);
+                })
+                this.atrasados[i] = this.atrasado[0];
+                this.limpaDados();
+            }
+            
+        },
         pegarDataAtual() {
             const data = new Date()
             const dia = String(data.getDate()).padStart(2, '0')
@@ -80,7 +95,12 @@ export default {
             this.diaAtual = dia
             this.anoAtual = ano
             this.dataAtual = atual
+            this.mesAno = mes+'-'+ano
+
         },
+        limpaDados() {
+            this.atrasado = '';
+        }
     },
     mounted() {
         this.getAllAlunosMensalidade();

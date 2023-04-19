@@ -76,5 +76,6 @@ router.delete('/recebimento/delete/:id', recebimentosController.deleteRecebiment
 // ROTAS MENSALIDADES ATRASADAS
 router.get('/alunosmensalidade', alunosController.getAllMensalidade)
 router.get('/recebimentoatrasadas/:mesAtual', recebimentosController.getAtrasados)
+router.get('/recebimentoatrasadas/:id_aluno/:mesAtual', recebimentosController.getAtrasadosTeste)
 
 module.exports = router;

@@ -72,6 +72,7 @@ const getAll = async () => {
     }
 };
 
+// RETORNA TODOS ALUNOS QUE O PLANO SEJA MENSALIDADE
 const getAllMensalidade = async () => {  
     try{
         const { rows } = await db.query(`
@@ -97,6 +98,7 @@ const getAllMensalidade = async () => {
     }
 };
 
+// TESTANDO AQUI
 const getAllMensalidadesAtrasadas = async (dataAtual) => {  
     try{
         const { rows } = await db.query(`

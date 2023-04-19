@@ -91,6 +91,32 @@ const getAtrasados = async (mesAtual) =>{
     }
 }
 
+const getAtrasadosTeste = async (id_aluno, mesAtual) =>{
+    try{
+        const recebido = await db.query(`
+        SELECT
+        r.id_mensalidade,
+        to_char(r.data_recebimento, 'DD/MM/YYYY') as data_recebimento,
+        r.valor_recebimento,
+        r.mes_referente,
+        a.nome_aluno,
+        a.cpf_aluno,
+        p.nome_plano,
+        p.valor_plano,
+        to_char(a.diapag_aluno, 'DD/MM/YYYY') as diapag_aluno,
+        EXTRACT (DAY FROM diapag_aluno) as diapag_format
+        FROM pagamentos_recebidos r
+        INNER JOIN alunos a on a.id_aluno = r.id_aluno
+        INNER JOIN planos p on p.id_plano = a.id_plano
+        WHERE a.id_aluno == ${id_aluno}
+        and r.mes_referente <> '${mesAtual}'
+        ORDER BY a.nome_aluno
+        `);
+        return recebido.rows;
+    }catch(err){
+        console.log(err);
+    }
+}
 
 module.exports = {
     createPagamentoRecebido,
@@ -98,4 +124,5 @@ module.exports = {
     getRecebidasEntreDatas,
     deleteRecebimento,
     getAtrasados,
+    getAtrasadosTeste,
 }

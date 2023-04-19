@@ -29,10 +29,18 @@ const getAtrasados = async (req, res) => {
     return res.status(200).json(recebidas);
 };
 
+const getAtrasadosTeste = async (req, res) => {
+    const id_aluno = req.params.id_aluno
+    const mesAtual = req.params.mesAtual
+    const recebidas = await recebimentosModel.getAtrasadosTeste(id_aluno, mesAtual);
+    return res.status(200).json(recebidas);
+};
+
 module.exports = {
     createPagamentoRecebido,
     getAllRecebidas,
     getRecebidasEntreDatas,
     deleteRecebimento,
     getAtrasados,
+    getAtrasadosTeste,
 }

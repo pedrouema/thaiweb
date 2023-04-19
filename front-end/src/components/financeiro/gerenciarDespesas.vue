@@ -51,7 +51,6 @@
             </tbody>
         </table>
         <!-- Tabela de Despesas já Pagas -->
-        <br>
         <div class="despesasPagas-table" v-show="tabela == 2">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button class="btn btn-dark" type="button"><i class="fa fa-print"></i> Imprimir</button>

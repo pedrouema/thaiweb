@@ -58,6 +58,11 @@ export default {
             mensalidade: false,
             plano: '',
             mesRecebimento: '',
+            mesAtual: '',
+            diaAtual: '',
+            anoAtual: '',
+            dataAtual: '',
+
         }
     },
     methods: {
@@ -180,7 +185,7 @@ export default {
         },
         criaRecebimento(id_aluno) {
             const recebimento = {
-                mes_referente: this.mesRecebimento,
+                mes_referente: this.mesRecebimento+'-'+this.anoAtual,
                 valor_recebimento: this.valorRecebimento,
                 data_recebimento: this.dataRecebimento,
                 id_aluno: id_aluno
@@ -190,6 +195,17 @@ export default {
             })
             this.limpaDados()
         },
+        pegarDataAtual() {
+            const data = new Date()
+            const dia = String(data.getDate()).padStart(2, '0')
+            const mes = String(data.getMonth() + 1).padStart(2, '0')
+            const ano = String(data.getFullYear())
+            const atual = `${dia}/${mes}/${ano}`
+            this.mesAtual = mes
+            this.diaAtual = dia
+            this.anoAtual = ano
+            this.dataAtual = atual
+        },
         limpaDados() {
             this.nome = '';
             this.valorRecebimento = '';
@@ -198,7 +214,7 @@ export default {
         },      
     },
     mounted() {
-        
+        this.pegarDataAtual();
     }
 }
 </script>
