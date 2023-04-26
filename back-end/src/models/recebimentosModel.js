@@ -72,6 +72,7 @@ const getAtrasados = async (mesAtual) =>{
         to_char(r.data_recebimento, 'DD/MM/YYYY') as data_recebimento,
         r.valor_recebimento,
         r.mes_referente,
+        a.id_aluno,
         a.nome_aluno,
         a.cpf_aluno,
         p.nome_plano,
@@ -91,7 +92,7 @@ const getAtrasados = async (mesAtual) =>{
     }
 }
 
-const getAtrasadosTeste = async (id_aluno, mesAtual) =>{
+const getAtrasadosTeste = async (mesAno) =>{
     try{
         const recebido = await db.query(`
         SELECT
@@ -99,6 +100,7 @@ const getAtrasadosTeste = async (id_aluno, mesAtual) =>{
         to_char(r.data_recebimento, 'DD/MM/YYYY') as data_recebimento,
         r.valor_recebimento,
         r.mes_referente,
+        a.id_aluno,
         a.nome_aluno,
         a.cpf_aluno,
         p.nome_plano,
@@ -108,10 +110,11 @@ const getAtrasadosTeste = async (id_aluno, mesAtual) =>{
         FROM pagamentos_recebidos r
         INNER JOIN alunos a on a.id_aluno = r.id_aluno
         INNER JOIN planos p on p.id_plano = a.id_plano
-        WHERE a.id_aluno == ${id_aluno}
-        and r.mes_referente <> '${mesAtual}'
+        WHERE r.mes_referente = '${mesAno}'
+        and p.tipo_mensal = true
         ORDER BY a.nome_aluno
         `);
+        console.log(recebido.rows);
         return recebido.rows;
     }catch(err){
         console.log(err);

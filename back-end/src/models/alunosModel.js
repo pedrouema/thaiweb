@@ -81,7 +81,8 @@ const getAllMensalidade = async () => {
             a.nome_aluno, 
             a.cpf_aluno, 
             to_char(a.datanasc_aluno, 'DD/MM/YYYY') as datanasc_aluno, 
-            p.nome_plano, 
+            p.nome_plano,
+            p.valor_plano, 
             t.nome_turma,
             to_char(a.diapag_aluno, 'DD/MM/YYYY') as diapag_aluno, 
             EXTRACT (DAY FROM diapag_aluno) as diapag_format
@@ -89,7 +90,7 @@ const getAllMensalidade = async () => {
             INNER JOIN planos p on p.id_plano = a.id_plano
             INNER JOIN turmas t on t.id_turma = a.id_turma
             WHERE p.tipo_mensal = true
-            ORDER BY a.nome_aluno
+            ORDER BY a.id_aluno
         `);  
         console.log(rows);
         return rows;

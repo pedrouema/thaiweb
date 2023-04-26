@@ -129,6 +129,7 @@ export default {
             axios.delete(this.URL+"/recebimento/delete/"+id).then(()=>{
                 this.buscarRecebidas()
             })
+            window.location.reload(true)
         },
         limpaDados() {
             this.dataIni = '';

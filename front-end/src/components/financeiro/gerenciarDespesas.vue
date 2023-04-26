@@ -192,7 +192,6 @@ export default {
                 else{
                     //função para buscar entre datas que quitada_despesa == true
                     this.retornaQuitadasEntreDatas()
-                    console.log('Passou por data despesas quitadas');
                     this.limpaDados()
                 }
             }
@@ -203,7 +202,6 @@ export default {
                 }
                 else{
                     this.retornaNaoQuitadasEntreDatas()
-                    console.log('Passou por data quitar despesa');
                     this.limpaDados()
                 }
             }

@@ -30,9 +30,8 @@ const getAtrasados = async (req, res) => {
 };
 
 const getAtrasadosTeste = async (req, res) => {
-    const id_aluno = req.params.id_aluno
-    const mesAtual = req.params.mesAtual
-    const recebidas = await recebimentosModel.getAtrasadosTeste(id_aluno, mesAtual);
+    const mesAno = req.params.mesAno;
+    const recebidas = await recebimentosModel.getAtrasadosTeste(mesAno);
     return res.status(200).json(recebidas);
 };
 

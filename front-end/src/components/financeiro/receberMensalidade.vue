@@ -69,7 +69,6 @@ export default {
         buscar() {
             axios.get(`${this.URL}/alunos/getnome/`+this.nome).then(response => {
                 this.alunos = response.data
-                console.log(this.alunos);
             })
             this.limpaDados()
         },
@@ -194,6 +193,7 @@ export default {
                 
             })
             this.limpaDados()
+            window.location.reload(true)
         },
         pegarDataAtual() {
             const data = new Date()

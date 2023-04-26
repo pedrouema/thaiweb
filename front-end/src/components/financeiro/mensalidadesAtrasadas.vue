@@ -1,15 +1,6 @@
 <template>
-    <h3>Mensalidades em atraso</h3>
-    <form class="form-inline">
-        <h5>Busque pelo o nome do aluno que deseja verificar!</h5>
-        <div class="form-group mb-2">
-            <label for="inputZip" class="form-label">Digite o nome do aluno</label >
-            <input type="text" class="form-control" v-model="nome">
-        </div>
-        <button type="button" class="btn btn-primary" @click="buscar()">
-            <i class="fa fa-search"></i> BUSCAR</button>
-    </form>
-    <br>
+    <h3>Alunos com mensalidade do mês atual em atraso</h3>
+    
     <div class="alunos-table">
         <table class="table">
             <thead>
@@ -23,13 +14,13 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr v-for="receb in atrasados" :key="receb.id_mensalidade">
-                    <th scope="row">{{ receb.nome_aluno }}</th>
-                    <td>{{ receb.cpf_aluno }}</td>
-                    <td>{{ receb.nome_plano }}</td>
-                    <td>R$ {{ receb.valor_plano.toFixed(2) }}</td>
-                    <td>{{ receb.diapag_format }}</td>
-                    <td>{{ this.mesAtual }}</td>
+                <tr v-for="aluno in alunos" :key="aluno.id_aluno">
+                    <th scope="row">{{ aluno.nome_aluno }}</th>
+                    <td>{{ aluno.cpf_aluno }}</td>
+                    <td>{{ aluno.nome_plano }}</td>
+                    <td>R$ {{ aluno.valor_plano.toFixed(2) }}</td>
+                    <td>{{ aluno.diapag_format }}</td>
+                    <td>{{ this.mesEscrito }}</td>
                 </tr>
             </tbody>
         </table>
@@ -38,7 +29,6 @@
 
 <script>
 import axios from 'axios'
-import { FORMERR } from 'dns'
 
 export default {
     name: 'MensalidadesAtrasadas',
@@ -47,9 +37,11 @@ export default {
             URL: "http://localhost:4000",
             alunos: [],
             atrasado: [],
+            pago: [],
             atrasados: [],
             nome: '',
             mesAtual: '',
+            mesEscrito: '',
             diaAtual: '',
             anoAtual: '',
             dataAtual: '',
@@ -57,33 +49,33 @@ export default {
         }
     },
     methods: {
-        //FUNÇÃO PARA MANDAR TODOS ID ALUNOS PARA VERIFICAR PAGAMENTO NA TABELA RECEBIMENTOS 
-        
         //RETORNAR TODOS ALUNOS TIPO PLANO MENSALIDADE
         getAllAlunosMensalidade() {
-            axios.get(`${this.URL}/alunosmensalidade`+this.mesAtual).then(response => {
+            this.$forceUpdate()
+            axios.get(`${this.URL}/alunosmensalidade`).then(response => {
                 this.alunos = response.data
-                console.log(this.alunos);
-            })
-            //this.limpaDados()
-        },
-        getAtrasados() {
-            axios.get(`${this.URL}/recebimentoatrasadas/`+this.mesAtual).then(response => {
-                this.atrasados = response.data
-                console.log(response.data);
+                this.getAllJaPagouNoMes();
             })
         },
         //FUNÇÃO TESTE
-        teste() {
-            for(let i = 0; i < this.alunos.length; i++){
-                axios.get(`${this.URL}/recebimentoatrasadas/`+this.alunos[i].id_aluno+'/'+this.mesAno).then(response => {
-                this.atrasado = response.data[0]
-                console.log(response.data);
-                })
-                this.atrasados[i] = this.atrasado[0];
-                this.limpaDados();
+        getAllJaPagouNoMes() {
+            this.pegarDataAtual();
+            axios.get(`${this.URL}/recebimentoatrasados/${this.mesAno}`).then(response => {
+                this.pago = response.data
+                this.listaEmAtrasos();
+            })
+        },
+        listaEmAtrasos(){
+            for(let i = 0; i < this.pago.length; i++)
+            {
+                for(let j = 0; j < this.alunos.length; j++)
+                {
+                    if(this.pago[i].id_aluno == this.alunos[j].id_aluno)
+                    {
+                        this.alunos.splice(j, 1)
+                    }
+                }
             }
-            
         },
         pegarDataAtual() {
             const data = new Date()
@@ -96,7 +88,30 @@ export default {
             this.anoAtual = ano
             this.dataAtual = atual
             this.mesAno = mes+'-'+ano
-
+            if(this.mesAtual == '01')
+                this.mesEscrito = 'Janeiro'
+            else if(this.mesAtual == '02')
+                this.mesEscrito = 'Fevereiro'
+            else if(this.mesAtual == '03')
+                this.mesEscrito = 'Março'
+            else if(this.mesAtual == '04')
+                this.mesEscrito = 'Abril'
+            else if(this.mesAtual == '05')
+                this.mesEscrito = 'Maio'
+            else if(this.mesAtual == '06')
+                this.mesEscrito = 'Junho'
+            else if(this.mesAtual == '07')
+                this.mesEscrito = 'Julho'
+            else if(this.mesAtual == '08')
+                this.mesEscrito = 'Agosto'
+            else if(this.mesAtual == '09')
+                this.mesEscrito = 'Setembro'
+            else if(this.mesAtual == '10')
+                this.mesEscrito = 'Outubro'
+            else if(this.mesAtual == '11')
+                this.mesEscrito = 'Novembro'
+            else 
+                this.mesEscrito = 'Dezembro'
         },
         limpaDados() {
             this.atrasado = '';
@@ -104,8 +119,6 @@ export default {
     },
     mounted() {
         this.getAllAlunosMensalidade();
-        this.pegarDataAtual();
-        this.getAtrasados();
     }
 }
 </script>
