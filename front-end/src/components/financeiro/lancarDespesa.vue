@@ -1,6 +1,9 @@
 <template>
     <div>
         <h3>Lançamento de Despesas</h3>
+        <button type="button" id="btnAjuda" class="btn btn-primary btn-floating" @click="ajuda()">
+            <i class="fa fa-question-circle"></i>
+        </button>
         <br/>
         <form class="row g-3">
             <div class="col-md-6">
@@ -134,6 +137,23 @@ export default {
             this.dataVenc = '';
             this.despesaId = 0;
             this.editar = false;
+        },
+        ajuda(){
+            this.$swal.fire({
+                title: '<h2>Lançamento de despesa</h2>',
+                icon: 'info',
+                html:
+                    '<h3 style="color:#4da6ff">Lançar uma despesa</h3>'+
+                    '<p><b>1- </b>Inserir todos os dados: nome da despesa, valor da despesa e data de vencimento.'+
+                    '<p><b>2- </b>Após todos dados inseridos clicar no botão "+SALVAR" para lançar despesa ou "CANCELAR" '+
+                    'para limpar formulário.'+
+                    '<h3 style="color:#39ac6b">Editar uma despesa</h3>'+
+                    '<p><b>1- </b>Na lista abaixo do formulário clicar no botão "Editar" na mesma linha correspondente '+
+                    'a despesa que deseja alterar o(s) dado(s).'+
+                    '<p><b>2- </b>Após clicar no botão "Editar" os dados da respectiva despesa irá carregar no formulário acima, '+
+                    'após isso pode alterar o(s) dado(s) que deseja da mesma.'+
+                    '<p><b>3- </b>Após editar, para salvar a(s) alteração(ôs) clicar no botão "+EDITAR" (azul) ou "CANCELAR" (vermelho) para cancelar alteração(ôs).'
+            })
         }
     },
     mounted() {

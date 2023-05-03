@@ -1,5 +1,8 @@
 <template id="form">
     <h3>Gerenciamento de Despesas</h3>
+    <button type="button" id="btnAjuda" class="btn btn-primary btn-floating" @click="ajuda()">
+        <i class="fa fa-question-circle"></i>
+    </button>
     <br/>
     <form class="row g-3">
         <h5>Selecione o filtro de ação e as datas inicio e fim para buscar as despesas.</h5>
@@ -297,6 +300,34 @@ export default {
         limpaDados(){
             // this.dataIni = ''
             // this.dataFim = ''
+        },
+        ajuda(){
+            this.$swal.fire({
+                title: '<h2>Gerenciamento de despesas</h2>',
+                icon: 'info',
+                html:
+                    '<h3 style="color:#ff6666">Quitar uma despesa</h3>'+
+                    '<b>IMPORTANTE </b><p>Para quitar uma despesa a mesma deve estar previamente lançada.</p>' +
+                    '<p><b>1- </b>Selecione a ação "Quitar Despesa" em "Selecione a ação desejada". Para carregar despesas em um certo periodo '+
+                    'deve ser selecionado obrigatoriamente a "Data inicio" e "Data Fim" e clicar no botão "BUSCAR" (azul). Caso queira ver todas '+
+                    'as despesas lançadas para quitar, selecione apenas "Quitar despesa" sem selecionar "Data Inicio" e Data Fim e clicar no '+
+                    'botão "BUSCAR".'+
+                    '<p><b>2- </b>Após buscar a(s) despesa(s) para quitar, a(s) mesma(s) sera(âo) carregada(s) em uma lista abaixo do formulário, '+
+                    'basta clicar no botão "Editar" (verde) na mesma linha correspondente a despesa que deseja quitar'+
+                    '<p><b>3- </b>Após clicar em "Editar" irá abrir uma tela, nela insira o valor pago da despesa e a data do pagamento e clique em "OK".'+
+                    '<p><b>4- </b>Após clicar em "OK" irá abrir outra tela de comfirmação, clique em "Sim, quitar agora!" para quitar a despesa '+
+                    'ou "Não, cancelar!" para cancelar a ação.'+
+                    '<h3 style="color:#39ac6b">Verificar despesas quitadas e Voltar uma despesa não quitada</h3>'+
+                    '<p><b>1- </b>Selecione a ação "Ver Despesas Quitadas" em "Selecione a ação desejada". Para carregar despesas quitadas de um certo periodo '+
+                    'deve ser selecionado obrigatoriamente a "Data inicio" e "Data Fim" e clicar no botão "BUSCAR" (azul). Caso queira ver todas '+
+                    'as despesas lançadas para quitar, selecione apenas "Quitar despesa" sem selecionar "Data Inicio" e Data Fim e clicar no '+
+                    'botão "BUSCAR".'+
+                    '<p><b>2- </b>Após buscar a(s) despesa(s) quitada(s), a(s) mesma(s) sera(âo) carregada(s) em uma lista abaixo do formulário. '+
+                    'Caso queira retornar uma despesa que não foi quitada, clique no botão "Voltar(Não Foi Paga)" na mesma linha correspondente '+
+                    'a despesa que deseja retornar.'+
+                    '<p><b>3- </b>Após clicar em "Voltar(Não Foi Paga)" irá abrir uma tela para confirmar se deseja realmente voltar a despesa, clique '+
+                    'em "Sim, voltar agora!" para comfirmar ou "Não, cancelar!" para cancelar a ação.'
+            })
         }
     },
     mounted() {

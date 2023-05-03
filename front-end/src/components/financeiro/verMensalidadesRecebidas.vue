@@ -1,5 +1,8 @@
 <template>
-    <h3>Pagamento Recebidos</h3>
+    <h3>Pagamentos Recebidos</h3>
+    <button type="button" id="btnAjuda" class="btn btn-primary btn-floating" @click="ajuda()">
+        <i class="fa fa-question-circle"></i>
+    </button>
     <form class="row g-3">
         <h5>Selecione as datas inicio e fim para buscar recebimentos confirmados.</h5>
         <div class="col-md-2">
@@ -134,6 +137,25 @@ export default {
         limpaDados() {
             this.dataIni = '';
             this.dataFim = '';
+        },
+        ajuda(){
+            this.$swal.fire({
+                title: '<h2>Pagamentos recebidos</h2>',
+                icon: 'info',
+                html:
+                    '<h3 style="color:#39ac6b">Verificar recebimentos e Voltar pagamentos não recebidos</h3>'+
+                    '<b>IMPORTANTE </b><p>Pagamento deve ter sido recebido previamente.</p>' +
+                    '<p><b>1- (Não recomendado): </b>Caso queira verificar todos pagamentos recebidos, não selecionar "Data Inicio" e nem "Data Fim", '+
+                    'basta clicar no botão "BUSCAR" diretamente.'+
+                    '<p><b>2- (Recomendado): </b>Para verificar pagamentos recebidos entre determinado periodo, selecione uma "Data Inicio" '+
+                    'e "Data Fim" e clique em "BUSCAR".'+
+                    '<p><b>3- </b>Após clicar em "BUSCAR", irá carregar uma lista dos pagamentos recebidos abaixo.'+
+                    '<p><b>4- </b>Caso queira voltar um pagamento, clique no botão "Voltar (Não Foi Recebido)" na mesma linha correspondente '+
+                    'ao pagamento recebido que deseja retornar.'+
+                    '<p><b>5- </b>Após clicar em "Voltar (Não Foi Recebido)", irá abrir uma tela de confirmação se realmente deseja retornar '+
+                    'a fatura recebida, clique em "Sim, apagar agora!" para confirmar ou "Não, cancelar!" para cancelar a ação.'
+
+            })
         }
     }
 

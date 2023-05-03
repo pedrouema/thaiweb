@@ -263,7 +263,7 @@ export default {
                     'ao aluno que deseja alterar o(s) dado(s).'+
                     '<p><b>2- </b>Após clicar no botão "Editar" os dados do respectivo aluno irá carregar no formulário acima, '+
                     'após isso pode alterar o(s) dado(s) que deseja do mesmo.'+
-                    '<p><b>3- </b>Após editar, para salvar a(s) alteração(ôs) clicar em "+SALVAR" ou "CANCELAR" para cancelar alteração(ôs).'+
+                    '<p><b>3- </b>Após editar, para salvar a(s) alteração(ôs) clicar no botão "+EDITAR" (azul) ou "CANCELAR" (vermelho) para cancelar alteração(ôs).'+
                     '<h3 style="color:#ff6666">Excluir um aluno</h3>'+
                     '<p><b>1- </b>Na lista abaixo do formulário, clicar no botão "Excluir" na mesma linha correspondente '+
                     'ao aluno que deseja fazer a exclusão.'+

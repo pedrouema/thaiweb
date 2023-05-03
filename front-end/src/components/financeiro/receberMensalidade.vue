@@ -1,5 +1,8 @@
 <template>
     <h3>Recebimento</h3>
+    <button type="button" id="btnAjuda" class="btn btn-primary btn-floating" @click="ajuda()">
+        <i class="fa fa-question-circle"></i>
+    </button>
     <form class="form-inline">
         <h5>Busque pelo o nome do aluno que deseja receber!</h5>
         <div class="form-group mb-2">
@@ -212,6 +215,25 @@ export default {
             this.dataRecebimento = '';
             this.mesRecebimento = '';
         },      
+        ajuda(){
+            this.$swal.fire({
+                title: '<h2>Recebimento</h2>',
+                icon: 'info',
+                html:
+                    '<h3 style="color:#39ac6b"">Receber um pagamento</h3>'+
+                    '<b>IMPORTANTE </b><p>O aluno deve estar previamente cadastrado e matriculado em um plano.</p>' +
+                    '<p><b>1- </b>Digite o nome do aluno que deseja receber e clique em "BUSCAR".'+
+                    '<p><b>2- </b>Após clicar em "BUSCAR" irá carregar uma lista abaixo do formulário, clique no botão "Receber"(verde) '+
+                    'para iniciar processo de recebimento.'+
+                    '<p><b>3- </b>Irá abrir uma tela para inserir os dados do recebimento, podendo ser para alunos do tipo mensalidade(3.1) ou avulso(3.2)'+
+                    '<p><b>3.1- </b>Caso seja um aluno do tipo mensalidade, preencher os seguintes dados do recebimento: "Selecione o mês à receber", '+
+                    '"Digite o valor recebido" e "Selecione a data do recebimento" e clique em "OK"'+
+                    '<p><b>3.2- </b>Caso seja um aluno do tipo avulso, preencher os seguintes dados do recebimento: '+
+                    '"Digite o valor recebido" e "Selecione a data do recebimento" e clique em "OK"'+
+                    '<p><b>4- </b>Irá abrir uma tela para confirmar se deseja realmente receber o pagamento, clique '+
+                    'em "Sim, receber agora!" para comfirmar ou "Não, cancelar!" para cancelar a ação.'
+            })
+        }
     },
     mounted() {
         this.pegarDataAtual();

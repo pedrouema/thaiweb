@@ -295,7 +295,7 @@ export default {
                     'a turma que deseja alterar o(s) dado(s).'+
                     '<p><b>2- </b>Após clicar no botão "Editar" os dados da respectiva turma irá carregar no formulário acima, '+
                     'após isso pode alterar o(s) dado(s) que deseja da mesma.'+
-                    '<p><b>3- </b>Após editar, para salvar a(s) alteração(ôs) clicar em "+SALVAR" ou "CANCELAR" para cancelar alteração(ôs).'+
+                    '<p><b>3- </b>Após editar, para salvar a(s) alteração(ôs) clicar no botão "+EDITAR" (azul) ou "CANCELAR" (vermelho) para cancelar alteração(ôs).'+
                     '<h3 style="color:#ff6666">Excluir uma turma</h3>'+
                     '<b>IMPORTANTE </b><p>Para excluir uma turma, nenhum aluno deve estar usando a mesma.</p>' +
                     '<p><b>1- </b>Na lista abaixo do formulário, clicar no botão "Excluir" na mesma linha correspondente '+
