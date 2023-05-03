@@ -6,6 +6,11 @@ import LoginPage from '@/components/login/LoginPage'
 import CronogramaPage from '@/components/cronograma/cronogramaPage'
 import FinanceiroPage from '@/components/financeiro/financeiroPage'
 import AnalisesPage from '@/components/analises/analisesPage'
+import RelatorioAlunos from '@/components/admin/RelatorioAlunos'
+import RelatorioDespesasPaga from '@/components/financeiro/RelatorioDespesasPaga'
+import RelatorioPlanos from '@/components/admin/RelatorioPlanos'
+import RelatorioTurmas from '@/components/admin/RelatorioTurmas'
+import RelatorioInstrutores from '@/components/admin/RelatorioInstrutores'
 
 const cors  = require('cors')
 
@@ -40,7 +45,33 @@ const routes = [
         name: 'analisesPage',
         path: '/analises',
         component: AnalisesPage
-    }
+    },
+    {
+        name: 'relatorioalunos',
+        path: '/relatorioalunos',
+        component: RelatorioAlunos
+    },
+    {
+        name: 'relatorioplanos',
+        path: '/relatorioplanos',
+        component: RelatorioPlanos
+    },
+    {
+        name: 'relatorioinstrutores',
+        path: '/relatorioinstrutores',
+        component: RelatorioInstrutores
+    },
+    {
+        name: 'relatorioturmas',
+        path: '/relatorioturmas',
+        component: RelatorioTurmas
+    },
+    {
+        name: 'relatoriodespesaspaga',
+        path: '/relatoriodespesaspaga',
+        component: RelatorioDespesasPaga
+    },
+    
 ]
 
 const router = createRouter({

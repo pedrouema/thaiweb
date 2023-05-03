@@ -12,6 +12,9 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 import VueTheMask from 'vue-the-mask'
 import store from './config/store'
 import router from './config/router'
+import Vue from 'vue'
+
+
 
 const app = createApp(App)
 app.use(VueTheMask)
@@ -20,4 +23,5 @@ app.use(store)
 app.use(router)
 app.use(VueSweetalert2)
 app.mount('#app')
+
 

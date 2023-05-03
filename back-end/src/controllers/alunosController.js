@@ -1,5 +1,10 @@
 const alunosModel = require('../models/alunosModel');
 
+const getTotalAlunos = async (req, res) => {
+    const alunos = await alunosModel.getTotalAlunos();
+    return res.status(200).json(alunos);
+};
+
 const getAll = async (req, res) => {
     const alunos = await alunosModel.getAll();
     return res.status(200).json(alunos);
@@ -49,4 +54,5 @@ module.exports = {
     updateAluno,
     getNome,
     getAllMensalidade,
+    getTotalAlunos,
 };

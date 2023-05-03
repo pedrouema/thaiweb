@@ -31,6 +31,7 @@ const getAtrasados = async (req, res) => {
 
 const getAtrasadosTeste = async (req, res) => {
     const mesAno = req.params.mesAno;
+    //const diaAtual = req.params.diaAtual;
     const recebidas = await recebimentosModel.getAtrasadosTeste(mesAno);
     return res.status(200).json(recebidas);
 };

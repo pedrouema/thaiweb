@@ -23,6 +23,7 @@ router.get('/alunos/getnome/:nome_aluno', alunosController.getNome)
 router.post('/alunos', alunosController.addAluno)
 router.delete('/alunos/delete/:id', alunosController.deleteAluno)
 router.put('/alunos/:id', alunosController.updateAluno)
+router.get('/alunostotal', alunosController.getTotalAlunos)
 
 // ROTAS DE INSTRUTORES
 router.get('/instrutores', instrutoresController.getAll)
@@ -66,6 +67,13 @@ router.get('/cronogramaquarta', cronogramaController.getTurmasQuarta)
 router.get('/cronogramaquinta', cronogramaController.getTurmasQuinta)
 router.get('/cronogramasexta', cronogramaController.getTurmasSexta)
 router.get('/cronogramasabado', cronogramaController.getTurmasSabado)
+router.get('/cronogramaqtdesegunda', cronogramaController.getQtdeSegunda)
+router.get('/cronogramaqtdeterca', cronogramaController.getQtdeTerca)
+router.get('/cronogramaqtdequarta', cronogramaController.getQtdeQuarta)
+router.get('/cronogramaqtdequinta', cronogramaController.getQtdeQuinta)
+router.get('/cronogramaqtdesexta', cronogramaController.getQtdeSexta)
+router.get('/cronogramaqtdesabado', cronogramaController.getQtdeSabado)
+
 
 // ROTAS PAGAMENTO RECEBIDOS (MENSALIDADES)
 router.post('/recebimentos', recebimentosController.createPagamentoRecebido)

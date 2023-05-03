@@ -1,6 +1,9 @@
 <template>
     <div class="aluno-admin">
         <h3>Gerenciamento de Alunos</h3>
+        <button type="button" id="btnAjuda" class="btn btn-primary btn-floating" @click="ajuda()">
+            <i class="fa fa-question-circle"></i>
+        </button>
         <form class="row g-3">
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Nome do Aluno</label>
@@ -37,17 +40,17 @@
                 <input type="date" class="form-control" id="inputZip" v-model="diaPag">
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-primary" @click="createAluno()" v-show="!editar">+ SALVAR</button>
-                <button type="button" class="btn btn-primary" @click="salvarDados()" v-show="editar">+ EDITAR</button>
+                <button type="button" id="button" class="btn btn-primary" @click="createAluno()" v-show="!editar">+ SALVAR</button>
+                <button type="button" id="button" class="btn btn-primary" @click="salvarDados()" v-show="editar">+ EDITAR</button>
                 <button  type="button" class="btn btn-danger" @click="limpaDadosFormulario()" >CANCELAR</button>
             </div>
         </form>
     </div>
     <br/>
-    <br>
+    <hr>
         <div class="alunos-table">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-dark" type="button" v-on:click.prevent="gerarPDF"><i class="fa fa-print"> </i> Imprimir</button>
+                <button class="btn btn-dark" type="button" v-on:click.prevent="abrirRelatorio()"><i class="fa fa-print"> </i> Imprimir</button>
             </div>
         <table class="table">
             <thead>
@@ -70,11 +73,11 @@
                     <td>{{ aluno.nome_turma }}</td>
                     <td>{{ aluno.diapag_aluno }}</td>
                     <td>
-                        <button type="button" class="btn btn-success" @click="carregarDadosAluno(aluno.id_aluno)">
+                        <button type="button" id="btnAcoes" class="btn btn-success" @click="carregarDadosAluno(aluno.id_aluno)">
                             <i class="fa fa-pencil"> </i>
                              Editar
                         </button>
-                        <button type="button" class="btn btn-danger" @click="deleteAluno(aluno.id_aluno)">
+                        <button type="button"  id="btnAcoes" class="btn btn-danger" @click="deleteAluno(aluno.id_aluno)">
                             <i class="fa fa-trash"> </i>
                              Excluir
                         </button>
@@ -87,9 +90,11 @@
 
 <script>
 import axios from 'axios'
+// import RelatorioAlunos from '@/components/admin/RelatorioAlunos'
 
 export default {
     name: 'AlunoAdmin',
+    // components: { RelatorioAlunos },
     data(){
         return {
             URL: "http://localhost:4000",
@@ -99,6 +104,7 @@ export default {
             alunoId: 0,
             nome: '',
             cpf: '',
+            cpfFormatado: 0,
             dataNasc: '',
             plano: 0,
             turma: 0,
@@ -107,25 +113,33 @@ export default {
         }
     },
     methods: {
+        abrirRelatorio(){
+            const win = window.open('http://localhost:8080/relatorioalunos')
+            win.focus()
+        },
         getAllAlunos() {
             axios.get(`${this.URL}/alunos`).then(response => {
                 this.alunos = response.data
             })
         },
         createAluno() {
-            const aluno = {
-                nome_aluno: this.nome,
-                cpf_aluno: this.cpf,
-                datanasc_aluno: this.dataNasc,
-                id_plano: this.plano,
-                id_turma: this.turma,
-                diapag_aluno: this.diaPag,
+            this.formatarCPF()
+            if(this.validarCpf(this.cpfFormatado))
+            {
+                const aluno = {
+                    nome_aluno: this.nome,
+                    cpf_aluno: this.cpf,
+                    datanasc_aluno: this.dataNasc,
+                    id_plano: this.plano,
+                    id_turma: this.turma,
+                    diapag_aluno: this.diaPag,
+                }
+                console.log(aluno);
+                axios.post(`${this.URL}/alunos`, aluno).then(response => {
+                    this.getAllAlunos();
+                });
+                this.limpaDadosFormulario();
             }
-            console.log(aluno);
-            axios.post(`${this.URL}/alunos`, aluno).then(response => {
-                this.getAllAlunos();
-            });
-            this.limpaDadosFormulario();
         },
         carregarDadosAluno(id){
             this.editar = true;
@@ -141,19 +155,22 @@ export default {
             })
         },
         salvarDados(){
-            const aluno = {
-                nome_aluno: this.nome,
-                cpf_aluno: this.cpf,
-                datanasc_aluno: this.dataNasc,
-                id_plano: this.plano,
-                id_turma: this.turma,
-                diapag_aluno: this.diaPag,
+            this.formatarCPF()
+            if(this.validarCpf(this.cpfFormatado))
+            {
+                const aluno = {
+                    nome_aluno: this.nome,
+                    cpf_aluno: this.cpf,
+                    datanasc_aluno: this.dataNasc,
+                    id_plano: this.plano,
+                    id_turma: this.turma,
+                    diapag_aluno: this.diaPag,
+                }
+                axios.put(`${this.URL}/alunos/${this.alunoId}`, aluno).then(response => {
+                    this.getAllAlunos();
+                });
+                this.limpaDadosFormulario();
             }
-            console.log(aluno);
-            axios.put(`${this.URL}/alunos/${this.alunoId}`, aluno).then(response => {
-                this.getAllAlunos();
-            });
-            this.limpaDadosFormulario();
         },
         deleteAluno(id) {
             axios.delete(this.URL+"/alunos/delete/"+id).then(()=>{
@@ -180,13 +197,80 @@ export default {
             this.diaPag = '';
             this.editar = false;
         },
-        isCPF(cpf){
-            cpf = cpf.replace(/\.|-/g,"");
-            soma = 0
-            console.log(cpf);
-            return true
+        validarPrimeiroDigito(cpf) {
+            let sum = 0;
+            for (let i = 0; i < 9; i++) {
+                sum += cpf[i] * (10 - i);
+            }
+            const resto = (sum * 10) % 11;
+            if (resto < 10) {
+                return cpf[9] == resto;
+            }
+            return cpf[9] == 0;
         },
-        
+        validarSegundoDigito(cpf) {
+        let sum = 0;
+        for (let i = 0; i < 10; i++) {
+            sum += cpf[i] * (11 - i);
+        }
+        const resto = (sum * 10) % 11;
+        if (resto < 10) {
+            return cpf[10] == resto;
+        }
+        return cpf[10] == 0;
+        },
+        validarRepetido(cpf) {
+            const primeiro = cpf[0];
+            let diferente = false;
+            for(let i = 1; i < cpf.length; i++) {
+                if(cpf[i] != primeiro) {
+                diferente = true;
+                }
+            }
+            return diferente;
+        },
+        validarCpf(cpf) {
+            if (cpf.length != 11) {
+                return false;
+            }
+            if(!this.validarRepetido(cpf)) {
+                return false;
+            }
+            if (!this.validarPrimeiroDigito(cpf)) {
+                return false;
+            }
+            if (!this.validarSegundoDigito(cpf)) {
+                return false;
+            }
+            return true;
+        },
+        formatarCPF(){
+            this.cpfFormatado = this.cpf.replace("-", "").replace(".", "").replace(".", "")
+        },
+        ajuda(){
+            this.$swal.fire({
+                title: '<h2>Gerenciamento de aluno</h2>',
+                icon: 'info',
+                html:
+                    '<h3 style="color:#4da6ff">Cadastrar novo aluno</h3>'+
+                    '<b>IMPORTANTE </b><p>Plano e Turma devem estar previamente cadastrados.</p>' +
+                    '<p><b>1- </b>Inserir todos os dados: nome do aluno, cpf(válido) do aluno, data de nascimento, '+
+                    'selecionar um plano, selecionar uma turma e data ne inicio.'+
+                    '<p><b>2- </b>Após todos dados inseridos clicar no botão "+SALVAR" para salvar cadastro ou "CANCELAR" '+
+                    'para limpar formulário.'+
+                    '<h3 style="color:#39ac6b">Editar um aluno</h3>'+
+                    '<p><b>1- </b>Na lista abaixo do formulário clicar no botão "Editar" na mesma linha correspondente '+
+                    'ao aluno que deseja alterar o(s) dado(s).'+
+                    '<p><b>2- </b>Após clicar no botão "Editar" os dados do respectivo aluno irá carregar no formulário acima, '+
+                    'após isso pode alterar o(s) dado(s) que deseja do mesmo.'+
+                    '<p><b>3- </b>Após editar, para salvar a(s) alteração(ôs) clicar em "+SALVAR" ou "CANCELAR" para cancelar alteração(ôs).'+
+                    '<h3 style="color:#ff6666">Excluir um aluno</h3>'+
+                    '<p><b>1- </b>Na lista abaixo do formulário, clicar no botão "Excluir" na mesma linha correspondente '+
+                    'ao aluno que deseja fazer a exclusão.'+
+                    '<p><b>2- </b>Após clicar no botão "Excluir" o aluno será excluido permanentemente. Para recuperar o mesmo, deve ser '+
+                    'feito o passo a passo de "Cadastrar novo aluno".'
+            })
+        }
     },
     mounted() {
         this.getAllAlunos();
@@ -197,5 +281,16 @@ export default {
 </script>
 
 <style>
-    
+    #btnAjuda{
+        float: right;
+        border-radius: 50%;
+    }
+    #button{
+        margin-right: 10px;
+    }
+    #btnAcoes{
+        width:100px;
+        height:40px;
+        margin-right: 10px;
+    }
 </style>

@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr v-for="aluno in alunos" :key="aluno.id_aluno">
+                <tr v-for="aluno in atrasados" :key="aluno.id_aluno">
                     <th scope="row">{{ aluno.nome_aluno }}</th>
                     <td>{{ aluno.cpf_aluno }}</td>
                     <td>{{ aluno.nome_plano }}</td>
@@ -62,20 +62,35 @@ export default {
             this.pegarDataAtual();
             axios.get(`${this.URL}/recebimentoatrasados/${this.mesAno}`).then(response => {
                 this.pago = response.data
+                console.log(this.pago);
                 this.listaEmAtrasos();
             })
         },
         listaEmAtrasos(){
-            for(let i = 0; i < this.pago.length; i++)
+            console.log(this.alunos);
+            for(let i = 0; i < this.alunos.length; i++)
             {
-                for(let j = 0; j < this.alunos.length; j++)
+                if(this.alunos[i].diapag_format < 10)
+                    this.alunos[i].diapag_format = '0'+this.alunos[i].diapag_format
+                for(let j = 0; j < this.pago.length; j++)
                 {
-                    if(this.pago[i].id_aluno == this.alunos[j].id_aluno)
+                    if(this.alunos[i].id_aluno != this.pago[j].id_aluno && this.alunos[i].diapag_format < this.diaAtual)
                     {
-                        this.alunos.splice(j, 1)
+                        if(!this.verificaSePago(this.alunos[i].id_aluno))
+                            this.atrasados.push(this.alunos[i]);
                     }
                 }
+                if(this.pago.length == 0)
+                    this.atrasados.push(this.alunos[i]);
             }
+        },
+        verificaSePago(id){
+            for(let i = 0; i < this.pago.length; i++)
+            {
+                if(id == this.pago[i].id_aluno)
+                    return true
+            }
+            return false
         },
         pegarDataAtual() {
             const data = new Date()

@@ -20,7 +20,6 @@ const getTurmasSegunda = async () => {
             WHERE t.segunda = true
             ORDER BY t.horario_turma;
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);
@@ -47,7 +46,6 @@ const getTurmasTerca = async () => {
             WHERE t.terca = true
             ORDER BY t.horario_turma;
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);
@@ -74,7 +72,6 @@ const getTurmasQuarta = async () => {
             WHERE t.quarta = true
             ORDER BY t.horario_turma;
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);
@@ -101,7 +98,6 @@ const getTurmasQuinta = async () => {
             WHERE t.quinta = true
             ORDER BY t.horario_turma;
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);
@@ -128,7 +124,6 @@ const getTurmasSexta = async () => {
             WHERE t.sexta = true
             ORDER BY t.horario_turma;
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);
@@ -155,7 +150,90 @@ const getTurmasSabado = async () => {
             WHERE t.sabado = true
             ORDER BY t.horario_turma;
         `);  
-        console.log(rows);
+        return rows;
+    }catch(err){
+        console.log(err);
+    }
+};
+
+const getQtdeSegunda = async () => {  
+    try{
+        const { rows } = await db.query(`
+            SELECT 
+            COUNT (*)
+            FROM turmas
+            WHERE segunda = true
+        `);  
+        return rows;
+    }catch(err){
+        console.log(err);
+    }
+};
+
+const getQtdeTerca = async () => {  
+    try{
+        const { rows } = await db.query(`
+            SELECT 
+            COUNT (*)
+            FROM turmas
+            WHERE terca = true
+        `);  
+        return rows;
+    }catch(err){
+        console.log(err);
+    }
+};
+
+const getQtdeQuarta = async () => {  
+    try{
+        const { rows } = await db.query(`
+            SELECT 
+            COUNT (*)
+            FROM turmas
+            WHERE quarta = true
+        `);  
+        return rows;
+    }catch(err){
+        console.log(err);
+    }
+};
+
+const getQtdeQuinta = async () => {  
+    try{
+        const { rows } = await db.query(`
+            SELECT 
+            COUNT (*)
+            FROM turmas
+            WHERE quinta = true
+        `);  
+        return rows;
+    }catch(err){
+        console.log(err);
+    }
+};
+
+const getQtdeSexta = async () => {  
+    try{
+        const { rows } = await db.query(`
+            SELECT 
+            COUNT (*)
+            FROM turmas
+            WHERE sexta = true
+        `);  
+        return rows;
+    }catch(err){
+        console.log(err);
+    }
+};
+
+const getQtdeSabado = async () => {  
+    try{
+        const { rows } = await db.query(`
+            SELECT 
+            COUNT (*)
+            FROM turmas
+            WHERE sabado = true
+        `);  
         return rows;
     }catch(err){
         console.log(err);
@@ -169,4 +247,10 @@ module.exports = {
     getTurmasQuinta,
     getTurmasSexta,
     getTurmasSabado,
+    getQtdeSegunda,
+    getQtdeTerca,
+    getQtdeQuarta,
+    getQtdeQuinta,
+    getQtdeSexta,
+    getQtdeSabado,
 }

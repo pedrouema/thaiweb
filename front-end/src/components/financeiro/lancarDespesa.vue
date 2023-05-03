@@ -16,8 +16,8 @@
                 <input type="date" class="form-control" v-model="dataVenc">
             </div>
             <div class="col-12">
-                <button type="button" class="btn btn-primary" @click="createDespesa()" v-show="!editar">+ SALVAR</button>
-                <button type="button" class="btn btn-primary" @click="salvarDados()" v-show="editar">+ EDITAR</button>
+                <button type="button" id="button" class="btn btn-primary" @click="createDespesa()" v-show="!editar">+ SALVAR</button>
+                <button type="button" id="button" class="btn btn-primary" @click="salvarDados()" v-show="editar">+ EDITAR</button>
                 <button  type="button" class="btn btn-danger" @click="limpaDadosFormulario()" >CANCELAR</button>
             </div>
         </form>

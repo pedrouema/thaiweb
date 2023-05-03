@@ -1,6 +1,9 @@
 <template>
     <div class="turma-admin">
         <h3>Gerenciamento de Turma</h3>
+        <button type="button" id="btnAjuda" class="btn btn-primary btn-floating" @click="ajuda()">
+            <i class="fa fa-question-circle"></i>
+        </button>
         <form class="row g-3">
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Nome da Turma</label>
@@ -85,13 +88,17 @@
         <br/>
         
         <div class="col-12">
-            <button type="button" class="btn btn-primary" @click="createTurma()" v-show="!editar" >+ SALVAR</button>
-            <button type="button" class="btn btn-primary" @click="salvarDados()" v-show="editar">+ EDITAR</button>
+            <button type="button" id="button" class="btn btn-primary" @click="createTurma()" v-show="!editar" >+ SALVAR</button>
+            <button type="button" id="button" class="btn btn-primary" @click="salvarDados()" v-show="editar">+ EDITAR</button>
             <button  type="button" class="btn btn-danger" @click="limpaDadosFormulario()" >CANCELAR</button>
         </div>
     </div>
+    <br/>
     <hr/>
     <div class="turma-table">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-dark" type="button" v-on:click.prevent="abrirRelatorio()"><i class="fa fa-print"> </i> Imprimir</button>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -109,11 +116,11 @@
                     <td>{{ turma.dias_turma }}</td>
                     <td>{{ turma.nome_instrutor }}</td>
                     <td>
-                        <button type="button" class="btn btn-success" @click="carregarDadosTurma(turma.id_turma)">
+                        <button type="button" id="btnAcoes" class="btn btn-success" @click="carregarDadosTurma(turma.id_turma)">
                             <i class="fa fa-pencil"> </i>
                              Editar
                         </button>
-                        <button type="button" class="btn btn-danger" @click="deleteTurma(turma.id_turma)">
+                        <button type="button" id="btnAcoes" class="btn btn-danger" @click="deleteTurma(turma.id_turma)">
                             <i class="fa fa-trash"> </i>
                              Excluir
                         </button>
@@ -153,6 +160,10 @@ export default {
         }
     },
     methods: {
+        abrirRelatorio(){
+            const win = window.open('http://localhost:8080/relatorioturmas')
+            win.focus()
+        },
         getAllTurmas() {
             axios.get(`${this.URL}/turmas`).then(response => {
                 this.turmas = response.data
@@ -190,6 +201,7 @@ export default {
             axios.post(`${this.URL}/turmas`, turma).then(response => {
                 this.getAllTurmas();
             });
+            window.location.reload(true)
             this.limpaDadosFormulario();
         },
         carregarDadosTurma(id){
@@ -239,6 +251,7 @@ export default {
             axios.put(`${this.URL}/turmas/${this.turmaId}`, turma).then(response => {
                 this.getAllTurmas();
             });
+            window.location.reload(true)
             this.limpaDadosFormulario();
         },
         deleteTurma(id) {
@@ -266,6 +279,30 @@ export default {
             this.sex = false;
             this.sab = false;
             this.dias = '';
+        },
+        ajuda(){
+            this.$swal.fire({
+                title: '<h2>Gerenciamento de Turmas</h2>',
+                icon: 'info',
+                html:
+                    '<h3 style="color:#4da6ff">Cadastrar nova turma</h3>'+
+                    '<p><b>1- </b>Inserir todos os dados: nome da turma, selecionar o instrutor, selecionar quantas vezes por semana '+
+                    'sera o treino, selecione o horario de inicio do treino e selecionar o(s) dia(s) da semana que vai ser o treino da turma'+
+                    '<p><b>2- </b>Após todos dados inseridos clicar no botão "+SALVAR" para salvar cadastro ou "CANCELAR" '+
+                    'para limpar formulário.'+
+                    '<h3 style="color:#39ac6b">Editar uma turma</h3>'+
+                    '<p><b>1- </b>Na lista abaixo do formulário clicar no botão "Editar" na mesma linha correspondente '+
+                    'a turma que deseja alterar o(s) dado(s).'+
+                    '<p><b>2- </b>Após clicar no botão "Editar" os dados da respectiva turma irá carregar no formulário acima, '+
+                    'após isso pode alterar o(s) dado(s) que deseja da mesma.'+
+                    '<p><b>3- </b>Após editar, para salvar a(s) alteração(ôs) clicar em "+SALVAR" ou "CANCELAR" para cancelar alteração(ôs).'+
+                    '<h3 style="color:#ff6666">Excluir uma turma</h3>'+
+                    '<b>IMPORTANTE </b><p>Para excluir uma turma, nenhum aluno deve estar usando a mesma.</p>' +
+                    '<p><b>1- </b>Na lista abaixo do formulário, clicar no botão "Excluir" na mesma linha correspondente '+
+                    'a turma que deseja fazer a exclusão.'+
+                    '<p><b>2- </b>Após clicar no botão "Excluir" a turma será excluido permanentemente. Para recuperar o mesmo, deve ser '+
+                    'feito o passo a passo de "Cadastrar nova turma".'
+            })
         }
     },
     mounted() {

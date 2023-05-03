@@ -2,6 +2,19 @@ const connection = require ('./connection')
 
 const db = require("./database");
 
+const getTotalAlunos = async (nome_aluno) => {  
+    try{
+        const { rows } = await db.query(`
+            SELECT 
+            COUNT (*)
+            FROM alunos 
+        `);  
+        return rows;
+    }catch(err){
+        console.log(err);
+    }
+};
+
 const getNome = async (nome_aluno) => {  
     try{
         const { rows } = await db.query(`
@@ -18,7 +31,6 @@ const getNome = async (nome_aluno) => {
             INNER JOIN planos p on p.id_plano = a.id_plano
             WHERE UPPER(a.nome_aluno) LIKE UPPER('%${nome_aluno}%')
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);
@@ -42,7 +54,6 @@ const getOne = async (id_aluno) => {
             INNER JOIN turmas t on t.id_turma = a.id_turma
             WHERE a.id_aluno = ${id_aluno}
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);
@@ -65,7 +76,6 @@ const getAll = async () => {
             INNER JOIN turmas t on t.id_turma = a.id_turma
             ORDER BY a.nome_aluno
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);
@@ -82,7 +92,7 @@ const getAllMensalidade = async () => {
             a.cpf_aluno, 
             to_char(a.datanasc_aluno, 'DD/MM/YYYY') as datanasc_aluno, 
             p.nome_plano,
-            p.valor_plano, 
+            p.valor_plano,   
             t.nome_turma,
             to_char(a.diapag_aluno, 'DD/MM/YYYY') as diapag_aluno, 
             EXTRACT (DAY FROM diapag_aluno) as diapag_format
@@ -92,7 +102,6 @@ const getAllMensalidade = async () => {
             WHERE p.tipo_mensal = true
             ORDER BY a.id_aluno
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);
@@ -118,7 +127,6 @@ const getAllMensalidadesAtrasadas = async (dataAtual) => {
             WHERE p.tipo_mensal = true
             ORDER BY a.nome_aluno
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);
@@ -176,4 +184,5 @@ module.exports = {
     getNome,
     getAllMensalidade,
     getAllMensalidadesAtrasadas,
+    getTotalAlunos,
 };

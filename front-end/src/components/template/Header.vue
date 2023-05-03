@@ -40,7 +40,7 @@ export default {
 <style>
     .header {
         grid-area: header;
-        background: linear-gradient(to right, #1e469a, #49a7c1);
+        background: linear-gradient(to right, #0c0d00, #8d820b);
 
         display: flex;
         justify-content: center;
@@ -56,12 +56,12 @@ export default {
     }
 
     .title a {
-        color: #FFF;
+        color: #ffffff;
         text-decoration: none;
     }
 
     .title a:hover {
-        color: #FFF;
+        color: #fdf8cb;
         text-decoration: none;
     }
 

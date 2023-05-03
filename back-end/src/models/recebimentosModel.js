@@ -92,7 +92,7 @@ const getAtrasados = async (mesAtual) =>{
     }
 }
 
-const getAtrasadosTeste = async (mesAno) =>{
+const getAtrasadosTeste = async (mesAno, diaAtual) =>{
     try{
         const recebido = await db.query(`
         SELECT
@@ -106,15 +106,14 @@ const getAtrasadosTeste = async (mesAno) =>{
         p.nome_plano,
         p.valor_plano,
         to_char(a.diapag_aluno, 'DD/MM/YYYY') as diapag_aluno,
-        EXTRACT (DAY FROM diapag_aluno) as diapag_format
+        EXTRACT (DAY FROM a.diapag_aluno) as diapag_format
         FROM pagamentos_recebidos r
         INNER JOIN alunos a on a.id_aluno = r.id_aluno
         INNER JOIN planos p on p.id_plano = a.id_plano
         WHERE r.mes_referente = '${mesAno}'
         and p.tipo_mensal = true
-        ORDER BY a.nome_aluno
+        ORDER BY a.id_aluno
         `);
-        console.log(recebido.rows);
         return recebido.rows;
     }catch(err){
         console.log(err);

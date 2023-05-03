@@ -30,6 +30,36 @@ const getTurmasSabado = async (req, res) => {
     return res.status(200).json(turmas);
 };
 
+const getQtdeSegunda = async (req, res) => {
+    const turmas = await cronogramaModel.getQtdeSegunda();
+    return res.status(200).json(turmas);
+};
+
+const getQtdeTerca = async (req, res) => {
+    const turmas = await cronogramaModel.getQtdeTerca();
+    return res.status(200).json(turmas);
+};
+
+const getQtdeQuarta = async (req, res) => {
+    const turmas = await cronogramaModel.getQtdeQuarta();
+    return res.status(200).json(turmas);
+};
+
+const getQtdeQuinta = async (req, res) => {
+    const turmas = await cronogramaModel.getQtdeQuinta();
+    return res.status(200).json(turmas);
+};
+
+const getQtdeSexta = async (req, res) => {
+    const turmas = await cronogramaModel.getQtdeSexta();
+    return res.status(200).json(turmas);
+};
+
+const getQtdeSabado = async (req, res) => {
+    const turmas = await cronogramaModel.getQtdeSabado();
+    return res.status(200).json(turmas);
+};
+
 module.exports = {
     getTurmasSegunda,
     getTurmasTerca,
@@ -37,4 +67,10 @@ module.exports = {
     getTurmasQuinta,
     getTurmasSexta,
     getTurmasSabado,
+    getQtdeSegunda,
+    getQtdeTerca,
+    getQtdeQuarta,
+    getQtdeQuinta,
+    getQtdeSexta,
+    getQtdeSabado,
 }

@@ -21,7 +21,6 @@ const getOne = async (id_instrutor) => {
             FROM INSTRUTORES 
             WHERE id_instrutor = ${id_instrutor}
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);

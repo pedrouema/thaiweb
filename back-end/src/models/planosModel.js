@@ -23,7 +23,6 @@ const getOne = async (id_plano) => {
             FROM PLANOS 
             WHERE id_plano = ${id_plano}
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);

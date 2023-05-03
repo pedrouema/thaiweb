@@ -22,7 +22,6 @@ const getAll = async () => {
             INNER JOIN instrutores i on i.id_instrutor = t.id_instrutor
             ORDER BY t.nome_turma
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);
@@ -49,7 +48,6 @@ const getOne = async (id_turma) => {
             INNER JOIN instrutores i on i.id_instrutor = t.id_instrutor
             WHERE t.id_turma = ${id_turma}
         `);  
-        console.log(rows);
         return rows;
     }catch(err){
         console.log(err);
@@ -94,7 +92,6 @@ const updateTurma = async (id, turma) => {
     ' sabado='+"'"+sabado+"',"+
     ' dias_turma='+"'"+dias_turma+"'"+
     ' WHERE id_turma = '+id;
-    console.log(sql);
     let updateTurma;
     try{ 
         updateTurma = await db.query(sql)

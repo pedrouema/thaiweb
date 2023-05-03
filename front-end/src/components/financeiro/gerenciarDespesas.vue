@@ -1,4 +1,4 @@
-<template>
+<template id="form">
     <h3>Gerenciamento de Despesas</h3>
     <br/>
     <form class="row g-3">
@@ -53,7 +53,7 @@
         <!-- Tabela de Despesas já Pagas -->
         <div class="despesasPagas-table" v-show="tabela == 2">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-dark" type="button"><i class="fa fa-print"></i> Imprimir</button>
+                <button class="btn btn-dark" type="button" v-on:click.prevent="abrirRelatorio()"><i class="fa fa-print"></i> Imprimir</button>
             </div>
         <table class="table" >
             <thead>
@@ -88,9 +88,13 @@
 
 <script>
 import axios from 'axios'
+import RelatorioDespesasPaga from './RelatorioDespesasPaga'
+
 
 export default {
     name: 'GerenciarDespesas',
+    components: { RelatorioDespesasPaga },
+    template: '#form',
     data(){
         return {
             URL: "http://localhost:4000",
@@ -108,6 +112,9 @@ export default {
         }
     },
     methods: {
+        abrirRelatorio(){
+            
+        },
         quitarDespesa(id){
             this.editar = true
             const despesa = {
@@ -288,8 +295,8 @@ export default {
             this.tabela = 0
         },
         limpaDados(){
-            this.dataIni = ''
-            this.dataFim = ''
+            // this.dataIni = ''
+            // this.dataFim = ''
         }
     },
     mounted() {
