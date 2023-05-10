@@ -1,5 +1,19 @@
 const recebimentosModel = require ('../models/recebimentosModel')
 
+const getValorEntradaMes = async (req, res) => {
+    const mesAtual = req.params.mesAtual
+    const anoAtual = req.params.anoAtual
+    const entrada = await recebimentosModel.getValorEntradaMes(mesAtual, anoAtual);
+    return res.status(200).json(entrada);
+};
+
+const getValorEntrada = async (req, res) => {
+    const dataIni = req.params.dataIni
+    const dataFim = req.params.dataFim
+    const entrada = await recebimentosModel.getValorEntrada(dataIni, dataFim);
+    return res.status(200).json(entrada);
+};
+
 const createPagamentoRecebido = async (req, res) => {
     const createRecebimento = await recebimentosModel.createPagamentoRecebido(req.body);
     return res.status(201).json(createRecebimento);
@@ -43,4 +57,6 @@ module.exports = {
     deleteRecebimento,
     getAtrasados,
     getAtrasadosTeste,
+    getValorEntrada,
+    getValorEntradaMes,
 }

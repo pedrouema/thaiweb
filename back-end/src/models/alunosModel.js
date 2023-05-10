@@ -2,6 +2,21 @@ const connection = require ('./connection')
 
 const db = require("./database");
 
+const getQtdeMes = async (mesAtual, anoAtual) => {  
+    try{
+        const { rows } = await db.query(`
+            SELECT 
+            COUNT (*)
+            FROM alunos 
+            WHERE EXTRACT(MONTH FROM diapag_aluno) = '${mesAtual}'
+            AND EXTRACT(YEAR FROM diapag_aluno) = '${anoAtual}'
+        `);  
+        return rows;
+    }catch(err){
+        console.log(err);
+    }
+};
+
 const getTotalAlunos = async (nome_aluno) => {  
     try{
         const { rows } = await db.query(`
@@ -30,6 +45,7 @@ const getNome = async (nome_aluno) => {
             FROM ALUNOS a
             INNER JOIN planos p on p.id_plano = a.id_plano
             WHERE UPPER(a.nome_aluno) LIKE UPPER('%${nome_aluno}%')
+            AND a.ativo_aluno = true
         `);  
         return rows;
     }catch(err){
@@ -74,6 +90,7 @@ const getAll = async () => {
             FROM ALUNOS a
             INNER JOIN planos p on p.id_plano = a.id_plano
             INNER JOIN turmas t on t.id_turma = a.id_turma
+            WHERE a.ativo_aluno = true
             ORDER BY a.nome_aluno
         `);  
         return rows;
@@ -146,8 +163,10 @@ const addAluno = async (newAluno) => {
     }
 };
 
-const deleteAluno = async (id) => {
-    let sql = 'DELETE FROM alunos WHERE id_aluno = '+id;
+const deleteAluno = async (id, aluno) => {
+    const { ativo_aluno } = aluno
+    let sql = 'UPDATE alunos SET ativo_aluno='+"'"+ativo_aluno+"'"+ 
+    ' WHERE id_aluno = '+id;
     let removeAluno;
     try{
         removeAluno = await db.query(sql)
@@ -185,4 +204,5 @@ module.exports = {
     getAllMensalidade,
     getAllMensalidadesAtrasadas,
     getTotalAlunos,
+    getQtdeMes,
 };

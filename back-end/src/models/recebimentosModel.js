@@ -13,6 +13,34 @@ const createPagamentoRecebido = async (newPagamento) => {
     }
 };
 
+const getValorEntradaMes = async (mesAtual, anoAtual) =>{
+    try{
+        const entrada = await db.query(`
+        SELECT SUM(valor_recebimento)
+        FROM pagamentos_recebidos
+        WHERE EXTRACT(MONTH FROM data_recebimento) = '${mesAtual}'
+        AND EXTRACT(YEAR FROM data_recebimento) = '${anoAtual}'
+        `);
+        return entrada.rows;
+    }catch(err){
+        console.log(err);
+    }
+}
+
+const getValorEntrada = async (dataIni, dataFim) =>{
+    try{
+        const entrada = await db.query(`
+        SELECT SUM(valor_recebimento)
+        FROM pagamentos_recebidos
+        WHERE data_recebimento >= '${dataIni}'
+        and data_recebimento <= '${dataFim}'
+        `);
+        return entrada.rows;
+    }catch(err){
+        console.log(err);
+    }
+}
+
 const getAllRecebidas = async () =>{
     try{
         const recebido = await db.query(`
@@ -127,4 +155,6 @@ module.exports = {
     deleteRecebimento,
     getAtrasados,
     getAtrasadosTeste,
+    getValorEntrada,
+    getValorEntradaMes,
 }

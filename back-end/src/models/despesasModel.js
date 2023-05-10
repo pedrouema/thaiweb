@@ -2,6 +2,36 @@ const connection = require ('./connection')
 
 const db = require("./database");
 
+const getValorSaidaMes = async (mesAtual, anoAtual) =>{
+    try{
+        const saida = await db.query(`
+        SELECT SUM(valorpag_despesa)
+        FROM despesas
+        WHERE EXTRACT(MONTH from datapag_despesa) = '${mesAtual}'
+        AND EXTRACT(YEAR from datapag_despesa) = '${anoAtual}'
+        AND quitada_despesa = true
+        `);
+        return saida.rows;
+    }catch(err){
+        console.log(err);
+    }
+}
+
+const getValorSaida = async (dataIni, dataFim) =>{
+    try{
+        const saida = await db.query(`
+        SELECT SUM(valorpag_despesa)
+        FROM despesas
+        WHERE datapag_despesa >= '${dataIni}'
+        and datapag_despesa <= '${dataFim}'
+        and quitada_despesa = true
+        `);
+        return saida.rows;
+    }catch(err){
+        console.log(err);
+    }
+}
+
 const getAll = async () =>{
     try{
         const despesas = await db.query(`
@@ -160,8 +190,6 @@ const voltarDespesa = async (id, despesa) => {
     }
 };
 
-
-
 module.exports = {
     getAll,
     getOne,
@@ -172,4 +200,6 @@ module.exports = {
     voltarDespesa,
     getNaoQuitadaEntreDatas,
     getQuitadaEntreDatas,
+    getValorSaida,
+    getValorSaidaMes,
 }

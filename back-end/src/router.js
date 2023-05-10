@@ -21,7 +21,7 @@ router.get('/alunos', alunosController.getAll)
 router.get('/alunos/getone/:id', alunosController.getOne)
 router.get('/alunos/getnome/:nome_aluno', alunosController.getNome)
 router.post('/alunos', alunosController.addAluno)
-router.delete('/alunos/delete/:id', alunosController.deleteAluno)
+router.put('/alunos/delete/:id', alunosController.deleteAluno)
 router.put('/alunos/:id', alunosController.updateAluno)
 router.get('/alunostotal', alunosController.getTotalAlunos)
 
@@ -85,5 +85,17 @@ router.delete('/recebimento/delete/:id', recebimentosController.deleteRecebiment
 router.get('/alunosmensalidade', alunosController.getAllMensalidade)
 router.get('/recebimentoatrasadas/:mesAtual', recebimentosController.getAtrasados)
 router.get('/recebimentoatrasados/:mesAno', recebimentosController.getAtrasadosTeste)
+
+
+// ROTAS ANALISES FINANCEIRO
+router.get('/getvalorsaida/:dataIni/:dataFim', despesasController.getValorSaida)
+router.get('/getvalorentrada/:dataIni/:dataFim', recebimentosController.getValorEntrada)
+
+// ROTAS ANALISES GANHOS
+router.get('/getvalorsaidames/:mesAtual/:anoAtual', despesasController.getValorSaidaMes)
+router.get('/getvalorentradames/:mesAtual/:anoAtual', recebimentosController.getValorEntradaMes)
+
+// ROTAS ANALISES QUANTIDADE ALUNOS
+router.get('/alunosquantidademes/:mesAtual/:anoAtual', alunosController.getQtdeMes)
 
 module.exports = router;

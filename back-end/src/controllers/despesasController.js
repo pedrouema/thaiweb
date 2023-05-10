@@ -1,5 +1,19 @@
 const despesasModel = require("../models/despesasModel");
 
+const getValorSaidaMes = async (req, res) => {
+    const mesAtual = req.params.mesAtual
+    const anoAtual = req.params.anoAtual
+    const saida = await despesasModel.getValorSaidaMes(mesAtual, anoAtual);
+    return res.status(200).json(saida);
+};
+
+const getValorSaida = async (req, res) => {
+    const dataIni = req.params.dataIni
+    const dataFim = req.params.dataFim
+    const saida = await despesasModel.getValorSaida(dataIni, dataFim);
+    return res.status(200).json(saida);
+};
+
 const getAll = async (req, res) => {
     const despesas = await despesasModel.getAll();
     return res.status(200).json(despesas);
@@ -63,4 +77,6 @@ module.exports = {
     voltarDespesa,
     getNaoQuitadaEntreDatas,
     getQuitadaEntreDatas,
+    getValorSaida,
+    getValorSaidaMes,
 }

@@ -1,5 +1,12 @@
 const alunosModel = require('../models/alunosModel');
 
+const getQtdeMes = async (req, res) => {
+    const mesAtual = req.params.mesAtual
+    const anoAtual = req.params.anoAtual
+    const alunos = await alunosModel.getQtdeMes(mesAtual, anoAtual);
+    return res.status(200).json(alunos);
+};
+
 const getTotalAlunos = async (req, res) => {
     const alunos = await alunosModel.getTotalAlunos();
     return res.status(200).json(alunos);
@@ -35,7 +42,7 @@ const addAluno = async (req, res) => {
 const deleteAluno = async (req, res) => {
     const { id } = req.params;
 
-    await alunosModel.deleteAluno(id);
+    await alunosModel.deleteAluno(id, req.body);
     return res.status(204).json();
 };
 
@@ -55,4 +62,5 @@ module.exports = {
     getNome,
     getAllMensalidade,
     getTotalAlunos,
+    getQtdeMes,
 };

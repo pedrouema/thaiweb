@@ -173,9 +173,15 @@ export default {
             }
         },
         deleteAluno(id) {
-            axios.delete(this.URL+"/alunos/delete/"+id).then(()=>{
-                this.getAllAlunos()
-            })
+            const aluno = {
+                    ativo_aluno: false
+            }
+            axios.put(`${this.URL}/alunos/delete/${id}`, aluno).then(response => {
+                this.getAllAlunos();
+            });
+            // axios.delete(this.URL+"/alunos/delete/"+id).then(()=>{
+            //     this.getAllAlunos()
+            // })
         },
         getAllPlanosOptions() {
             axios.get(`${this.URL}/planos/options`).then(response => {
