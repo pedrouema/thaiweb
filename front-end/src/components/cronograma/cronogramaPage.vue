@@ -141,7 +141,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    
     import PageTitle from '../template/PageTitle'
 
     export default{

@@ -5,19 +5,23 @@
         </button>
         <ul class="dropdown-menu">
             <router-link to="/admin">
-                <li><a id="btn-line" class="dropdown-item" href="#"><i class="fa fa-cogs"></i>  Administração</a></li>
+                <li><a id="btn-line" class="dropdown-item"><i class="fa fa-cogs"></i>  Administração</a></li>
             </router-link>
-            <li><a id="btn-line" class="dropdown-item" href="/"><i class="fa fa-sign-out"></i>  Sair</a></li>
+            <li><a id="btn-line" class="dropdown-item" @click="logout()"><i class="fa fa-sign-out"></i>  Sair</a></li>
         </ul>
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
 
 export default {
     name: 'UserDropdown',
-    
+    methods: {
+        logout(){
+            localStorage.removeItem('token')
+            window.location.href = '/login'
+        }
+    }
  }
 </script>
 

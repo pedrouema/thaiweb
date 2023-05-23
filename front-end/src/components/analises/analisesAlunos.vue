@@ -1,13 +1,13 @@
 <template>
     <h2>Quantidade de novos alunos nos ultimos meses</h2>
-    <div style="position: relative; height: 50vh; width: 80vw">
+    <div style="position: relative; height: 45vh; width: 70vw">
         <canvas id="myChartAlunos"></canvas>
     </div>
 </template>
 
 <script>
 import Chart from 'chart.js/auto';
-import axios from 'axios';
+;
 
 export default {
     name: 'AnalisesAlunos',
@@ -78,59 +78,19 @@ export default {
 
 
         const data = {
-        labels: this.mesesUsar,
-        datasets: [{
-            label: 'Novos Alunos',
-            data: this.qtdeAlunos,
-            backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 205, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(201, 203, 207, 0.2)'
-            ],
-            borderColor: [
-            'rgb(255, 99, 132)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(54, 162, 235)',
-            'rgb(153, 102, 255)',
-            'rgb(201, 203, 207)'
-            ],
-            borderWidth: 1
-        }]
+            labels: this.mesesUsar,
+            datasets: [{
+                label: 'Novos Alunos',
+                data: this.qtdeAlunos,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.2
+            }]
         };
 
         const config = {
             type: 'line',
             data: data,
-            options: {
-                layout : {
-                    padding : {
-                        left : 20,
-                        right : 20,
-                        top : 20,
-                        bottom : 20
-                    }
-                },
-                legend : {
-                    display : false,
-                    position : 'bottom'
-                },
-                title : {
-                    display : true,
-                    text : 'Sales by Months',
-                    fontSize : 20
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            },
         };
 
         const ctx = document.getElementById('myChartAlunos');

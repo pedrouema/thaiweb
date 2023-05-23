@@ -55,9 +55,6 @@
         </table>
         <!-- Tabela de Despesas já Pagas -->
         <div class="despesasPagas-table" v-show="tabela == 2">
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-dark" type="button" v-on:click.prevent="abrirRelatorio()"><i class="fa fa-print"></i> Imprimir</button>
-            </div>
         <table class="table" >
             <thead>
                 <tr>
@@ -90,7 +87,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+
 import RelatorioDespesasPaga from './RelatorioDespesasPaga'
 
 
@@ -115,9 +112,6 @@ export default {
         }
     },
     methods: {
-        abrirRelatorio(){
-            
-        },
         quitarDespesa(id){
             this.editar = true
             const despesa = {

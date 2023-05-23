@@ -1,20 +1,24 @@
+
 const express = require('express');
+
+
 const alunosController = require('./controllers/alunosController');
 const instrutoresController = require('./controllers/instrutoresController');
 const planosController = require('./controllers/planosController');
 const turmasController = require('./controllers/turmasController');
-const adminsController = require('./controllers/adminsController');
 const despesasController = require('./controllers/despesasController');
 const cronogramaController = require('./controllers/cronogramaController');
 const recebimentosController = require('./controllers/recebimentosController');
+const usuarioController = require('./controllers/usuarioController');
 
 const router = express.Router();
 
+
+
 //ROTAS DE ADMINS
-router.get('/admins', adminsController.getAll)
-router.get('/admins/getone/:id', adminsController.getOne)
-router.post('/admins', adminsController.addAdmin)
-router.post('/admins/valid', adminsController.getValido)
+router.post('/usuario', usuarioController.addUsuario)
+router.post('/login', usuarioController.login)
+router.put('/primeiroacesso', usuarioController.updateUsuario)
 
 // ROTAS DE ALUNOS
 router.get('/alunos', alunosController.getAll)

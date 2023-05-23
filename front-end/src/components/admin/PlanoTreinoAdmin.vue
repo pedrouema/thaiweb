@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+;
 import AlunoAdmin from './AlunoAdmin.vue'
 
 export default {

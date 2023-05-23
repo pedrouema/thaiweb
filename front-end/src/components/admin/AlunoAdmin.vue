@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+
 // import RelatorioAlunos from '@/components/admin/RelatorioAlunos'
 
 export default {

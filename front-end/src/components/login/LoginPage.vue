@@ -11,15 +11,15 @@
                                     <p class="text-white-50 mb-5">Por favor, entre com seu nome de usuário e senha!</p>
                                     <div class="form-outline form-white mb-4">
                                         <input type="text" id="typeEmailX" class="form-control form-control-lg"
-                                            v-model="usuario_admin" />
+                                            v-model="nome_usuario" />
                                         <label class="form-label" for="typeEmailX">Usuário</label>
                                     </div>
                                     <div class="form-outline form-white mb-4">
                                         <input type="password" id="typePasswordX" class="form-control form-control-lg"
-                                            v-model="senha_admin" />
+                                            v-model="senha_usuario" />
                                         <label class="form-label" for="typePasswordX">Senha</label>
                                     </div>
-                                    <button class="btn btn-outline-light btn-lg px-5" type="button" @click="getValido()">Entrar</button>
+                                    <button class="btn btn-outline-light btn-lg px-5" type="button" @click="login()">Entrar</button>
                                 </div>
                             </div>
                         </div>
@@ -31,24 +31,45 @@
 </template>
 
 <script>
-import axios from 'axios';
+
 
 export default {
     name: 'LoginPage',
     data() {
         return{
             URL: "http://localhost:4000",
-            admin: [],
-            usuario_admin: '',
-            senha_admin: '',
-            valida_usuario:'',
-            valida_senha:'',
-            valido: false,
+            nome_usuario: '',
+            senha_usuario: '',
         }
     },
     methods: {
-        
-    }
+        login() {
+            const usuario = {
+                usuario_nome: this.nome_usuario,
+                usuario_senha: this.senha_usuario
+            }
+            axios.post(`${this.URL}/login`, usuario).then(response => {
+                console.log(response.data);
+                if(response.data.success){
+                    localStorage.setItem('token', response.data.token)
+                    if(!response.data.acesso)
+                        window.location.href = '/primeiroacesso?usuario_nome='+response.data.usuario_nome
+                    else
+                        window.location.href = '/home'
+                }
+                else{
+                    this.alertaLogin();
+                }
+            });
+        },
+        alertaLogin(){
+            this.$swal.fire({
+                title: '<h2>Falha de acesso!</h2>',
+                icon: 'error',
+                text: 'Verifique seu nome de usuario e senha!'
+            })
+        }
+    },
 
 }
 </script>

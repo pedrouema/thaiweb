@@ -36,7 +36,7 @@
 
 <script>
 import PageTitle from '../template/PageTitle'
-import axios from 'axios'
+
 
 export default {
     name: 'Home',

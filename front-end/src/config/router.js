@@ -11,6 +11,7 @@ import RelatorioDespesasPaga from '@/components/financeiro/RelatorioDespesasPaga
 import RelatorioPlanos from '@/components/admin/RelatorioPlanos'
 import RelatorioTurmas from '@/components/admin/RelatorioTurmas'
 import RelatorioInstrutores from '@/components/admin/RelatorioInstrutores'
+import UsuarioAcesso from '@/components/login/UsuarioAcesso'
 
 const cors  = require('cors')
 
@@ -18,8 +19,13 @@ const cors  = require('cors')
 const routes = [
     {
         name: 'login',
-        path: '/',
+        path: '/login',
         component: LoginPage
+    },
+    {
+        name: 'primeiroacesso',
+        path: '/primeiroacesso',
+        component: UsuarioAcesso
     },
     {
         name: 'home',
