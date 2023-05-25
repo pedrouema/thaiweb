@@ -1,0 +1,179 @@
+-- Database: thaiweb
+
+-- DROP DATABASE IF EXISTS thaiweb;
+
+CREATE DATABASE thaiweb
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Portuguese_Brazil.1252'
+    LC_CTYPE = 'Portuguese_Brazil.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+
+-- Table: public.usuarios
+
+-- DROP TABLE IF EXISTS public.usuarios;
+
+CREATE TABLE IF NOT EXISTS public.usuarios
+(
+    id_usuario integer NOT NULL DEFAULT nextval('admin_id_admin_seq'::regclass),
+    usuario_nome text COLLATE pg_catalog."default" NOT NULL,
+    usuario_senha text COLLATE pg_catalog."default" NOT NULL,
+    acesso boolean NOT NULL DEFAULT false,
+    CONSTRAINT admin_pkey PRIMARY KEY (id_usuario)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.usuarios
+    OWNER to postgres;
+
+
+-- Table: public.instrutores
+
+-- DROP TABLE IF EXISTS public.instrutores;
+
+CREATE TABLE IF NOT EXISTS public.instrutores
+(
+    id_instrutor integer NOT NULL DEFAULT nextval('instrutores_id_instrutor_seq'::regclass),
+    nome_instrutor text COLLATE pg_catalog."default" NOT NULL,
+    cpf_instrutor text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT instrutores_pkey PRIMARY KEY (id_instrutor)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.instrutores
+    OWNER to postgres;
+
+
+-- Table: public.planos
+
+-- DROP TABLE IF EXISTS public.planos;
+
+CREATE TABLE IF NOT EXISTS public.planos
+(
+    id_plano integer NOT NULL DEFAULT nextval('planos_id_plano_seq'::regclass),
+    nome_plano text COLLATE pg_catalog."default" NOT NULL,
+    valor_plano double precision NOT NULL,
+    tipo_mensal boolean DEFAULT false,
+    tipo_avulso boolean DEFAULT false,
+    tipo_plano text COLLATE pg_catalog."default",
+    CONSTRAINT planos_pkey PRIMARY KEY (id_plano)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.planos
+    OWNER to postgres;
+
+
+-- Table: public.turmas
+
+-- DROP TABLE IF EXISTS public.turmas;
+
+CREATE TABLE IF NOT EXISTS public.turmas
+(
+    id_turma integer NOT NULL DEFAULT nextval('turmas_id_turma_seq'::regclass),
+    nome_turma text COLLATE pg_catalog."default" NOT NULL,
+    id_instrutor integer,
+    qtdesemanal_turma integer,
+    horario_turma text COLLATE pg_catalog."default",
+    segunda boolean DEFAULT false,
+    terca boolean DEFAULT false,
+    quarta boolean DEFAULT false,
+    quinta boolean DEFAULT false,
+    sexta boolean DEFAULT false,
+    sabado boolean DEFAULT false,
+    dias_turma text COLLATE pg_catalog."default",
+    CONSTRAINT turmas_pkey PRIMARY KEY (id_turma),
+    CONSTRAINT id_instrutor_fkey FOREIGN KEY (id_instrutor)
+        REFERENCES public.instrutores (id_instrutor) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.turmas
+    OWNER to postgres;
+
+
+-- Table: public.alunos
+
+-- DROP TABLE IF EXISTS public.alunos;
+
+CREATE TABLE IF NOT EXISTS public.alunos
+(
+    id_aluno integer NOT NULL DEFAULT nextval('alunos_id_aluno_seq'::regclass),
+    nome_aluno text COLLATE pg_catalog."default" NOT NULL,
+    cpf_aluno text COLLATE pg_catalog."default" NOT NULL,
+    datanasc_aluno date,
+    id_plano integer,
+    id_turma integer,
+    diapag_aluno date,
+    ativo_aluno boolean NOT NULL DEFAULT true,
+    CONSTRAINT alunos_pkey PRIMARY KEY (id_aluno),
+    CONSTRAINT id_plano_fkey FOREIGN KEY (id_plano)
+        REFERENCES public.planos (id_plano) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT id_turma_fkey FOREIGN KEY (id_turma)
+        REFERENCES public.turmas (id_turma) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.alunos
+    OWNER to postgres;
+
+
+-- Table: public.despesas
+
+-- DROP TABLE IF EXISTS public.despesas;
+
+CREATE TABLE IF NOT EXISTS public.despesas
+(
+    id_despesa integer NOT NULL DEFAULT nextval('despesas_id_despesas_seq'::regclass),
+    nome_despesa text COLLATE pg_catalog."default" NOT NULL,
+    valor_despesa double precision NOT NULL,
+    vencimento_despesa date,
+    quitada_despesa boolean DEFAULT false,
+    valorpag_despesa double precision,
+    datapag_despesa date,
+    CONSTRAINT despesas_pkey PRIMARY KEY (id_despesa)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.despesas
+    OWNER to postgres;
+
+
+-- Table: public.pagamentos_recebidos
+
+-- DROP TABLE IF EXISTS public.pagamentos_recebidos;
+
+CREATE TABLE IF NOT EXISTS public.pagamentos_recebidos
+(
+    id_mensalidade integer NOT NULL DEFAULT nextval('pagamentos_recebidos_id_mensalidade_seq'::regclass),
+    data_recebimento date,
+    valor_recebimento double precision,
+    id_aluno integer,
+    mes_referente text COLLATE pg_catalog."default",
+    CONSTRAINT pagamentos_recebidos_pkey PRIMARY KEY (id_mensalidade),
+    CONSTRAINT id_aluno_fkey FOREIGN KEY (id_aluno)
+        REFERENCES public.alunos (id_aluno) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.pagamentos_recebidos
+    OWNER to postgres;
