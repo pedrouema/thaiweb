@@ -44,7 +44,7 @@ const login = async (usuario) =>{
             id: usuarioBanco.id_usuario,
             usuario: usuario_nome
         }
-        const jwtToken = jwt.sign(payload, SECRET, {expiresIn:86400})
+        const jwtToken = jwt.sign(payload, SECRET, {expiresIn:86400}) //86400 = 24hr
         return {success: true, token: jwtToken, usuario_nome: usuario_nome, acesso: usuarioBanco.acesso}
     }
     return {success: false, msg: 'Falha na autenticação, verifique seus dados!'}
